@@ -1,0 +1,11 @@
+{
+  "name": "cahsper",
+  "version": "1.0.0",
+  "description": "API document for cahsper",
+  "main": "index.js",
+  "author": "YoshinoriN",
+  "devDependencies": {
+    "redoc-cli": "^0.8.6"
+  },
+  "dependencies": {}
+}
