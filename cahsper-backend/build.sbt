@@ -36,3 +36,4 @@ libraryDependencies ++= Seq(
   "org.mockito" % "mockito-core" % "3.0.0" % "test"
 )
 
+coverageExcludedPackages := "net.yoshinorin.cahsper.BootStrap; net.yoshinorin.cahsper.services.FlywayService;"
