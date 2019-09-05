@@ -37,3 +37,4 @@ libraryDependencies ++= Seq(
 )
 
 coverageExcludedPackages := "net.yoshinorin.cahsper.BootStrap; net.yoshinorin.cahsper.services.FlywayService;"
+org.scoverage.coveralls.Imports.CoverallsKeys.coverallsGitRepoLocation := Some("..")
