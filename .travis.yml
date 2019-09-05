@@ -1,0 +1,17 @@
+dist: xenial
+sudo: false
+language: scala
+scala:
+  - 2.12.9
+jdk:
+  - openjdk11
+before_script:
+  - "source ./cahsper-backend/scripts/devenv.sh"
+  - "cd cahsper-backend"
+script:
+  - "sbt clean coverage test"
+after_success: "sbt coverageReport coveralls"
+cache:
+  directories:
+    - $HOME/.ivy2/cache
+    - $HOME/.sbt/launchers
