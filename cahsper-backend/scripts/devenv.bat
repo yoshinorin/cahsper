@@ -1,4 +1,3 @@
-setx CAHSPER_DB_DATASOURCE_CLASSNAME "org.mariadb.jdbc.MariaDbDataSource"
 setx CAHSPER_DB_DATASOURCE_URL "jdbc:mariadb://127.0.0.1/cahsper?useUnicode=true&characterEncoding=utf8mb4"
 setx CAHSPER_DB_DATASOURCE_USER "root"
 setx CAHSPER_DB_DATASOURCE_PASSWORD "pass"
