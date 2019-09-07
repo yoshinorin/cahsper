@@ -11,6 +11,12 @@ class ConfigSpec extends WordSpec {
       assert(Config.dbUser == "root")
       assert(Config.dbPassword == "pass")
     }
+
+    "http server configuration gettable from application.conf" in {
+      assert(Config.httpHost == "127.0.0.1")
+      assert(Config.httpPort == 9001)
+    }
+
   }
 
 }
