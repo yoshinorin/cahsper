@@ -1,7 +1,7 @@
 package net.yoshinorin.cahsper.models.db
 
 import org.scalatest.WordSpec
-import net.yoshinorin.cahsper.models.request.{CommentRequestFormat, CreateCommentFormat}
+import net.yoshinorin.cahsper.models.request.{CommentRequestFormat, CreateCommentRequestFormat}
 
 // testOnly *CommentRequestFormatSpec
 class CommentRequestFormatSpec extends WordSpec {
@@ -20,7 +20,7 @@ class CommentRequestFormatSpec extends WordSpec {
 
     "convert success when comment is max length" in {
       val payloadJson: String = s"""{"comment" : "${commentMaxString}"}"""
-      val createCommentRequestFormat = CommentRequestFormat.convertFromJsonString[CreateCommentFormat](payloadJson)
+      val createCommentRequestFormat = CommentRequestFormat.convertFromJsonString[CreateCommentRequestFormat](payloadJson)
       val result = createCommentRequestFormat.right.get.validate
 
       assert(result.isRight)
@@ -28,7 +28,7 @@ class CommentRequestFormatSpec extends WordSpec {
 
     "convert success when comment length is three" in {
       val payloadJson: String = s"""{"comment" : "123"}"""
-      val createCommentRequestFormat = CommentRequestFormat.convertFromJsonString[CreateCommentFormat](payloadJson)
+      val createCommentRequestFormat = CommentRequestFormat.convertFromJsonString[CreateCommentRequestFormat](payloadJson)
       val result = createCommentRequestFormat.right.get.validate
 
       assert(result.isRight)
@@ -36,7 +36,7 @@ class CommentRequestFormatSpec extends WordSpec {
 
     "convert failed when comment is exceed max length" in {
       val payloadJson: String = s"""{"comment" : "${commentExceedMaxString}"}"""
-      val createCommentRequestFormat = CommentRequestFormat.convertFromJsonString[CreateCommentFormat](payloadJson)
+      val createCommentRequestFormat = CommentRequestFormat.convertFromJsonString[CreateCommentRequestFormat](payloadJson)
       val result = createCommentRequestFormat.right.get.validate
 
       assert(result.left.get.messages == CommentRequestFormat.requireCommentMaxMessage.messages)
@@ -44,7 +44,7 @@ class CommentRequestFormatSpec extends WordSpec {
 
     "convert failed when comment is too short" in {
       val payloadJson: String = """{"comment" : "aa"}"""
-      val createCommentRequestFormat = CommentRequestFormat.convertFromJsonString[CreateCommentFormat](payloadJson)
+      val createCommentRequestFormat = CommentRequestFormat.convertFromJsonString[CreateCommentRequestFormat](payloadJson)
       val result = createCommentRequestFormat.right.get.validate
 
       assert(result.left.get.messages == CommentRequestFormat.requireCommentMinMessage.messages)
@@ -52,14 +52,14 @@ class CommentRequestFormatSpec extends WordSpec {
 
     "convert failed when comment key does not extist in JSON" in {
       val payloadJson: String = """{"dummy" : "not exitst needed key"}"""
-      val createCommentRequestFormat = CommentRequestFormat.convertFromJsonString[CreateCommentFormat](payloadJson)
+      val createCommentRequestFormat = CommentRequestFormat.convertFromJsonString[CreateCommentRequestFormat](payloadJson)
 
       assert(createCommentRequestFormat.isLeft)
     }
 
     "convert failed when string in not a JSON" in {
       val payloadJson: String = """{NOT a JSON}"""
-      val createCommentRequestFormat = CommentRequestFormat.convertFromJsonString[CreateCommentFormat](payloadJson)
+      val createCommentRequestFormat = CommentRequestFormat.convertFromJsonString[CreateCommentRequestFormat](payloadJson)
 
       assert(createCommentRequestFormat.isLeft)
     }

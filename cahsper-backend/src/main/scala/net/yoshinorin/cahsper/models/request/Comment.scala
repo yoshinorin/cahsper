@@ -31,7 +31,7 @@ sealed abstract class CommentRequestFormat[T](comment: String) extends BaseComme
  *
  * @param comment user's comment
  */
-case class CreateCommentFormat(
+case class CreateCommentRequestFormat(
   comment: String
 ) extends CommentRequestFormat[String](comment) {
 
@@ -55,7 +55,7 @@ case class CreateCommentFormat(
    *
    * @return
    */
-  override def validate: Either[Messages, CreateCommentFormat] = {
+  override def validate: Either[Messages, CreateCommentRequestFormat] = {
     for {
       _ <- validateComment
     } yield {
@@ -72,7 +72,7 @@ object CommentRequestFormat {
   val requireCommentMinMessage: Messages = Messages("Comment must be more 3 characters.")
   val requireCommentMaxMessage: Messages = Messages("Comment must be less than 256 characters.")
 
-  implicit val decodeCreateCommentFormat: Decoder[CreateCommentFormat] = deriveDecoder[CreateCommentFormat]
+  implicit val decodeCreateCommentRequestFormat: Decoder[CreateCommentRequestFormat] = deriveDecoder[CreateCommentRequestFormat]
 
   /**
    * Convert string JSON to CommentRequestFormat case class
