@@ -5,7 +5,8 @@
   "main": "index.js",
   "author": "YoshinoriN",
   "scripts": {
-    "build": "redoc-cli bundle openapi.yml -o ./dist/index.html"
+    "build": "redoc-cli bundle openapi.yml -o ./dist/index.html",
+    "publish": "npm run build && cd dist && git checkout gh-pages && git commit index.html -m \"update api document\" && git push"
   },
   "devDependencies": {
     "redoc-cli": "^0.8.6"
