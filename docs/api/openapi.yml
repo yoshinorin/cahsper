@@ -37,6 +37,23 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/comment'
+    post:
+      summary: Create a new comment
+      responses:
+        201:
+          description: Create a comment succeeded
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/comment'
+        400:
+          description: Payload is wrong
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/errorMessage'
 components:
   schemas:
     comment:
@@ -56,3 +73,9 @@ components:
           type: long
           description: Unix time
           example: 1567814290
+    errorMessage:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Something is wrong

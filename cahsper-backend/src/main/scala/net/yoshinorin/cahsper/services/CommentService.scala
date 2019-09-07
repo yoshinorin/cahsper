@@ -2,6 +2,7 @@ package net.yoshinorin.cahsper.services
 
 import scala.concurrent.{ExecutionContext, Future}
 import net.yoshinorin.cahsper.models.db.{CommentRepository, Comments}
+import net.yoshinorin.cahsper.models.request.CreateCommentRequestFormat
 
 class CommentService(commentRepository: CommentRepository)(implicit executeContext: ExecutionContext) {
 
@@ -13,12 +14,12 @@ class CommentService(commentRepository: CommentRepository)(implicit executeConte
    * Create comment
    *
    * @param user user name
-   * @param userComment user's comment
+   * @param createCommentFormat
    * @return
    */
-  def create(user: String, userComment: String): Future[Comments] = {
+  def create(user: String, createCommentFormat: CreateCommentRequestFormat): Future[Comments] = {
 
-    val comment = Comments(user = user, comment = userComment)
+    val comment = Comments(user = user, comment = createCommentFormat.comment)
     for {
       mayBeCommentId <- this.create(comment)
       mayBeComment <- this.findById(mayBeCommentId)

@@ -59,6 +59,15 @@ class CommentServiceRouteSpec extends WordSpec with MockitoSugar with ScalatestR
       }
 
     }
+
+    "return 400 when payload is wrong format" in {
+      val json = """{Not a JSON}""".stripMargin
+      Post("/comments/").withEntity(ContentTypes.`application/json`, json) ~> commentServiceRoute.route ~> check {
+        assert(status == StatusCodes.BadRequest)
+        assert(contentType == ContentTypes.`application/json`)
+      }
+    }
+
   }
 
 }
