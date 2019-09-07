@@ -1,11 +1,11 @@
 package net.yoshinorin.cahsper.http
 
-import akka.http.scaladsl.model.{ContentTypes, StatusCode, StatusCodes}
+import akka.http.scaladsl.model.{ContentTypes, StatusCodes}
 import akka.http.scaladsl.testkit.ScalatestRouteTest
 import org.scalatest.WordSpec
 
-// testOnly *HttpServerSpec
-class HttpServerSpec extends WordSpec with ScalatestRouteTest {
+// testOnly *ApiRouteSpec
+class ApiRouteSpec extends WordSpec with ScalatestRouteTest {
 
   val apiStatusRoute = new ApiStatusRoute()
 
