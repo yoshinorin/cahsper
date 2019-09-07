@@ -1,0 +1,35 @@
+package net.yoshinorin.cahsper.models.db
+
+import java.time.{Instant, ZoneOffset, ZonedDateTime}
+
+import org.scalatest.WordSpec
+
+// testOnly *CommentsSpec
+class CommentsSpec extends WordSpec {
+
+  "Comments" should {
+
+    "default instance" in {
+      val currentUTCDateTime = ZonedDateTime.now(ZoneOffset.UTC)
+      val comment = Comments(user = "YoshinoriN", comment = "This is a test")
+      val instanceUTCDateTime = ZonedDateTime.ofInstant(Instant.ofEpochSecond(comment.createdAt), ZoneOffset.UTC)
+
+      assert(comment.id == 0)
+      assert(comment.user == "YoshinoriN")
+      assert(comment.comment == "This is a test")
+      assert(instanceUTCDateTime.getYear == currentUTCDateTime.getYear)
+      assert(instanceUTCDateTime.getMonth == currentUTCDateTime.getMonth)
+      assert(instanceUTCDateTime.getDayOfMonth == currentUTCDateTime.getDayOfMonth)
+      assert(instanceUTCDateTime.getHour == currentUTCDateTime.getHour)
+    }
+
+    "specific id and createdAt" in {
+      val comment = Comments(9, "YoshinoriN", "This is a test", 1567814286)
+      assert(comment.id == 9)
+      assert(comment.user == "YoshinoriN")
+      assert(comment.comment == "This is a test")
+      assert(comment.createdAt == 1567814286)
+    }
+  }
+
+}
