@@ -3,7 +3,7 @@ package net.yoshinorin.cahsper.http
 import akka.actor.ActorSystem
 import akka.http.scaladsl.server.{HttpApp, Route}
 
-class HttpServer(apiStatusRoute: ApiStatusRoute)(implicit actorSystem: ActorSystem) extends HttpApp {
+class HttpServer(apiStatusRoute: ApiStatusRoute, commentServiceRoute: CommentServiceRoute)(implicit actorSystem: ActorSystem) extends HttpApp {
 
   override def startServer(host: String, port: Int): Unit = {
     super.startServer(host, port)
@@ -11,7 +11,8 @@ class HttpServer(apiStatusRoute: ApiStatusRoute)(implicit actorSystem: ActorSyst
   }
 
   override def routes: Route = {
-    apiStatusRoute.route
+    apiStatusRoute.route ~
+      commentServiceRoute.route
   }
 
 }

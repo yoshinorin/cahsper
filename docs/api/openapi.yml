@@ -25,3 +25,34 @@ paths:
                   status:
                     type: string
                     example: operational
+  /comments:
+    get:
+      summary: Get all users comments
+      responses:
+        200:
+          description: Response when Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/comment'
+components:
+  schemas:
+    comment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int
+          example: 1
+        user:
+          type: string
+          example: JohnDoe
+        comment:
+          type: string
+          example: "Hello Cahsper!!"
+        createdAt:
+          type: long
+          description: Unix time
+          example: 1567814290
