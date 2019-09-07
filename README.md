@@ -22,7 +22,17 @@ TODO
 
 # Configuration
 
-TODO
+Cahsper backend (API server) read all settings from the system environment variable. You have to set the system environment variables followings.
+
+|Property|Description|Type|Default|Example|
+|---|---|---|---|---|
+|`CAHSPER_DB_DATASOURCE_URL`|Data source url for JDBC connection.|`string`|-|`jdbc:mariadb://127.0.0.1/cahsper?useUnicode=true&characterEncoding=utf8mb4`|
+|`CAHSPER_DB_DATASOURCE_USER`|Database user name.|`string`|-|`root`|
+|`CAHSPER_DB_DATASOURCE_PASSWORD`|Database user password.|`string`|-|`pass`|
+|`CAHSPER_DB_CONNECTION_TIMEOUT`|Database connection timeout.|`int`|`30000`|`30000`|
+|`CAHSPER_DB_MAXIMUM_POOLSIZE`|Connection pool size.|`int`|`6`|`6`|
+|`CAHSPER_HTTP_HOST`|Http server host.|`string`|`127.0.0.1`|`127.0.0.1`|
+|`CAHSPER_HTTP_PORT`|Http server port.|`int`|`9001`|`9001`|
 
 # API Execution example
 
