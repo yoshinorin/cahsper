@@ -55,7 +55,7 @@ case class CreateCommentFormat(
    *
    * @return
    */
-  override def validate: Either[Messages, CommentRequestFormat[String]] = {
+  override def validate: Either[Messages, CreateCommentFormat] = {
     for {
       _ <- validateComment
     } yield {
