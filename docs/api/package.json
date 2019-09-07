@@ -4,6 +4,9 @@
   "description": "API document for cahsper",
   "main": "index.js",
   "author": "YoshinoriN",
+  "scripts": {
+    "build": "redoc-cli bundle openapi.yml -o ./dist/index.html"
+  },
   "devDependencies": {
     "redoc-cli": "^0.8.6"
   },

@@ -22,3 +22,7 @@ project/plugins/project/
 # IntelliJ specific
 .idea/
 .idea_modules/
+
+# Documentation
+
+docs/api/dist/*
