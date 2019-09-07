@@ -16,10 +16,28 @@
 * JVM 11
 * MariaDB 10.x
 
+# Set up
+
+TODO
+
 # Configuration
 
 TODO
 
-# Stacks
+# Using Stacks
 
-TODO
+|Stack|-|
+|---|---|
+|[Scala](https://www.scala-lang.org/)|-|
+|[Akka HTTP](https://akka.io/docs/)|HTTP server|
+|[Flyway](https://flywaydb.org/)|Database Migration|
+|[quill](https://getquill.io/)|Database Library|
+|[circe](https://circe.github.io/circe/)|JSON Library|
+|[MariaDB](https://mariadb.org/)|Database|
+|[ScalaTest](http://www.scalatest.org/)|Unit test|
+|[Scalafmt](https://scalameta.org/scalafmt/)|Code formatter|
+|[TravisCI](https://travis-ci.org/YoshinoriN/todo-example)|CI|
+|[Codacy](https://app.codacy.com/project/YoshinoriN/todo-example/dashboard?bid=12587277)|Check Code quality|
+|[COVERALLS](https://coveralls.io/github/YoshinoriN/todo-example?branch=master)|Coverage report|
+|[ReDoc](https://github.com/Rebilly/ReDoc)|Generate API documentation |
+|[GitHub Pages](https://pages.github.com/)|Hosting API docuementation|
