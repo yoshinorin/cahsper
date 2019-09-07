@@ -24,6 +24,59 @@ TODO
 
 TODO
 
+# API Execution example
+
+<details>
+  <summary>Get all users comments</summary>
+
+```sh
+$ curl -D - -X GET 127.0.0.1:9001/comments
+
+HTTP/1.1 200 OK
+Server: akka-http/10.1.9
+Date: Sat, 07 Sep 2019 13:28:57 GMT
+Content-Type: application/json
+Content-Length: 307
+
+[
+  {
+    "id" : 1,
+    "user" : "YoshinoriN",
+    "comment" : "test",
+    "createdAt" : 1567862313
+  },
+  {
+    "id" : 2,
+    "user" : "TODO",
+    "comment" : "Hello Cahsper!!",
+    "createdAt" : 1567862760
+  }
+]
+```
+
+</details>
+
+<details>
+  <summary>Create new comment</summary>
+
+```sh
+$ curl -D - -X POST -H "Content-Type: application/json" -d '{"comment":"Hello Cahsper!!"}' 127.0.0.1:9001/comments
+
+HTTP/1.1 201 Created
+Server: akka-http/10.1.9
+Date: Sat, 07 Sep 2019 13:26:01 GMT
+Content-Type: application/json
+Content-Length: 94
+{
+  "id" : 1,
+  "user" : "TODO",
+  "comment" : "Hello Cahsper!!",
+  "createdAt" : 1567862760
+}
+```
+
+</details>
+
 # Using Stacks
 
 |Stack|-|
