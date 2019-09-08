@@ -21,6 +21,7 @@ services:
       CAHSPER_DB_DATASOURCE_URL: jdbc:mariadb://cahsper-mariadb:3306/cahsper?useUnicode=true&characterEncoding=utf8mb4
       CAHSPER_DB_DATASOURCE_USER: root
       CAHSPER_DB_DATASOURCE_PASSWORD: pass
+      CAHSPER_HTTP_HOST: 0.0.0.0
     volumes:
       - ./data:/var/lib/mysql
     hostname: cahsper
