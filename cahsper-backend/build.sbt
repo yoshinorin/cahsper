@@ -18,6 +18,7 @@ val akkaVersion = "2.5.25"
 val akkaHttpVersion = "10.1.9"
 libraryDependencies ++= Seq(
   "ch.qos.logback" % "logback-classic" % "1.2.3",
+  "ch.megard" %% "akka-http-cors" % "0.4.1",
   "com.nimbusds" % "nimbus-jose-jwt" % "7.8",
   "com.typesafe.akka" %% "akka-http" % akkaHttpVersion,
   "com.typesafe.akka" %% "akka-actor" % akkaVersion,
