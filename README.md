@@ -103,6 +103,7 @@ Content-Length: 94
 |---|---|
 |[Scala](https://www.scala-lang.org/)|-|
 |[Akka HTTP](https://akka.io/docs/)|HTTP server|
+|[akka-http-cors](https://github.com/lomigmegard/akka-http-cors)|CORS for Akka HTTP|
 |[Flyway](https://flywaydb.org/)|Database Migration|
 |[quill](https://getquill.io/)|Database Library|
 |[circe](https://circe.github.io/circe/)|JSON Library|
