@@ -109,8 +109,10 @@ Content-Length: 94
 |[MariaDB](https://mariadb.org/)|Database|
 |[ScalaTest](http://www.scalatest.org/)|Unit test|
 |[Scalafmt](https://scalameta.org/scalafmt/)|Code formatter|
-|[TravisCI](https://travis-ci.org/YoshinoriN/todo-example)|CI|
-|[Codacy](https://app.codacy.com/project/YoshinoriN/todo-example/dashboard?bid=12587277)|Check Code quality|
-|[COVERALLS](https://coveralls.io/github/YoshinoriN/todo-example?branch=master)|Coverage report|
+|[TravisCI](https://travis-ci.org/YoshinoriN/cahsper)|CI|
+|[Codacy](https://app.codacy.com/manual/YoshinoriN/cahsper/dashboard)|Check Code quality|
+|[COVERALLS](https://coveralls.io/github/YoshinoriN/cahsper?branch=master)|Coverage report|
 |[ReDoc](https://github.com/Rebilly/ReDoc)|Generate API documentation |
 |[GitHub Pages](https://pages.github.com/)|Hosting API docuementation|
+|AWS Cognito|Authentication|
+|[Nimbus JOSE](https://connect2id.com/products/nimbus-jose-jwt)|JWT validator|
