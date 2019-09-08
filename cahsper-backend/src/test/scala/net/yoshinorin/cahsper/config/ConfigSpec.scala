@@ -13,7 +13,7 @@ class ConfigSpec extends WordSpec {
     }
 
     "http server configuration gettable from application.conf" in {
-      assert(Config.httpHost == "127.0.0.1")
+      assert(Config.httpHost == "0.0.0.0")
       assert(Config.httpPort == 9001)
     }
 
