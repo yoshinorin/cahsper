@@ -22,7 +22,9 @@ TODO
 
 # Configuration
 
-Cahsper backend (API server) read all settings from the system environment variable. You have to set the system environment variables followings.
+Cahsper backend (API server) read all settings from the system environment variable. You have to set the following system environment variables.
+
+## Database & HTTP Server
 
 |Property|Description|Type|Default|Example|
 |---|---|---|---|---|
@@ -33,6 +35,14 @@ Cahsper backend (API server) read all settings from the system environment varia
 |`CAHSPER_DB_MAXIMUM_POOLSIZE`|Connection pool size.|`int`|`6`|`6`|
 |`CAHSPER_HTTP_HOST`|Http server host.|`string`|`0.0.0.0`|`127.0.0.1`|
 |`CAHSPER_HTTP_PORT`|Http server port.|`int`|`9001`|`9001`|
+
+## Authentication
+
+Cahsper backend (API server) use AWS Cognito for authentication. Please create AWS Cognito user pool and set the following system environment variable.
+
+|Property|Description|Type|Default|Example|
+|---|---|---|---|---|
+|`CAHSPER_AWS_COGNITO_JWK `|AWS Cognito jwk URL|`string`|-|`https://cognito-idp.{region}.amazonaws.com/{userPoolId}/.well-known/jwks.json`|
 
 # API Execution example
 
