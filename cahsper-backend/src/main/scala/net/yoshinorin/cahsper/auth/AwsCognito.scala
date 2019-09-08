@@ -38,6 +38,7 @@ object AwsCognito {
 
     Try(jwtProcessor.process(jwt, null)) match {
       case Success(jwtClaimsSet: JWTClaimsSet) =>
+        // TODO: Add more verify https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html
         Right(jwtClaimsSet)
       case Failure(badJwtException: BadJWTException) =>
         logger.error(badJwtException.toString)
