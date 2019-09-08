@@ -117,3 +117,7 @@ Content-Length: 94
 |[GitHub Pages](https://pages.github.com/)|Hosting API docuementation|
 |AWS Cognito|Authentication|
 |[Nimbus JOSE](https://connect2id.com/products/nimbus-jose-jwt)|JWT validator|
+
+# License
+
+This code is open source software licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0.html).
