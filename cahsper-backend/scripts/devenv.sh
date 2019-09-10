@@ -6,7 +6,7 @@ export CAHSPER_DB_PASSWORD="pass"
 export CAHSPER_DB_CONNECTION_TIMEOUT=30000
 export CAHSPER_DB_MAXIMUM_POOLSIZE=6
 
-export CAHSPER_HTTP_HOST="0.0.0.0"
+export CAHSPER_HTTP_BIND_ADDRESS="0.0.0.0"
 export CAHSPER_HTTP_PORT=9001
 
 export CAHSPER_AWS_COGNITO_JWK="https://cognito-idp.{region}.amazonaws.com/{userPoolId}/.well-known/jwks.json"
