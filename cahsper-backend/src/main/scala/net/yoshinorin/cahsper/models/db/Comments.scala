@@ -6,7 +6,7 @@ import io.circe.Encoder
 
 case class Comments(
   id: Int = 0,
-  user: String,
+  userName: String,
   comment: String,
   createdAt: Long = ZonedDateTime.now.toEpochSecond
 )

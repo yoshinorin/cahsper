@@ -39,13 +39,13 @@ class CommentServiceRouteSpec extends WordSpec with MockitoSugar with ScalatestR
         |[
         |  {
         |    "id" : 1,
-        |    "user" : "YoshinoriN",
+        |    "userName" : "YoshinoriN",
         |    "comment" : "This is a test one.",
         |    "createdAt" : 1567814290
         |  },
         |  {
         |    "id" : 2,
-        |    "user" : "YoshinoriN",
+        |    "userName" : "YoshinoriN",
         |    "comment" : "This is a test two.",
         |    "createdAt" : 1567814391
         |  }

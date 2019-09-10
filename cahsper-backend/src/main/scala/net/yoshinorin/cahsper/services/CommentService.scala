@@ -13,13 +13,13 @@ class CommentService(commentRepository: CommentRepository)(implicit executeConte
   /**
    * Create comment
    *
-   * @param user user name
+   * @param userName user name
    * @param createCommentFormat
    * @return
    */
-  def create(user: String, createCommentFormat: CreateCommentRequestFormat): Future[Comments] = {
+  def create(userName: String, createCommentFormat: CreateCommentRequestFormat): Future[Comments] = {
 
-    val comment = Comments(user = user, comment = createCommentFormat.comment)
+    val comment = Comments(userName = userName, comment = createCommentFormat.comment)
     for {
       mayBeCommentId <- this.create(comment)
       mayBeComment <- this.findById(mayBeCommentId)
