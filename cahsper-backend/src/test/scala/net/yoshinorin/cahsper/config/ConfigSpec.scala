@@ -21,6 +21,10 @@ class ConfigSpec extends WordSpec {
       assert(Config.awsCognitoJwkUrl.startsWith("https://cognito-idp."))
     }
 
+    "aws cognito jwk iss configuration gettable from application.conf" in {
+      assert(Config.awsCognitoJwkIss.startsWith("https://cognito-idp."))
+    }
+
   }
 
 }
