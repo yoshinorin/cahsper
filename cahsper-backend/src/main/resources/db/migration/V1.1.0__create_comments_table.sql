@@ -5,3 +5,5 @@ CREATE TABLE comments (
   created_at BIGINT UNSIGNED DEFAULT 0,
   FOREIGN KEY(user_name) REFERENCES users(name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+ALTER TABLE `comments` ADD INDEX idx_user_name(`user_name`);
