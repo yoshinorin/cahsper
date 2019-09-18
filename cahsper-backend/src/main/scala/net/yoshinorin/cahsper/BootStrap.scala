@@ -3,7 +3,7 @@ package net.yoshinorin.cahsper
 import akka.actor.ActorSystem
 import akka.stream.ActorMaterializer
 import net.yoshinorin.cahsper.config.Config
-import net.yoshinorin.cahsper.http.{ApiStatusRoute, CommentServiceRoute, HttpServer}
+import net.yoshinorin.cahsper.http.{ApiStatusRoute, CommentRoute, HttpServer}
 import net.yoshinorin.cahsper.models.db.CommentRepository
 import net.yoshinorin.cahsper.services.{CommentService, FlywayService}
 
@@ -20,7 +20,7 @@ object BootStrap extends App {
   val apiStatusRoute: ApiStatusRoute = new ApiStatusRoute()
   val commentRepository: CommentRepository = new CommentRepository()
   val commentService: CommentService = new CommentService(commentRepository)
-  val commentServiceRoute: CommentServiceRoute = new CommentServiceRoute(commentService)
+  val commentServiceRoute: CommentRoute = new CommentRoute(commentService)
 
   val httpServer: HttpServer = new HttpServer(apiStatusRoute, commentServiceRoute)
 

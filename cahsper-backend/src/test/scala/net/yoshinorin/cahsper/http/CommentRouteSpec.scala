@@ -9,7 +9,7 @@ import org.scalatest.WordSpec
 import org.scalatestplus.mockito.MockitoSugar
 
 // testOnly *CommentServiceRouteSpec
-class CommentServiceRouteSpec extends WordSpec with MockitoSugar with ScalatestRouteTest {
+class CommentRouteSpec extends WordSpec with MockitoSugar with ScalatestRouteTest {
 
   val mockCommentRepository: CommentRepository = mock[CommentRepository]
 
@@ -28,7 +28,7 @@ class CommentServiceRouteSpec extends WordSpec with MockitoSugar with ScalatestR
     .thenReturn(3)
 
   val commentService: CommentService = new CommentService(mockCommentRepository)
-  val commentServiceRoute: CommentServiceRoute = new CommentServiceRoute(commentService)
+  val commentServiceRoute: CommentRoute = new CommentRoute(commentService)
 
   "CommentServiceRoute" should {
 

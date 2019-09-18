@@ -9,7 +9,7 @@ import io.circe.syntax._
 import net.yoshinorin.cahsper.models.request.{CommentRequestFormat, CreateCommentRequestFormat}
 import net.yoshinorin.cahsper.services.CommentService
 
-class CommentServiceRoute(commentService: CommentService)(implicit actorSystem: ActorSystem) {
+class CommentRoute(commentService: CommentService)(implicit actorSystem: ActorSystem) {
 
   def route: Route = {
     pathPrefix("comments") {
