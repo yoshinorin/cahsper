@@ -17,13 +17,13 @@ class UserRepository extends QuillService {
   }
 
   /**
-   * Find comment by user
+   * Find user by Name
    *
    * @param name
-   * @return Comment
+   * @return Users
    */
-  def findById(name: String): Option[Users] = {
-    run(query[Users].filter(comment => comment.name == lift(name))).headOption
+  def findByName(name: String): Option[Users] = {
+    run(query[Users].filter(user => user.name == lift(name))).headOption
   }
 
 }
