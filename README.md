@@ -9,6 +9,16 @@
 * [API](https://yoshinorin.github.io/cahsper/)
 * [Development](./docs/dev)
 
+# Table of contents
+
+* [Requirements](#requirements)
+* [Set up](#set-up)
+* [Configuration](#configuration)
+    * [Database](#database)
+    * [HTTP Server](#http-server)
+    * [Authentication (AWS Cognito)](#authentication)
+* [API Execution example](#api-execution-example)
+
 # Requirements
 
 * sbt 1.2.x
@@ -18,13 +28,15 @@
 
 # Set up
 
-TODO
+* (TODO): AWS Cognito settings
+* (TODO): DataBase settings
+* (TODO): Others
 
 # Configuration
 
 Cahsper backend (API server) read all settings from the system environment variable. You have to set the following system environment variables.
 
-## Database & HTTP Server
+## Database
 
 |Property|Description|Type|Default|Example|
 |---|---|---|---|---|
@@ -33,6 +45,11 @@ Cahsper backend (API server) read all settings from the system environment varia
 |`CAHSPER_DB_PASSWORD`|Database user password.|`string`|-|`pass`|
 |`CAHSPER_DB_CONNECTION_TIMEOUT`|Database connection timeout.|`int`|`30000`|`30000`|
 |`CAHSPER_DB_MAXIMUM_POOLSIZE`|Connection pool size.|`int`|`6`|`6`|
+
+## HTTP Server
+
+|Property|Description|Type|Default|Example|
+|---|---|---|---|---|
 |`CAHSPER_HTTP_BIND_ADDRESS`|Http server bind address.|`string`|`0.0.0.0`|`127.0.0.1`|
 |`CAHSPER_HTTP_PORT`|Http server port.|`int`|`9001`|`9001`|
 
