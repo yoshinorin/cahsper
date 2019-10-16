@@ -2,7 +2,7 @@ dist: xenial
 sudo: false
 language: scala
 scala:
-  - 2.12.9
+  - 2.13.1
 jdk:
   - openjdk11
 before_script:
