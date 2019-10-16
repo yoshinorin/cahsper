@@ -13,7 +13,9 @@ class UserRepository extends QuillService {
    * @return created user name
    */
   def insert(data: Users): String = {
-    run(query[Users].insert(lift(data)).returningGenerated(_.name))
+    //run(query[Users].insert(lift(data)).returning(_.name))
+    run(query[Users].insert(lift(data))) //TODO: Mysql hasn't returning clause
+    data.name
   }
 
   /**
