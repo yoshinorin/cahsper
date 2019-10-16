@@ -26,19 +26,21 @@ paths:
                     type: string
                     example: operational
   /users:
-    get:
-      summary: Get all users
-      responses:
-        200:
-          description: Response when Success
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/user'
+    #get:
+    #  summary: Get all users
+    #  responses:
+    #    200:
+    #      description: Response when Success
+    #      content:
+    #        application/json:
+    #          schema:
+    #            type: array
+    #            items:
+    #              $ref: '#/components/schemas/user'
     post:
-      summary: Create a new user with AWS Cognito attribute
+      summary: Create a new user
+      description: |
+        Create a new user with the AWS Cognito username attribute
       security:
         - OAuth2:
           - write
@@ -127,9 +129,9 @@ components:
     OAuth2:
       type: oauth2
       description: |
-        Use AWS Cognito JWT for authorization and authentication. [Please see AWS document](https://docs.aws.amazon.com/cognito/latest/developerguide/what-is-amazon-cognito.html)を参照してください。
+        Use AWS Cognito JWT for authorization and authentication. [Please see AWS document](https://docs.aws.amazon.com/cognito/latest/developerguide/what-is-amazon-cognito.html).
       flows:
         authorizationCode:
           scopes:
-            write: Create something
-            read: TBD
+            write:
+            read:

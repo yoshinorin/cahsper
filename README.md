@@ -21,8 +21,8 @@
 
 # Requirements
 
-* sbt 1.2.x
-* Scala 2.12.9
+* sbt 1.3.x
+* Scala 2.13.x
 * JVM 11
 * MariaDB 10.x
 
