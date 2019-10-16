@@ -25,6 +25,40 @@ paths:
                   status:
                     type: string
                     example: operational
+  /users:
+    get:
+      summary: Get all users
+      responses:
+        200:
+          description: Response when Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/user'
+    post:
+      summary: Create a new user with AWS Cognito attribute
+      security:
+        - OAuth2:
+          - write
+      responses:
+        201:
+          description: Create a user succeeded
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/user'
+        400:
+          description: Payload is wrong
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/errorMessage'
+        401:
+          description: Unauthorized
   /comments:
     get:
       summary: Get all users comments
@@ -56,6 +90,16 @@ paths:
                   $ref: '#/components/schemas/errorMessage'
 components:
   schemas:
+    user:
+      type: object
+      properties:
+        name:
+          type: string
+          example: JohnDoe
+        createdAt:
+          type: long
+          description: Unix time
+          example: 1567814290
     comment:
       type: object
       properties:
@@ -79,3 +123,13 @@ components:
         message:
           type: string
           example: Something is wrong
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: |
+        Use AWS Cognito JWT for authorization and authentication. [Please see AWS document](https://docs.aws.amazon.com/cognito/latest/developerguide/what-is-amazon-cognito.html)を参照してください。
+      flows:
+        authorizationCode:
+          scopes:
+            write: Create something
+            read: TBD

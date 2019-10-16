@@ -48,6 +48,26 @@ Cahsper backend (API server) use AWS Cognito for authentication. Please create A
 # API Execution example
 
 <details>
+  <summary>Create a new user</summary>
+
+```sh
+$ curl -D - -X POST -H "Authorization: Bearer 123456789" 127.0.0.1:9001/users
+
+Server: akka-http/10.1.9
+Date:
+Wed, 16 Oct 2019 13:06:05 GMT-44s
+Content-Type: application/json
+Content-Length: 55 bytes
+
+{
+  "name": "YoshinoriN",
+  "createdAt": 1571231165
+}
+```
+
+</details>
+
+<details>
   <summary>Get all users comments</summary>
 
 ```sh

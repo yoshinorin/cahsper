@@ -1,29 +1,48 @@
 package net.yoshinorin.cahsper.http
 
 import akka.actor.ActorSystem
-import akka.http.scaladsl.server.Directives.{entity, _}
+import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.model.{ContentTypes, HttpEntity, HttpResponse}
 import akka.http.scaladsl.server.Route
 import akka.http.scaladsl.model.StatusCodes._
 import io.circe.syntax._
 import net.yoshinorin.cahsper.services.UserService
 
-class UserRoute(userService: UserService)(implicit actorSystem: ActorSystem) {
+class UserRoute(userService: UserService)(implicit actorSystem: ActorSystem) extends AwsCognitoAuthenticator {
 
   def route: Route = {
     pathPrefix("users") {
       pathEndOrSingleSlash {
-        get {
-          //TODO: return all user
-          complete(HttpResponse(NotFound, entity = HttpEntity(ContentTypes.`application/json`, "{\"message\":\"Not found\"}")))
-        } ~ post {
-          //TODO: Create user from AWS Cognito claim
-          entity(as[String]) { userName =>
-            onSuccess(userService.create(userName)) { result =>
-              complete(HttpResponse(Created, entity = HttpEntity(ContentTypes.`application/json`, s"${result.asJson}")))
-            }
-          }
+        getUserRoute
+        authenticate { jwtClaim =>
+          postUserRoute(jwtClaim.username)
         }
+      }
+    }
+  }
+
+  // $COVERAGE-OFF$
+  // NOTE: This route for unit test. Never use at production.
+  def nonAuthRoute: Route = {
+    pathPrefix("users") {
+      pathEndOrSingleSlash {
+        postUserRoute("JohnDoe")
+      }
+    }
+  }
+  // $COVERAGE-ON$
+
+  private[this] def getUserRoute: Route = {
+    get {
+      //TODO: return all user
+      complete(HttpResponse(NotFound, entity = HttpEntity(ContentTypes.`application/json`, "{\"message\":\"Not found\"}")))
+    }
+  }
+
+  private[this] def postUserRoute(userName: String): Route = {
+    post {
+      onSuccess(userService.create(userName)) { result =>
+        complete(HttpResponse(Created, entity = HttpEntity(ContentTypes.`application/json`, s"${result.asJson}")))
       }
     }
   }
