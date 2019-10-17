@@ -1,4 +1,4 @@
-package net.yoshinorin.cahsper.http
+package net.yoshinorin.cahsper.http.routes
 
 import akka.http.scaladsl.model.{ContentTypes, StatusCodes}
 import akka.http.scaladsl.testkit.ScalatestRouteTest

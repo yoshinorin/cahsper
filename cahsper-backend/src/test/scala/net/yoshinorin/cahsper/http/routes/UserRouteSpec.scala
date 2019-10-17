@@ -1,14 +1,13 @@
-package net.yoshinorin.cahsper.http
+package net.yoshinorin.cahsper.http.routes
 
 import akka.actor.ActorSystem
-import akka.http.scaladsl.model.{ContentTypes, StatusCodes}
 import akka.http.scaladsl.model.headers.OAuth2BearerToken
+import akka.http.scaladsl.model.{ContentTypes, StatusCodes}
 import akka.http.scaladsl.server.AuthenticationFailedRejection
 import akka.http.scaladsl.server.AuthenticationFailedRejection.{CredentialsMissing, CredentialsRejected}
-import akka.http.scaladsl.server.ContentNegotiator.Alternative.ContentType
 import akka.http.scaladsl.testkit.ScalatestRouteTest
 import akka.stream.ActorMaterializer
-import net.yoshinorin.cahsper.models.db.{UserRepository, Users}
+import net.yoshinorin.cahsper.models.db.Users
 import net.yoshinorin.cahsper.services.UserService
 import org.mockito.Mockito.when
 import org.scalatest.WordSpec

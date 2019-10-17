@@ -1,10 +1,10 @@
-package net.yoshinorin.cahsper.http
+package net.yoshinorin.cahsper.http.routes
 
 import akka.actor.ActorSystem
-import akka.http.scaladsl.server.Directives.{entity, _}
-import akka.http.scaladsl.model.{ContentTypes, HttpEntity, HttpResponse}
-import akka.http.scaladsl.server.Route
 import akka.http.scaladsl.model.StatusCodes._
+import akka.http.scaladsl.model.{ContentTypes, HttpEntity, HttpResponse}
+import akka.http.scaladsl.server.Directives._
+import akka.http.scaladsl.server.Route
 
 class ApiStatusRoute(implicit actorSystem: ActorSystem) {
 
