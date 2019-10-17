@@ -13,10 +13,10 @@ class UserRoute(userService: UserService)(implicit actorSystem: ActorSystem) ext
   def route: Route = {
     pathPrefix("users") {
       pathEndOrSingleSlash {
-        getUserRoute
-        authenticate { jwtClaim =>
-          postUserRoute(jwtClaim.username)
-        }
+        getUserRoute ~
+          authenticate { jwtClaim =>
+            postUserRoute(jwtClaim.username)
+          }
       }
     }
   }
@@ -25,9 +25,10 @@ class UserRoute(userService: UserService)(implicit actorSystem: ActorSystem) ext
   // NOTE: This route for unit test. Never use at production.
   def nonAuthRoute: Route = {
     pathPrefix("users") {
-      pathEndOrSingleSlash {
-        postUserRoute("JohnDoe")
-      }
+      getUserRoute ~
+        pathEndOrSingleSlash {
+          postUserRoute("JohnDoe")
+        }
     }
   }
   // $COVERAGE-ON$
