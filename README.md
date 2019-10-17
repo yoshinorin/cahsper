@@ -70,9 +70,9 @@ Cahsper backend (API server) use AWS Cognito for authentication. Please create A
 ```sh
 $ curl -D - -X POST -H "Authorization: Bearer 123456789" 127.0.0.1:9001/users
 
+HTTP/1.1 201 Created
 Server: akka-http/10.1.9
-Date:
-Wed, 16 Oct 2019 13:06:05 GMT-44s
+Date: Wed, 16 Oct 2019 13:06:05 GMT
 Content-Type: application/json
 Content-Length: 55 bytes
 
