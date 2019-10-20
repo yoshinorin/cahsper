@@ -41,13 +41,15 @@ class UserRouteSpec extends WordSpec with MockitoSugar with ScalatestRouteTest {
 
     "unauthorized when access token is invalid" in {
       Post("/users") ~> addCredentials(OAuth2BearerToken("Invalid Token")) ~> userRoute.route ~> check {
-        assert(rejection.asInstanceOf[AuthenticationFailedRejection].cause == CredentialsRejected)
+        // TODO: workaround
+        assert(rejections.last.asInstanceOf[AuthenticationFailedRejection].cause == CredentialsRejected)
       }
     }
 
     "reject when Authorization header is nothing" in {
+      // TODO: workaround
       Post("/users") ~> userRoute.route ~> check {
-        assert(rejection.asInstanceOf[AuthenticationFailedRejection].cause == CredentialsMissing)
+        assert(rejections.last.asInstanceOf[AuthenticationFailedRejection].cause == CredentialsMissing)
       }
     }
 
