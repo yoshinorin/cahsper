@@ -85,6 +85,32 @@ Content-Length: 55 bytes
 </details>
 
 <details>
+  <summary>Get all users</summary>
+
+```sh
+$ curl -D - -X GET 127.0.0.1:9001/users
+
+HTTP/1.1 200 OK
+Server: akka-http/10.1.10
+Date: Sun, 20 Oct 2019 12:45:24 GMT
+Content-Type: application/json
+Content-Length: 129
+
+[
+  {
+    "name" : "JhonDue",
+    "createdAt" : 1571323331
+  },
+  {
+    "name" : "YoshinoriN",
+    "createdAt" : 1571323750
+  }
+]
+```
+
+</details>
+
+<details>
   <summary>Get all users comments</summary>
 
 ```sh

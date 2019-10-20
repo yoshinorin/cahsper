@@ -36,8 +36,9 @@ class UserRoute(userService: UserService)(implicit actorSystem: ActorSystem) ext
 
   private[this] def getUserRoute: Route = {
     get {
-      //TODO: return all user
-      complete(HttpResponse(NotFound, entity = HttpEntity(ContentTypes.`application/json`, "{\"message\":\"Not found\"}")))
+      onSuccess(userService.getAll) { result =>
+        complete(HttpResponse(OK, entity = HttpEntity(ContentTypes.`application/json`, s"${result.asJson}")))
+      }
     }
   }
 

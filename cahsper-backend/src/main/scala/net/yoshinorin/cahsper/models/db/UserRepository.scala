@@ -28,4 +28,14 @@ class UserRepository extends QuillService {
     run(query[Users].filter(user => user.name == lift(name))).headOption
   }
 
+  /**
+   * Get all users
+   *
+   * TODO: implement like SQL limit and should change function name
+   * @return all users
+   */
+  def getAll: Seq[Users] = {
+    run(query[Users])
+  }
+
 }

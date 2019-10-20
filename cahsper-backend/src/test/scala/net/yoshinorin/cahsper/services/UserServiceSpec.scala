@@ -26,6 +26,14 @@ class UserServiceSpec extends WordSpec with MockitoSugar {
   when(mockUserRepository.insert(Users("YoshinoriN")))
     .thenReturn("YoshinoriN")
 
+  when(mockUserRepository.getAll)
+    .thenReturn(
+      Seq(
+        Users("YoshinoriN", 1567814290),
+        Users("NoshinoriN", 1567814391)
+      )
+    )
+
   val userService: UserService = new UserService(mockUserRepository)
 
   "UserService" should {
@@ -40,6 +48,16 @@ class UserServiceSpec extends WordSpec with MockitoSugar {
         case Success(user) => assert(user.name == "YoshinoriN")
         case Failure(exception) => // Nothing to do
       }
+    }
+
+    "get all users when call getAll" in {
+      val result = Await.result(userService.getAll, Duration.Inf)
+      assert(
+        result == Seq(
+          Users("YoshinoriN", 1567814290),
+          Users("NoshinoriN", 1567814391)
+        )
+      )
     }
 
   }

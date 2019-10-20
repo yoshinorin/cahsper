@@ -27,6 +27,16 @@ class UserRouteSpec extends WordSpec with MockitoSugar with ScalatestRouteTest {
   when(mockUserService.create("JohnDoe"))
     .thenReturn(Future(Users("JohnDoe")))
 
+  when(mockUserService.getAll)
+    .thenReturn(
+      Future(
+        Seq(
+          Users("YoshinoriN", 1567814290),
+          Users("NoshinoriN", 1567814391)
+        )
+      )
+    )
+
   val userRoute: UserRoute = new UserRoute(mockUserService)
 
   "UserRoute" should {
@@ -51,6 +61,30 @@ class UserRouteSpec extends WordSpec with MockitoSugar with ScalatestRouteTest {
       Post("/users") ~> userRoute.route ~> check {
         assert(rejections.last.asInstanceOf[AuthenticationFailedRejection].cause == CredentialsMissing)
       }
+    }
+
+    "return all users JSON" in {
+
+      val expectJson =
+        """
+          |[
+          |  {
+          |    "name" : "YoshinoriN",
+          |    "createdAt" : 1567814290
+          |  },
+          |  {
+          |    "name" : "NoshinoriN",
+          |    "createdAt" : 1567814391
+          |  }
+          |]
+      """.stripMargin.replaceAll("\n", "").replaceAll(" ", "")
+
+      Get("/users/") ~> userRoute.route ~> check {
+        assert(status == StatusCodes.OK)
+        assert(contentType == ContentTypes.`application/json`)
+        assert(responseAs[String].replaceAll("\n", "").replaceAll(" ", "") == expectJson)
+      }
+
     }
 
   }

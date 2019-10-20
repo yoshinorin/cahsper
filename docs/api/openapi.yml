@@ -26,17 +26,17 @@ paths:
                     type: string
                     example: operational
   /users:
-    #get:
-    #  summary: Get all users
-    #  responses:
-    #    200:
-    #      description: Response when Success
-    #      content:
-    #        application/json:
-    #          schema:
-    #            type: array
-    #            items:
-    #              $ref: '#/components/schemas/user'
+    get:
+      summary: Get all users
+      responses:
+        200:
+          description: Response when Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/user'
     post:
       summary: Create a new user
       description: |

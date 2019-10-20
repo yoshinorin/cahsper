@@ -36,4 +36,13 @@ class UserService(userRepository: UserRepository)(implicit executionContext: Exe
     userRepository.findByName(name)
   }
 
+  /**
+   * Get all users
+   *
+   * @return
+   */
+  def getAll: Future[Seq[Users]] = Future {
+    userRepository.getAll
+  }
+
 }
