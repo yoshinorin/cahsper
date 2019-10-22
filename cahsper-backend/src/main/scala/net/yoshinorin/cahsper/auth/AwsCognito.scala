@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory
 
 import scala.util.{Failure, Success, Try}
 
+// TODO: refactor architecture
 object AwsCognito {
 
   val badJwtMessage: Messages = Messages("Invalid JWT.")
@@ -38,7 +39,22 @@ object AwsCognito {
 
     Try(jwtProcessor.process(jwt, null)) match {
       case Success(jwtClaimsSet: JWTClaimsSet) =>
-        // TODO: Add more verify https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html
+        // TODO: clean up
+        if (jwtClaimsSet.getStringClaim("client_id") != Config.awsCognitoAppClientId) {
+          logger.error("jwt client_id is wrong.")
+          return Left(badJwtMessage)
+        }
+
+        if (jwtClaimsSet.getIssuer.split("/").last != Config.awsCognitoJwkIss) {
+          logger.error("jwt iss is wrong.")
+          return Left(badJwtMessage)
+        }
+
+        if (jwtClaimsSet.getStringClaim("token_use") != "access") {
+          logger.error("jwt token_use must be 'access'.")
+          return Left(badJwtMessage)
+        }
+
         Right(jwtClaimsSet)
       case Failure(badJwtException: BadJWTException) =>
         logger.error(badJwtException.toString)
