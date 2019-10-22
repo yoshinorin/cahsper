@@ -9,3 +9,4 @@ setx CAHSPER_HTTP_PORT 9001
 
 setx CAHSPER_AWS_COGNITO_ISS "https://cognito-idp.{region}.amazonaws.com/{userPoolId}"
 setx CAHSPER_AWS_COGNITO_JWK "https://cognito-idp.{region}.amazonaws.com/{userPoolId}/.well-known/jwks.json"
+setx CAHSPER_AWS_COGNITO_APP_CLIENT_ID "<cognito_application_client_id>"

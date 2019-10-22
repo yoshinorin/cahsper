@@ -15,5 +15,6 @@ object Config {
 
   val awsCognitoJwkIss: String = config.getString("aws.cognito.iss").split("/").last
   val awsCognitoJwkUrl: String = config.getString("aws.cognito.jwk")
+  val awsCognitoAppClientId: String = config.getString("aws.cognito.appClientId")
 
 }
