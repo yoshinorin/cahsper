@@ -22,7 +22,7 @@ class ConfigSpec extends WordSpec {
     }
 
     "aws cognito jwk iss configuration gettable from application.conf" in {
-      assert(Config.awsCognitoJwkIss.startsWith("https://cognito-idp."))
+      assert(Config.awsCognitoJwkIss == "example_user_pool_id")
     }
 
   }

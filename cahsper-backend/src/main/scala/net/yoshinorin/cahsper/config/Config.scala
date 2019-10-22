@@ -13,7 +13,7 @@ object Config {
   val httpHost: String = config.getString("http.host")
   val httpPort: Int = config.getInt("http.port")
 
-  val awsCognitoJwkIss: String = config.getString("aws.cognito.iss")
+  val awsCognitoJwkIss: String = config.getString("aws.cognito.iss").split("/").last
   val awsCognitoJwkUrl: String = config.getString("aws.cognito.jwk")
 
 }
