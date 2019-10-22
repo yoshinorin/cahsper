@@ -26,7 +26,7 @@ class ConfigSpec extends WordSpec {
     }
 
     "aws cognito application id configuration gettable from application.conf" in {
-      assert(Config.awsCognitoAppClientId == "<cognito_application_client_id>")
+      assert(Config.awsCognitoAppClientId == "cognito_application_client_id")
     }
 
   }
