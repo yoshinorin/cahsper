@@ -26,10 +26,10 @@ class UserRoute(userService: UserService)(implicit actorSystem: ActorSystem) ext
   // NOTE: This route for unit test. Never use at production.
   def nonAuthRoute: Route = {
     pathPrefix("users") {
-      getUserRoute ~
-        pathEndOrSingleSlash {
+      pathEndOrSingleSlash {
+        getUserRoute ~
           postUserRoute("JohnDoe")
-        }
+      }
     }
   }
   // $COVERAGE-ON$
