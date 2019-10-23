@@ -42,7 +42,7 @@ class UserRouteSpec extends WordSpec with MockitoSugar with ScalatestRouteTest {
   "UserRoute" should {
 
     "return created user" in {
-      Post("/users") ~> userRoute.nonAuthRoute ~> check {
+      Post("/users") ~> userRoute.devRoute ~> check {
         assert(status == StatusCodes.Created)
         assert(contentType == ContentTypes.`application/json`)
         assert(responseAs[String].contains("JohnDoe")) //TODO: brush up

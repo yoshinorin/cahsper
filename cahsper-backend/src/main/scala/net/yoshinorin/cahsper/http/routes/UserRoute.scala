@@ -14,9 +14,9 @@ class UserRoute(userService: UserService)(implicit actorSystem: ActorSystem) ext
   def route: Route = {
     pathPrefix("users") {
       pathEndOrSingleSlash {
-        getUserRoute ~
+        read ~
           authenticate { jwtClaim =>
-            postUserRoute(jwtClaim.username)
+            write(jwtClaim.username)
           }
       }
     }
@@ -24,17 +24,17 @@ class UserRoute(userService: UserService)(implicit actorSystem: ActorSystem) ext
 
   // $COVERAGE-OFF$
   // NOTE: This route for unit test. Never use at production.
-  def nonAuthRoute: Route = {
+  def devRoute: Route = {
     pathPrefix("users") {
       pathEndOrSingleSlash {
-        getUserRoute ~
-          postUserRoute("JohnDoe")
+        read ~
+          write("JohnDoe")
       }
     }
   }
   // $COVERAGE-ON$
 
-  private[this] def getUserRoute: Route = {
+  private[this] def read: Route = {
     get {
       onSuccess(userService.getAll) { result =>
         complete(HttpResponse(OK, entity = HttpEntity(ContentTypes.`application/json`, s"${result.asJson}")))
@@ -42,7 +42,7 @@ class UserRoute(userService: UserService)(implicit actorSystem: ActorSystem) ext
     }
   }
 
-  private[this] def postUserRoute(userName: String): Route = {
+  private[this] def write(userName: String): Route = {
     post {
       onSuccess(userService.create(userName)) { result =>
         complete(HttpResponse(Created, entity = HttpEntity(ContentTypes.`application/json`, s"${result.asJson}")))
