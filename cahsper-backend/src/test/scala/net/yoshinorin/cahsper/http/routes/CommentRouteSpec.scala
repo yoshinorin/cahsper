@@ -1,6 +1,9 @@
 package net.yoshinorin.cahsper.http.routes
 
+import akka.http.scaladsl.model.headers.OAuth2BearerToken
 import akka.http.scaladsl.model.{ContentTypes, StatusCodes}
+import akka.http.scaladsl.server.AuthenticationFailedRejection
+import akka.http.scaladsl.server.AuthenticationFailedRejection.{CredentialsMissing, CredentialsRejected}
 import akka.http.scaladsl.testkit.ScalatestRouteTest
 import net.yoshinorin.cahsper.models.db.{CommentRepository, Comments}
 import net.yoshinorin.cahsper.services.CommentService
@@ -8,7 +11,7 @@ import org.mockito.Mockito._
 import org.scalatest.WordSpec
 import org.scalatestplus.mockito.MockitoSugar
 
-// testOnly *CommentServiceRouteSpec
+// testOnly *CommentRouteSpec
 class CommentRouteSpec extends WordSpec with MockitoSugar with ScalatestRouteTest {
 
   val mockCommentRepository: CommentRepository = mock[CommentRepository]
@@ -60,9 +63,23 @@ class CommentRouteSpec extends WordSpec with MockitoSugar with ScalatestRouteTes
 
     }
 
+    "unauthorized when access token is invalid" in {
+      Post("/comments/") ~> addCredentials(OAuth2BearerToken("Invalid Token")) ~> commentServiceRoute.route ~> check {
+        // TODO: workaround
+        assert(rejections.last.asInstanceOf[AuthenticationFailedRejection].cause == CredentialsRejected)
+      }
+    }
+
+    "reject when Authorization header is nothing" in {
+      // TODO: workaround
+      Post("/comments/") ~> commentServiceRoute.route ~> check {
+        assert(rejections.last.asInstanceOf[AuthenticationFailedRejection].cause == CredentialsMissing)
+      }
+    }
+
     "return 400 when payload is wrong format" in {
       val json = """{Not a JSON}""".stripMargin
-      Post("/comments/").withEntity(ContentTypes.`application/json`, json) ~> commentServiceRoute.route ~> check {
+      Post("/comments/").withEntity(ContentTypes.`application/json`, json) ~> commentServiceRoute.devRoute ~> check {
         assert(status == StatusCodes.BadRequest)
         assert(contentType == ContentTypes.`application/json`)
       }

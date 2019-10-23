@@ -75,6 +75,9 @@ paths:
                   $ref: '#/components/schemas/comment'
     post:
       summary: Create a new comment
+      security:
+        - OAuth2:
+          - write
       responses:
         201:
           description: Create a comment succeeded
@@ -90,6 +93,8 @@ paths:
               schema:
                 items:
                   $ref: '#/components/schemas/errorMessage'
+        401:
+          description: Unauthorized
 components:
   schemas:
     user:
