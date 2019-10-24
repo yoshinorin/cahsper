@@ -93,6 +93,16 @@ class CommentRouteSpec extends WordSpec with MockitoSugar with ScalatestRouteTes
       }
     }
 
+    /* NOTE: This test will be a failure. It's return 500 error. why...??
+    "create a new comment" in {
+
+      Post("/comments/").withEntity(ContentTypes.`application/json`, """{"comment":"Hello"}""") ~> commentServiceRoute.devRoute ~> check {
+        assert(status == StatusCodes.Created)
+        assert(contentType == ContentTypes.`application/json`)
+      }
+    }
+   */
+
   }
 
 }
