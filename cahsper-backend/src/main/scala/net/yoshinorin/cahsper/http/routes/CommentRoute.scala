@@ -52,7 +52,7 @@ class CommentRoute(commentService: CommentService)(implicit actorSystem: ActorSy
         } yield createCommentRequestFormat
         result match {
           case Right(createCommentRequestFormat) =>
-            onSuccess(commentService.create("TODO", createCommentRequestFormat)) { result =>
+            onSuccess(commentService.create(userName, createCommentRequestFormat)) { result =>
               complete(HttpResponse(Created, entity = HttpEntity(ContentTypes.`application/json`, s"${result.asJson}")))
             }
           case Left(message) =>
