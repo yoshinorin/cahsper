@@ -1,12 +1,12 @@
-package net.yoshinorin.cahsper.models
+package net.yoshinorin.cahsper.models.aws.cognito
 
-import net.yoshinorin.cahsper.models.AwsCognitoJwtClaims.convertJwtClaims
+import net.yoshinorin.cahsper.models.aws.cognito.Jwt.convertJwtClaims
 import org.scalatest.WordSpec
 
-// testOnly *AwsCognitoJwtClaimsSpec
-class AwsCognitoJwtClaimsSpec extends WordSpec {
+// testOnly *JwtSpec
+class JwtSpec extends WordSpec {
 
-  "AwsCognitoJwtClaims" should {
+  "Jwt" should {
 
     // https://github.com/awslabs/aws-support-tools/tree/master/Cognito/decode-verify-jwt
     "AWS Cognito JWT claims convertible to case class" in {
@@ -25,12 +25,12 @@ class AwsCognitoJwtClaimsSpec extends WordSpec {
           |  "client_id": "clientId12345",
           |  "username": "test1"
           |}
-        """.stripMargin.toAwsCognitoJwtClaims
-      assert(jwtClaims.right.get.isInstanceOf[AwsCognitoJwtClaims])
+        """.stripMargin.toJwtClaims
+      assert(jwtClaims.right.get.isInstanceOf[Jwt])
     }
 
     "return left if string not convertible to case class" in {
-      val notAJson = "{NOT a JSON}".toAwsCognitoJwtClaims
+      val notAJson = "{NOT a JSON}".toJwtClaims
       assert(notAJson.isLeft)
     }
   }

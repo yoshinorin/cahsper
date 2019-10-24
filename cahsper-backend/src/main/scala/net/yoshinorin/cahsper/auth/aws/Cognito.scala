@@ -1,4 +1,4 @@
-package net.yoshinorin.cahsper.auth
+package net.yoshinorin.cahsper.auth.aws
 
 import java.net.URL
 
@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory
 import scala.util.{Failure, Success, Try}
 
 // TODO: refactor architecture
-object AwsCognito {
+object Cognito {
 
   val badJwtMessage: Messages = Messages("Invalid JWT.")
   val exceptionOccured: Messages = Messages("Exception occured.")

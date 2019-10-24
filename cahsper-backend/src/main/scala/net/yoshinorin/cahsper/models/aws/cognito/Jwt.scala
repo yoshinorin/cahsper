@@ -1,4 +1,4 @@
-package net.yoshinorin.cahsper.models
+package net.yoshinorin.cahsper.models.aws.cognito
 
 import io.circe.Decoder
 import io.circe.generic.semiauto.deriveDecoder
@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory
 /**
  * AWS Cognito Jwt Claims case class
  */
-case class AwsCognitoJwtClaims(
+case class Jwt(
   sub: String,
   event_id: String,
   token_use: String,
@@ -23,10 +23,10 @@ case class AwsCognitoJwtClaims(
   username: String
 )
 
-object AwsCognitoJwtClaims {
+object Jwt {
 
   private val logger = LoggerFactory.getLogger(this.getClass)
-  implicit val decodeAwsJwtClaims: Decoder[AwsCognitoJwtClaims] = deriveDecoder[AwsCognitoJwtClaims]
+  implicit val decodeAwsJwtClaims: Decoder[Jwt] = deriveDecoder[Jwt]
 
   implicit class convertJwtClaims(string: String) {
 
@@ -35,8 +35,8 @@ object AwsCognitoJwtClaims {
      *
      * @return
      */
-    def toAwsCognitoJwtClaims: Either[Messages, AwsCognitoJwtClaims] = {
-      decode[AwsCognitoJwtClaims](string) match {
+    def toJwtClaims: Either[Messages, Jwt] = {
+      decode[Jwt](string) match {
         case Right(jwtClaims) => Right(jwtClaims)
         case Left(error) =>
           logger.error(error.getMessage)
