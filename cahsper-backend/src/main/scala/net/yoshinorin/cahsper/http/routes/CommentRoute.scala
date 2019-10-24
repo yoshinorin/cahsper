@@ -6,11 +6,11 @@ import akka.http.scaladsl.model.{ContentTypes, HttpEntity, HttpResponse}
 import akka.http.scaladsl.server.Directives.{entity, _}
 import akka.http.scaladsl.server.Route
 import io.circe.syntax._
-import net.yoshinorin.cahsper.http.AwsCognitoAuthenticator
+import net.yoshinorin.cahsper.http.auth.Cognito
 import net.yoshinorin.cahsper.models.request.{CommentRequestFormat, CreateCommentRequestFormat}
 import net.yoshinorin.cahsper.services.CommentService
 
-class CommentRoute(commentService: CommentService)(implicit actorSystem: ActorSystem) extends AwsCognitoAuthenticator {
+class CommentRoute(commentService: CommentService)(implicit actorSystem: ActorSystem) extends Cognito {
 
   def route: Route = {
     pathPrefix("comments") {

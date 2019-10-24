@@ -6,10 +6,10 @@ import akka.http.scaladsl.model.{ContentTypes, HttpEntity, HttpResponse}
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import io.circe.syntax._
-import net.yoshinorin.cahsper.http.AwsCognitoAuthenticator
+import net.yoshinorin.cahsper.http.auth.Cognito
 import net.yoshinorin.cahsper.services.UserService
 
-class UserRoute(userService: UserService)(implicit actorSystem: ActorSystem) extends AwsCognitoAuthenticator {
+class UserRoute(userService: UserService)(implicit actorSystem: ActorSystem) extends Cognito {
 
   def route: Route = {
     pathPrefix("users") {
