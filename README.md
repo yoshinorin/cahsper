@@ -34,23 +34,23 @@
 # Set up
 
 <details>
-  <summary>Preconditions</summary>
+  <summary>Preconditions</summary><br>
 
-Please prepare [requirements](#requirements) environment before setup.
-
-</details>
-
-<details>
-  <summary>Prepare application</summary>
-
-Please download source code from [releases](https://github.com/YoshinoriN/cahsper/releases) or `git clone`.
+Prepare [requirements](#requirements) environment before setup.
 
 </details>
 
 <details>
-  <summary>AWS Cognito</summary>
+  <summary>Download application</summary><br>
 
-Cahsper use AWS cognito for authorization/authentication and creates `username` from AWS cognito `name` attribute.
+Download source code from [releases](https://github.com/YoshinoriN/cahsper/releases) or `git clone`.
+
+</details>
+
+<details>
+  <summary>AWS Cognito</summary><br>
+
+Create AWS Cognito userpool. Cahsper use AWS cognito for authorization/authentication and creates `username` from AWS cognito `name` attribute.
 
 So, you have to select `name` attribute when create userpool.
 
@@ -63,19 +63,25 @@ Next, please create `App clients` and select `Enable sign-in API for server-base
 </details>
 
 <details>
-  <summary>DataBase</summary>
+  <summary>DataBase</summary><br>
 
-Please create database scheme.
+Create a database schema. Also, schema name is anything will be fine.
 
 ```sql
 CREATE DATABASE cahsper;
 ```
 
-All tables will be created after run the cahsper automatically.
+All tables will be migrated after run the cahsper automatically.
 
 </details>
 
-After done above procedure, [please set system environment](#configuration).
+<details>
+
+  <summary>Configuration</summary><br>
+
+After done above procedure, [set system environment](#configuration) before start server.
+
+</details>
 
 # Docker integration
 
