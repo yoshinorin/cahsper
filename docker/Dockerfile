@@ -2,8 +2,12 @@ FROM yoshinorin/docker-sbt:1.3.3
 
 MAINTAINER YoshinoriN
 
-RUN apt-get update \
-  && apt-get install git
+RUN apt update \
+  && apt upgrade \
+  && apt install git -y \
+  && apt autoremove \
+  && apt autoclean
+
 
 WORKDIR /usr/opt
 
