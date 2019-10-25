@@ -9,16 +9,19 @@
 # Documentation
 
 * [API](https://yoshinorin.github.io/cahsper/)
+    * [Examples](#api-execution-example)
 * [Development](./docs/dev)
 
 # Table of contents
 
 * [Requirements](#requirements)
 * [Set up](#set-up)
+* [Docker integration](#docker-integration)
 * [Configuration](#configuration)
     * [Database](#database)
     * [HTTP Server](#http-server)
     * [Authentication (AWS Cognito)](#authentication)
+* [Start server](#start-server)
 * [API Execution example](#api-execution-example)
 
 # Requirements
@@ -30,13 +33,59 @@
 
 # Set up
 
-* (TODO): AWS Cognito settings
-* (TODO): DataBase settings
-* (TODO): Others
+<details>
+  <summary>Preconditions</summary>
+
+Please prepare [requirements](#requirements) environment before setup.
+
+</details>
+
+<details>
+  <summary>Prepare application</summary>
+
+Please download source code from [releases](https://github.com/YoshinoriN/cahsper/releases) or `git clone`.
+
+</details>
+
+<details>
+  <summary>AWS Cognito</summary>
+
+Cahsper use AWS cognito for authorization/authentication and creates `username` from AWS cognito `name` attribute.
+
+So, you have to select `name` attribute when create userpool.
+
+![](./docs/images/cognito-attr.jpg)
+
+Next, please create `App clients` and select `Enable sign-in API for server-based authentication (ADMIN_NO_SRP_AUTH)`.
+
+![](./docs/images/cognito-appclient.jpg)
+
+</details>
+
+<details>
+  <summary>DataBase</summary>
+
+Please create database scheme.
+
+```sql
+CREATE DATABASE cahsper;
+```
+
+All tables will be created after run the cahsper automatically.
+
+</details>
+
+After done above procedure, [please set system environment](#configuration).
+
+# Docker integration
+
+Cahsper provide [docker image](https://cloud.docker.com/repository/docker/yoshinorin/docker-cahsper). Please see [docker-compose.yml](https://github.com/YoshinoriN/cahsper/blob/master/docker/docker-compose.yml)
 
 # Configuration
 
 Cahsper backend (API server) read all settings from the system environment variable. You have to set the following system environment variables.
+
+> [Example](https://github.com/YoshinoriN/cahsper/blob/master/cahsper-backend/scripts/devenv.sh)
 
 ## Database
 
@@ -63,6 +112,13 @@ Cahsper backend (API server) use AWS Cognito for authentication. Please create A
 |---|---|---|---|---|
 |`CAHSPER_AWS_COGNITO_ISS `|AWS Cognito jwk iss|`string`|-|`https://cognito-idp.{region}.amazonaws.com/{userPoolId}`|
 |`CAHSPER_AWS_COGNITO_APP_CLIENT_ID `|AWS Cognito application Id|`string`|-|-|
+
+# Start server
+
+```sbt
+$ cd <source code dir>
+$ sbt run
+```
 
 # API Execution example
 
