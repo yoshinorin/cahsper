@@ -14,7 +14,7 @@ object Config {
   val httpPort: Int = config.getInt("http.port")
 
   val awsCognitoJwkIss: String = config.getString("aws.cognito.iss").split("/").last
-  val awsCognitoJwkUrl: String = config.getString("aws.cognito.jwk")
+  val awsCognitoJwkUrl: String = config.getString("aws.cognito.iss") + ("/.well-known/jwks.json")
   val awsCognitoAppClientId: String = config.getString("aws.cognito.appClientId")
 
 }

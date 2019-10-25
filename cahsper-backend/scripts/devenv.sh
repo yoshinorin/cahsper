@@ -10,5 +10,4 @@ export CAHSPER_HTTP_BIND_ADDRESS="0.0.0.0"
 export CAHSPER_HTTP_PORT=9001
 
 export CAHSPER_AWS_COGNITO_ISS="https://cognito-idp.{region}.amazonaws.com/{userPoolId}"
-export CAHSPER_AWS_COGNITO_JWK="https://cognito-idp.{region}.amazonaws.com/{userPoolId}/.well-known/jwks.json"
 export CAHSPER_AWS_COGNITO_APP_CLIENT_ID "cognito_application_client_id"

@@ -62,7 +62,6 @@ Cahsper backend (API server) use AWS Cognito for authentication. Please create A
 |Property|Description|Type|Default|Example|
 |---|---|---|---|---|
 |`CAHSPER_AWS_COGNITO_ISS `|AWS Cognito jwk iss|`string`|-|`https://cognito-idp.{region}.amazonaws.com/{userPoolId}`|
-|`CAHSPER_AWS_COGNITO_JWK `|AWS Cognito jwk URL|`string`|-|`https://cognito-idp.{region}.amazonaws.com/{userPoolId}/.well-known/jwks.json`|
 |`CAHSPER_AWS_COGNITO_APP_CLIENT_ID `|AWS Cognito application Id|`string`|-|-|
 
 # API Execution example

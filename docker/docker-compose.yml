@@ -23,7 +23,6 @@ services:
       CAHSPER_DB_PASSWORD: pass
       CAHSPER_HTTP_BIND_ADDRESS: 0.0.0.0
       CAHSPER_AWS_COGNITO_ISS: https://cognito-idp.{region}.amazonaws.com/{userPoolId}
-      CAHSPER_AWS_COGNITO_JWK: https://cognito-idp.{region}.amazonaws.com/{userPoolId}/.well-known/jwks.json
     volumes:
       - ./data:/var/lib/mysql
     hostname: cahsper
