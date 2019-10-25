@@ -1,4 +1,4 @@
-FROM yoshinorin/docker-sbt:1.2.8.2
+FROM yoshinorin/docker-sbt:1.3.3
 
 MAINTAINER YoshinoriN
 
