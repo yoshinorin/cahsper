@@ -42,7 +42,7 @@ class CommentRoute(
   private[this] def read: Route = {
     get {
       onSuccess(commentService.getAll) { result =>
-        complete(HttpResponse(OK, entity = HttpEntity(ContentTypes.`application/json`, s"${result.asJson}")))
+        complete(HttpResponse(OK, entity = HttpEntity(ContentTypes.`application/json`, s"${result.reverse.asJson}")))
       }
     }
   }
