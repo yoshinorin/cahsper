@@ -7,17 +7,20 @@ import akka.http.scaladsl.server.Directives.{entity, _}
 import akka.http.scaladsl.server.Route
 import io.circe.syntax._
 import net.yoshinorin.cahsper.definitions.User
-import net.yoshinorin.cahsper.http.auth.Cognito
+import net.yoshinorin.cahsper.http.auth.Auth
 import net.yoshinorin.cahsper.models.request.{CommentRequestFormat, CreateCommentRequestFormat}
 import net.yoshinorin.cahsper.services.CommentService
 
-class CommentRoute(commentService: CommentService)(implicit actorSystem: ActorSystem) extends Cognito {
+class CommentRoute(
+  auth: Auth,
+  commentService: CommentService
+)(implicit actorSystem: ActorSystem) {
 
   def route: Route = {
     pathPrefix("comments") {
       pathEndOrSingleSlash {
         read ~
-          authenticate { user =>
+          auth.authenticate { user =>
             write(user)
           }
       }

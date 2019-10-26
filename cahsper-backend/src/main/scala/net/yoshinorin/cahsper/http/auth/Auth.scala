@@ -1,9 +1,10 @@
 package net.yoshinorin.cahsper.http.auth
 
 import akka.http.scaladsl.server.directives.AuthenticationDirective
+import net.yoshinorin.cahsper.definitions.User
 
-abstract class AuthBase[T] {
+trait Auth {
 
-  def authenticate: AuthenticationDirective[T]
+  def authenticate: AuthenticationDirective[User]
 
 }

@@ -6,6 +6,7 @@ import akka.http.scaladsl.server.AuthenticationFailedRejection
 import akka.http.scaladsl.server.AuthenticationFailedRejection.{CredentialsMissing, CredentialsRejected}
 import akka.http.scaladsl.testkit.ScalatestRouteTest
 import net.yoshinorin.cahsper.definitions.User
+import net.yoshinorin.cahsper.http
 import net.yoshinorin.cahsper.models.db.Comments
 import net.yoshinorin.cahsper.models.request.CreateCommentRequestFormat
 import net.yoshinorin.cahsper.services.CommentService
@@ -40,7 +41,8 @@ class CommentRouteSpec extends WordSpec with MockitoSugar with ScalatestRouteTes
       )
     )
 
-  val commentServiceRoute: CommentRoute = new CommentRoute(mockCommentService)
+  val auth = new http.auth.Cognito()
+  val commentServiceRoute: CommentRoute = new CommentRoute(auth, mockCommentService)
 
   "CommentServiceRoute" should {
 

@@ -18,13 +18,15 @@ object BootStrap extends App {
   implicit val actorMaterializer: ActorMaterializer = ActorMaterializer()
   implicit val executionContextExecutor: ExecutionContextExecutor = actorSystem.dispatcher
 
+  val auth = new http.auth.Cognito()
+
   val apiStatusRoute: ApiStatusRoute = new ApiStatusRoute()
   val commentRepository: CommentRepository = new CommentRepository()
   val commentService: CommentService = new CommentService(commentRepository)
-  val commentServiceRoute: CommentRoute = new CommentRoute(commentService)
+  val commentServiceRoute: CommentRoute = new CommentRoute(auth, commentService)
   val userRepository: UserRepository = new UserRepository()
   val userService: UserService = new UserService(userRepository)
-  val userServiceRoute: UserRoute = new UserRoute(userService)
+  val userServiceRoute: UserRoute = new UserRoute(auth, userService)
 
   val httpServer: HttpServer = new HttpServer(apiStatusRoute, commentServiceRoute, userServiceRoute)
 

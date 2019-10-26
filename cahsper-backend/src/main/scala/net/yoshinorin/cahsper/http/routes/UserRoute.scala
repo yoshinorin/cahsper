@@ -7,16 +7,19 @@ import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import io.circe.syntax._
 import net.yoshinorin.cahsper.definitions.User
-import net.yoshinorin.cahsper.http.auth.Cognito
+import net.yoshinorin.cahsper.http.auth.Auth
 import net.yoshinorin.cahsper.services.UserService
 
-class UserRoute(userService: UserService)(implicit actorSystem: ActorSystem) extends Cognito {
+class UserRoute(
+  auth: Auth,
+  userService: UserService
+)(implicit actorSystem: ActorSystem) {
 
   def route: Route = {
     pathPrefix("users") {
       pathEndOrSingleSlash {
         read ~
-          authenticate { user =>
+          auth.authenticate { user =>
             write(user)
           }
       }

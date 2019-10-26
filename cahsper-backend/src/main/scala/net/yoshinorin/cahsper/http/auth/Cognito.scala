@@ -5,15 +5,14 @@ import akka.http.scaladsl.server.Directives.authenticateOrRejectWithChallenge
 import akka.http.scaladsl.server.directives.{AuthenticationDirective, AuthenticationResult}
 import net.yoshinorin.cahsper.auth.aws.Cognito
 import net.yoshinorin.cahsper.definitions.User
-import net.yoshinorin.cahsper.models.aws.cognito.Jwt
 import net.yoshinorin.cahsper.models.aws.cognito.Jwt.convertJwtClaims
 
 import scala.concurrent.Future
 
-trait Cognito {
+class Cognito extends Auth {
 
   // TODO: Clean up
-  def authenticate: AuthenticationDirective[User] = {
+  override def authenticate: AuthenticationDirective[User] = {
 
     authenticateOrRejectWithChallenge[OAuth2BearerToken, User] {
       case Some(OAuth2BearerToken(bearerToken)) => {
