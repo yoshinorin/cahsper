@@ -10,8 +10,3 @@ case class Message(
 object Message {
   implicit val encodeMessage: Encoder[Message] = deriveEncoder[Message]
 }
-
-// NOTE: This object does not relate to database object
-case class User(
-  name: String
-)
