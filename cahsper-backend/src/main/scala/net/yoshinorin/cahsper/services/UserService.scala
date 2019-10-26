@@ -1,6 +1,8 @@
 package net.yoshinorin.cahsper.services
 
+import net.yoshinorin.cahsper.definitions.User
 import net.yoshinorin.cahsper.models.db.{UserRepository, Users}
+
 import scala.concurrent.{ExecutionContext, Future}
 
 class UserService(userRepository: UserRepository)(implicit executionContext: ExecutionContext) {
@@ -12,15 +14,14 @@ class UserService(userRepository: UserRepository)(implicit executionContext: Exe
   /**
    * Create User
    *
-   * @param userName user name
+   * @param user
    * @return
    */
-  def create(userName: String): Future[Users] = {
+  def create(user: User): Future[Users] = {
     // TODO: Check user already exists or not
 
-    val user = Users(userName)
     for {
-      maybeUserName <- this.create(user)
+      maybeUserName <- this.create(Users(user.name))
       maybeUser <- this.findByName(maybeUserName)
     } yield maybeUser.head
 

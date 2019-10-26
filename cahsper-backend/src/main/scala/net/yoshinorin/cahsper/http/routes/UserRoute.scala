@@ -6,6 +6,7 @@ import akka.http.scaladsl.model.{ContentTypes, HttpEntity, HttpResponse}
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import io.circe.syntax._
+import net.yoshinorin.cahsper.definitions.User
 import net.yoshinorin.cahsper.http.auth.Cognito
 import net.yoshinorin.cahsper.services.UserService
 
@@ -15,8 +16,8 @@ class UserRoute(userService: UserService)(implicit actorSystem: ActorSystem) ext
     pathPrefix("users") {
       pathEndOrSingleSlash {
         read ~
-          authenticate { jwtClaim =>
-            write(jwtClaim.username)
+          authenticate { user =>
+            write(user)
           }
       }
     }
@@ -28,7 +29,7 @@ class UserRoute(userService: UserService)(implicit actorSystem: ActorSystem) ext
     pathPrefix("users") {
       pathEndOrSingleSlash {
         read ~
-          write("JohnDoe")
+          write(User("JohnDoe"))
       }
     }
   }
@@ -42,9 +43,9 @@ class UserRoute(userService: UserService)(implicit actorSystem: ActorSystem) ext
     }
   }
 
-  private[this] def write(userName: String): Route = {
+  private[this] def write(user: User): Route = {
     post {
-      onSuccess(userService.create(userName)) { result =>
+      onSuccess(userService.create(user)) { result =>
         complete(HttpResponse(Created, entity = HttpEntity(ContentTypes.`application/json`, s"${result.asJson}")))
       }
     }

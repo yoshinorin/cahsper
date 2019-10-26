@@ -6,6 +6,7 @@ import akka.http.scaladsl.model.{ContentTypes, HttpEntity, HttpResponse}
 import akka.http.scaladsl.server.Directives.{entity, _}
 import akka.http.scaladsl.server.Route
 import io.circe.syntax._
+import net.yoshinorin.cahsper.definitions.User
 import net.yoshinorin.cahsper.http.auth.Cognito
 import net.yoshinorin.cahsper.models.request.{CommentRequestFormat, CreateCommentRequestFormat}
 import net.yoshinorin.cahsper.services.CommentService
@@ -16,8 +17,8 @@ class CommentRoute(commentService: CommentService)(implicit actorSystem: ActorSy
     pathPrefix("comments") {
       pathEndOrSingleSlash {
         read ~
-          authenticate { jwtClaim =>
-            write(jwtClaim.username)
+          authenticate { user =>
+            write(user)
           }
       }
     }
@@ -29,7 +30,7 @@ class CommentRoute(commentService: CommentService)(implicit actorSystem: ActorSy
     pathPrefix("comments") {
       pathEndOrSingleSlash {
         read ~
-          write("JohnDoe")
+          write(User("JohnDoe"))
       }
     }
   }
@@ -43,7 +44,7 @@ class CommentRoute(commentService: CommentService)(implicit actorSystem: ActorSy
     }
   }
 
-  private[this] def write(userName: String): Route = {
+  private[this] def write(user: User): Route = {
     post {
       entity(as[String]) { payload =>
         val result = for {
@@ -52,7 +53,7 @@ class CommentRoute(commentService: CommentService)(implicit actorSystem: ActorSy
         } yield createCommentRequestFormat
         result match {
           case Right(createCommentRequestFormat) =>
-            onSuccess(commentService.create(userName, createCommentRequestFormat)) { result =>
+            onSuccess(commentService.create(user, createCommentRequestFormat)) { result =>
               complete(HttpResponse(Created, entity = HttpEntity(ContentTypes.`application/json`, s"${result.asJson}")))
             }
           case Left(message) =>

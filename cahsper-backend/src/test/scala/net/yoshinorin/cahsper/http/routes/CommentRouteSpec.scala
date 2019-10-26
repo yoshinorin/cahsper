@@ -5,6 +5,7 @@ import akka.http.scaladsl.model.{ContentTypes, StatusCodes}
 import akka.http.scaladsl.server.AuthenticationFailedRejection
 import akka.http.scaladsl.server.AuthenticationFailedRejection.{CredentialsMissing, CredentialsRejected}
 import akka.http.scaladsl.testkit.ScalatestRouteTest
+import net.yoshinorin.cahsper.definitions.User
 import net.yoshinorin.cahsper.models.db.Comments
 import net.yoshinorin.cahsper.models.request.CreateCommentRequestFormat
 import net.yoshinorin.cahsper.services.CommentService
@@ -32,7 +33,7 @@ class CommentRouteSpec extends WordSpec with MockitoSugar with ScalatestRouteTes
       )
     )
 
-  when(mockCommentService.create("JohnDue", CreateCommentRequestFormat("Hello")))
+  when(mockCommentService.create(User("JohnDue"), CreateCommentRequestFormat("Hello")))
     .thenReturn(
       Future(
         Comments(3, "JohnDue", "Hello", 1567814391)

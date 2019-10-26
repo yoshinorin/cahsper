@@ -2,6 +2,7 @@ package net.yoshinorin.cahsper.services
 
 import akka.actor.ActorSystem
 import akka.stream.ActorMaterializer
+import net.yoshinorin.cahsper.definitions.User
 import net.yoshinorin.cahsper.models.db.{CommentRepository, Comments}
 import net.yoshinorin.cahsper.models.request.CreateCommentRequestFormat
 import org.mockito.Mockito._
@@ -55,7 +56,7 @@ class CommentServiceSpec extends WordSpec with MockitoSugar {
     }
 
     "create new comment" in {
-      commentService.create("YoshinoriN", CreateCommentRequestFormat("This is a test three.")).onComplete {
+      commentService.create(User("YoshinoriN"), CreateCommentRequestFormat("This is a test three.")).onComplete {
         case Success(comment) => assert(comment.id == 3)
         case Failure(exception) => // Nothing to do
       }

@@ -7,6 +7,7 @@ import akka.http.scaladsl.server.AuthenticationFailedRejection
 import akka.http.scaladsl.server.AuthenticationFailedRejection.{CredentialsMissing, CredentialsRejected}
 import akka.http.scaladsl.testkit.ScalatestRouteTest
 import akka.stream.ActorMaterializer
+import net.yoshinorin.cahsper.definitions.User
 import net.yoshinorin.cahsper.models.db.Users
 import net.yoshinorin.cahsper.services.UserService
 import org.mockito.Mockito.when
@@ -24,7 +25,7 @@ class UserRouteSpec extends WordSpec with MockitoSugar with ScalatestRouteTest {
 
   val mockUserService: UserService = mock[UserService]
 
-  when(mockUserService.create("JohnDoe"))
+  when(mockUserService.create(User("JohnDoe")))
     .thenReturn(Future(Users("JohnDoe")))
 
   when(mockUserService.getAll)

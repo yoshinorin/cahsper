@@ -2,6 +2,7 @@ package net.yoshinorin.cahsper.services
 
 import akka.actor.ActorSystem
 import akka.stream.ActorMaterializer
+import net.yoshinorin.cahsper.definitions.User
 import net.yoshinorin.cahsper.models.db.{UserRepository, Users}
 import org.mockito.Mockito._
 import org.scalatest.WordSpec
@@ -44,7 +45,7 @@ class UserServiceSpec extends WordSpec with MockitoSugar {
     }
 
     "create new user" in {
-      userService.create("YoshinoriN").onComplete {
+      userService.create(User("YoshinoriN")).onComplete {
         case Success(user) => assert(user.name == "YoshinoriN")
         case Failure(exception) => // Nothing to do
       }
