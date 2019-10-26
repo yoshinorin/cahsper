@@ -3,7 +3,7 @@ package net.yoshinorin.cahsper.models.aws.cognito
 import io.circe.Decoder
 import io.circe.generic.semiauto.deriveDecoder
 import io.circe.parser.decode
-import net.yoshinorin.cahsper.definitions.Messages
+import net.yoshinorin.cahsper.definitions.Message
 import org.slf4j.LoggerFactory
 
 /**
@@ -35,12 +35,12 @@ object Jwt {
      *
      * @return
      */
-    def toJwtClaims: Either[Messages, Jwt] = {
+    def toJwtClaims: Either[Message, Jwt] = {
       decode[Jwt](string) match {
         case Right(jwtClaims) => Right(jwtClaims)
         case Left(error) =>
           logger.error(error.getMessage)
-          Left(Messages(error.getMessage))
+          Left(Message(error.getMessage))
       }
     }
   }

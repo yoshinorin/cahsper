@@ -3,10 +3,10 @@ package net.yoshinorin.cahsper.definitions
 import io.circe.Encoder
 import io.circe.generic.semiauto._
 
-case class Messages(
+case class Message(
   messages: String
 )
 
-object Messages {
-  implicit val encodeMessage: Encoder[Messages] = deriveEncoder[Messages]
+object Message {
+  implicit val encodeMessage: Encoder[Message] = deriveEncoder[Message]
 }

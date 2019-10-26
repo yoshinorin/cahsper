@@ -8,7 +8,7 @@ import com.nimbusds.jose.proc.{JWSVerificationKeySelector, SecurityContext}
 import com.nimbusds.jwt.JWTClaimsSet
 import com.nimbusds.jwt.proc.{BadJWTException, ConfigurableJWTProcessor, DefaultJWTProcessor}
 import net.yoshinorin.cahsper.config.Config
-import net.yoshinorin.cahsper.definitions.Messages
+import net.yoshinorin.cahsper.definitions.Message
 import org.slf4j.LoggerFactory
 
 import scala.util.{Failure, Success, Try}
@@ -16,8 +16,8 @@ import scala.util.{Failure, Success, Try}
 // TODO: refactor architecture
 object Cognito {
 
-  val badJwtMessage: Messages = Messages("Invalid JWT.")
-  val exceptionOccured: Messages = Messages("Exception occured.")
+  val badJwtMessage: Message = Message("Invalid JWT.")
+  val exceptionOccured: Message = Message("Exception occured.")
 
   private val logger = LoggerFactory.getLogger(this.getClass)
 
@@ -35,7 +35,7 @@ object Cognito {
    * @param jwt
    * @return
    */
-  def validateJwt(jwt: String): Either[Messages, JWTClaimsSet] = {
+  def validateJwt(jwt: String): Either[Message, JWTClaimsSet] = {
 
     Try(jwtProcessor.process(jwt, null)) match {
       case Success(jwtClaimsSet: JWTClaimsSet) =>
