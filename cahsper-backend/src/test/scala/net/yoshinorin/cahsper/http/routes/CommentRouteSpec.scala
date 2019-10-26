@@ -5,6 +5,7 @@ import akka.http.scaladsl.model.{ContentTypes, StatusCodes}
 import akka.http.scaladsl.server.AuthenticationFailedRejection
 import akka.http.scaladsl.server.AuthenticationFailedRejection.{CredentialsMissing, CredentialsRejected}
 import akka.http.scaladsl.testkit.ScalatestRouteTest
+import net.yoshinorin.cahsper.auth.FakeAuth
 import net.yoshinorin.cahsper.definitions.User
 import net.yoshinorin.cahsper.http
 import net.yoshinorin.cahsper.models.db.Comments
@@ -43,6 +44,9 @@ class CommentRouteSpec extends WordSpec with MockitoSugar with ScalatestRouteTes
 
   val auth = new http.auth.Cognito()
   val commentServiceRoute: CommentRoute = new CommentRoute(auth, mockCommentService)
+
+  val fakeAuth = new FakeAuth("JohnDue")
+  val commentServiceRouteWithFakeAuth: CommentRoute = new CommentRoute(fakeAuth, mockCommentService)
 
   "CommentServiceRoute" should {
 
@@ -90,21 +94,21 @@ class CommentRouteSpec extends WordSpec with MockitoSugar with ScalatestRouteTes
 
     "return 400 when payload is wrong format" in {
       val json = """{Not a JSON}""".stripMargin
-      Post("/comments/").withEntity(ContentTypes.`application/json`, json) ~> commentServiceRoute.devRoute ~> check {
+      Post("/comments/")
+        .withEntity(ContentTypes.`application/json`, json) ~> addCredentials(OAuth2BearerToken("Valid Token")) ~> commentServiceRouteWithFakeAuth.route ~> check {
         assert(status == StatusCodes.BadRequest)
         assert(contentType == ContentTypes.`application/json`)
       }
     }
 
-    /* NOTE: This test will be a failure. It's return 500 error. why...??
     "create a new comment" in {
 
-      Post("/comments/").withEntity(ContentTypes.`application/json`, """{"comment":"Hello"}""") ~> commentServiceRoute.devRoute ~> check {
+      Post("/comments/")
+        .withEntity(ContentTypes.`application/json`, """{"comment":"Hello"}""") ~> addCredentials(OAuth2BearerToken("Valid Token")) ~> commentServiceRouteWithFakeAuth.route ~> check {
         assert(status == StatusCodes.Created)
         assert(contentType == ContentTypes.`application/json`)
       }
     }
-   */
 
   }
 

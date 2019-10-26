@@ -7,6 +7,7 @@ import akka.http.scaladsl.server.AuthenticationFailedRejection
 import akka.http.scaladsl.server.AuthenticationFailedRejection.{CredentialsMissing, CredentialsRejected}
 import akka.http.scaladsl.testkit.ScalatestRouteTest
 import akka.stream.ActorMaterializer
+import net.yoshinorin.cahsper.auth.FakeAuth
 import net.yoshinorin.cahsper.definitions.User
 import net.yoshinorin.cahsper.http
 import net.yoshinorin.cahsper.models.db.Users
@@ -42,10 +43,13 @@ class UserRouteSpec extends WordSpec with MockitoSugar with ScalatestRouteTest {
   val auth = new http.auth.Cognito()
   val userRoute: UserRoute = new UserRoute(auth, mockUserService)
 
+  val fakeAuth = new FakeAuth("JohnDoe")
+  val userRouteWithFakeAuth: UserRoute = new UserRoute(fakeAuth, mockUserService)
+
   "UserRoute" should {
 
     "return created user" in {
-      Post("/users") ~> userRoute.devRoute ~> check {
+      Post("/users") ~> addCredentials(OAuth2BearerToken("Valid Token")) ~> userRouteWithFakeAuth.route ~> check {
         assert(status == StatusCodes.Created)
         assert(contentType == ContentTypes.`application/json`)
         assert(responseAs[String].contains("JohnDoe")) //TODO: brush up

@@ -26,18 +26,6 @@ class UserRoute(
     }
   }
 
-  // $COVERAGE-OFF$
-  // NOTE: This route for unit test. Never use at production.
-  def devRoute: Route = {
-    pathPrefix("users") {
-      pathEndOrSingleSlash {
-        read ~
-          write(User("JohnDoe"))
-      }
-    }
-  }
-  // $COVERAGE-ON$
-
   private[this] def read: Route = {
     get {
       onSuccess(userService.getAll) { result =>

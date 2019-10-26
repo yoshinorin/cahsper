@@ -27,18 +27,6 @@ class CommentRoute(
     }
   }
 
-  // $COVERAGE-OFF$
-  // NOTE: This route for unit test. Never use at production.
-  def devRoute: Route = {
-    pathPrefix("comments") {
-      pathEndOrSingleSlash {
-        read ~
-          write(User("JohnDoe"))
-      }
-    }
-  }
-  // $COVERAGE-ON$
-
   private[this] def read: Route = {
     get {
       onSuccess(commentService.getAll) { result =>
