@@ -5,7 +5,11 @@ import akka.http.scaladsl.server.{HttpApp, Route}
 import ch.megard.akka.http.cors.scaladsl.CorsDirectives._
 import net.yoshinorin.cahsper.http.routes.{ApiStatusRoute, CommentRoute, UserRoute}
 
-class HttpServer(apiStatusRoute: ApiStatusRoute, commentServiceRoute: CommentRoute, userRoute: UserRoute)(implicit actorSystem: ActorSystem)
+class HttpServer(
+  apiStatusRoute: ApiStatusRoute,
+  commentRoute: CommentRoute,
+  userRoute: UserRoute
+)(implicit actorSystem: ActorSystem)
     extends HttpApp
     with HttpLogger {
 
@@ -17,7 +21,7 @@ class HttpServer(apiStatusRoute: ApiStatusRoute, commentServiceRoute: CommentRou
   override def routes: Route = cors() {
     httpLogging {
       apiStatusRoute.route ~
-        commentServiceRoute.route ~
+        commentRoute.route ~
         userRoute.route
     }
   }
