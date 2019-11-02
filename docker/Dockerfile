@@ -2,12 +2,11 @@ FROM yoshinorin/docker-sbt:1.3.3
 
 MAINTAINER YoshinoriN
 
-RUN apt update \
-  && apt upgrade \
-  && apt install git -y \
+RUN apt update -y \
+  && apt upgrade -y \
+  && apt install -y git vim \
   && apt autoremove \
   && apt autoclean
-
 
 WORKDIR /usr/opt
 
@@ -16,7 +15,7 @@ RUN git clone https://github.com/YoshinoriN/cahsper.git
 
 WORKDIR /usr/opt/cahsper
 
-RUN rm -rf .git docs \
+RUN rm -rf .git docs docker \
   && rm .gitignore .editorconfig .travis.yml \
   && pwd && ls -la \
   && mv cahsper-backend/* . \
