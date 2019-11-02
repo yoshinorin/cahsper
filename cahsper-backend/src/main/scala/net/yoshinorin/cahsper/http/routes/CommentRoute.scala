@@ -19,10 +19,9 @@ class CommentRoute(
   def route: Route = {
     pathPrefix("comments") {
       pathEndOrSingleSlash {
-        read ~
-          auth.authenticate { user =>
-            write(user)
-          }
+        auth.authenticate { user =>
+          write(user)
+        } ~ read
       }
     }
   }

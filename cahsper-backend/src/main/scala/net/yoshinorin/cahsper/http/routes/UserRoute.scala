@@ -18,10 +18,9 @@ class UserRoute(
   def route: Route = {
     pathPrefix("users") {
       pathEndOrSingleSlash {
-        read ~
-          auth.authenticate { user =>
-            write(user)
-          }
+        auth.authenticate { user =>
+          write(user)
+        } ~ read
       }
     }
   }
