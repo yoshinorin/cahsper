@@ -25,7 +25,7 @@ services:
       CAHSPER_AWS_COGNITO_ISS: https://cognito-idp.{region}.amazonaws.com/{userPoolId}
       CAHSPER_AWS_COGNITO_APP_CLIENT_ID: cognito_application_client_id
     volumes:
-      - ./data:/var/lib/mysql
+      - ./logs:/usr/opt/cahsper/logs
     hostname: cahsper
     container_name: cahsper
     ports:

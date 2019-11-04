@@ -1,6 +1,7 @@
 # General
 *.class
 *.log
+**/logs/**
 *.gz
 **/node_modules/*
 
