@@ -79,16 +79,14 @@ class CommentRouteSpec extends WordSpec with MockitoSugar with ScalatestRouteTes
     }
 
     "unauthorized when access token is invalid" in {
-      // TODO: workaround
       Post("/comments/") ~> addCredentials(OAuth2BearerToken("Invalid Token")) ~> commentServiceRoute.route ~> check {
-        assert(rejections.head.asInstanceOf[AuthenticationFailedRejection].cause == CredentialsRejected)
+        assert(rejection.asInstanceOf[AuthenticationFailedRejection].cause == CredentialsRejected)
       }
     }
 
     "reject when Authorization header is nothing" in {
-      // TODO: workaround
       Post("/comments/") ~> commentServiceRoute.route ~> check {
-        assert(rejections.head.asInstanceOf[AuthenticationFailedRejection].cause == CredentialsMissing)
+        assert(rejection.asInstanceOf[AuthenticationFailedRejection].cause == CredentialsMissing)
       }
     }
 
@@ -102,7 +100,6 @@ class CommentRouteSpec extends WordSpec with MockitoSugar with ScalatestRouteTes
     }
 
     "create a new comment" in {
-
       Post("/comments/")
         .withEntity(ContentTypes.`application/json`, """{"comment":"Hello"}""") ~> addCredentials(OAuth2BearerToken("Valid Token")) ~> commentServiceRouteWithFakeAuth.route ~> check {
         assert(status == StatusCodes.Created)

@@ -6,7 +6,6 @@ import akka.http.scaladsl.model.{ContentTypes, HttpEntity, HttpResponse}
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import io.circe.syntax._
-import net.yoshinorin.cahsper.definitions.User
 import net.yoshinorin.cahsper.http.auth.Auth
 import net.yoshinorin.cahsper.services.UserService
 
@@ -18,9 +17,7 @@ class UserRoute(
   def route: Route = {
     pathPrefix("users") {
       pathEndOrSingleSlash {
-        auth.authenticate { user =>
-          write(user)
-        } ~ read
+        read ~ write
       }
     }
   }
@@ -33,10 +30,12 @@ class UserRoute(
     }
   }
 
-  private[this] def write(user: User): Route = {
+  private[this] def write: Route = {
     post {
-      onSuccess(userService.create(user)) { result =>
-        complete(HttpResponse(Created, entity = HttpEntity(ContentTypes.`application/json`, s"${result.asJson}")))
+      auth.authenticate { user =>
+        onSuccess(userService.create(user)) { result =>
+          complete(HttpResponse(Created, entity = HttpEntity(ContentTypes.`application/json`, s"${result.asJson}")))
+        }
       }
     }
   }

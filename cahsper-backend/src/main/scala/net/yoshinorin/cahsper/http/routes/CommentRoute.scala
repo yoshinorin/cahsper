@@ -6,7 +6,6 @@ import akka.http.scaladsl.model.{ContentTypes, HttpEntity, HttpResponse}
 import akka.http.scaladsl.server.Directives.{entity, _}
 import akka.http.scaladsl.server.Route
 import io.circe.syntax._
-import net.yoshinorin.cahsper.definitions.User
 import net.yoshinorin.cahsper.http.auth.Auth
 import net.yoshinorin.cahsper.models.request.{CommentRequestFormat, CreateCommentRequestFormat}
 import net.yoshinorin.cahsper.services.CommentService
@@ -19,9 +18,7 @@ class CommentRoute(
   def route: Route = {
     pathPrefix("comments") {
       pathEndOrSingleSlash {
-        auth.authenticate { user =>
-          write(user)
-        } ~ read
+        read ~ write
       }
     }
   }
@@ -34,20 +31,22 @@ class CommentRoute(
     }
   }
 
-  private[this] def write(user: User): Route = {
+  private[this] def write: Route = {
     post {
-      entity(as[String]) { payload =>
-        val result = for {
-          maybeCreateCommentFormat <- CommentRequestFormat.convertFromJsonString[CreateCommentRequestFormat](payload)
-          createCommentRequestFormat <- maybeCreateCommentFormat.validate
-        } yield createCommentRequestFormat
-        result match {
-          case Right(createCommentRequestFormat) =>
-            onSuccess(commentService.create(user, createCommentRequestFormat)) { result =>
-              complete(HttpResponse(Created, entity = HttpEntity(ContentTypes.`application/json`, s"${result.asJson}")))
-            }
-          case Left(message) =>
-            complete(HttpResponse(BadRequest, entity = HttpEntity(ContentTypes.`application/json`, s"${message.asJson}")))
+      auth.authenticate { user =>
+        entity(as[String]) { payload =>
+          val result = for {
+            maybeCreateCommentFormat <- CommentRequestFormat.convertFromJsonString[CreateCommentRequestFormat](payload)
+            createCommentRequestFormat <- maybeCreateCommentFormat.validate
+          } yield createCommentRequestFormat
+          result match {
+            case Right(createCommentRequestFormat) =>
+              onSuccess(commentService.create(user, createCommentRequestFormat)) { result =>
+                complete(HttpResponse(Created, entity = HttpEntity(ContentTypes.`application/json`, s"${result.asJson}")))
+              }
+            case Left(message) =>
+              complete(HttpResponse(BadRequest, entity = HttpEntity(ContentTypes.`application/json`, s"${message.asJson}")))
+          }
         }
       }
     }
