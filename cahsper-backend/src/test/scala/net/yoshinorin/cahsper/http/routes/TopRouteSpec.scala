@@ -11,6 +11,14 @@ class TopRouteSpec extends WordSpec with ScalatestRouteTest {
 
   "TopRoute" should {
 
+    "hello Cahsper!!" in {
+      Get("/") ~> topRoute.route ~> check {
+        assert(status == StatusCodes.OK)
+        assert(contentType == ContentTypes.`text/plain(UTF-8)`)
+        assert(responseAs[String].contains("Hello Cahsper!!"))
+      }
+    }
+
     "return robots.txt" in {
       Get("/robots.txt") ~> topRoute.route ~> check {
         assert(status == StatusCodes.OK)
