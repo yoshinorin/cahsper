@@ -8,7 +8,7 @@
 
 # Demo
 
-* [Styled demo](https://about.yoshinorin.net/cahsper)
+* [Demo](https://about.yoshinorin.net/cahsper)
 * [Raw(JSON) data demo](https://cahsper.yoshinorin.io/comments)
 
 # Documentation
