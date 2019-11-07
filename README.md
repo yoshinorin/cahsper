@@ -57,7 +57,7 @@ Download source code from [releases](https://github.com/YoshinoriN/cahsper/relea
 
 Create AWS Cognito userpool. Cahsper use AWS cognito for authorization/authentication and creates `username` from AWS cognito `name` attribute.
 
-So, you have to select `name` attribute when create userpool.
+So, you have to select `name` attribute when create userpool and it's must be **UNIQUE**.
 
 ![](./docs/images/cognito-attr.jpg)
 
