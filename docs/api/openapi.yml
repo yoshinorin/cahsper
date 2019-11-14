@@ -61,6 +61,24 @@ paths:
                   $ref: '#/components/schemas/errorMessage'
         401:
           description: Unauthorized
+  /users/{userName}:
+    get:
+      summary: Get a single user
+      responses:
+        200:
+          description: Response when Success
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/user'
+        404:
+          description: user not found
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/errorMessageNotFound'
   /comments:
     get:
       summary: Get all users comments
@@ -130,6 +148,12 @@ components:
         message:
           type: string
           example: Something is wrong
+    errorMessageNotFound:
+      type: object
+      properties:
+        message:
+          type: string
+          example: NotFound
   securitySchemes:
     OAuth2:
       type: oauth2

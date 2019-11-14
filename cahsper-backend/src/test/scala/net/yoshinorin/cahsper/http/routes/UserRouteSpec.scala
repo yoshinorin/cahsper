@@ -40,6 +40,12 @@ class UserRouteSpec extends WordSpec with MockitoSugar with ScalatestRouteTest {
       )
     )
 
+  when(mockUserService.findByName("YoshinoriN"))
+    .thenReturn(Future(Option(Users("YoshinoriN", 1567814290))))
+
+  when(mockUserService.findByName("exampleUser"))
+    .thenReturn(Future(None))
+
   val auth = new http.auth.Cognito()
   val userRoute: UserRoute = new UserRoute(auth, mockUserService)
 
@@ -88,6 +94,39 @@ class UserRouteSpec extends WordSpec with MockitoSugar with ScalatestRouteTest {
         assert(status == StatusCodes.OK)
         assert(contentType == ContentTypes.`application/json`)
         assert(responseAs[String].replaceAll("\n", "").replaceAll(" ", "") == expectJson)
+      }
+
+      Get("/users") ~> userRoute.route ~> check {
+        assert(status == StatusCodes.OK)
+        assert(contentType == ContentTypes.`application/json`)
+        assert(responseAs[String].replaceAll("\n", "").replaceAll(" ", "") == expectJson)
+      }
+
+    }
+
+    "return specify user JSON" in {
+
+      val expectJson =
+        """
+          |{
+          |  "name" : "YoshinoriN",
+          |  "createdAt" : 1567814290
+          |}
+      """.stripMargin.replaceAll("\n", "").replaceAll(" ", "")
+
+      Get("/users/YoshinoriN") ~> userRoute.route ~> check {
+        assert(status == StatusCodes.OK)
+        assert(contentType == ContentTypes.`application/json`)
+        assert(responseAs[String].replaceAll("\n", "").replaceAll(" ", "") == expectJson)
+      }
+
+    }
+
+    "user not found" in {
+
+      Get("/users/exampleUser") ~> userRoute.route ~> check {
+        assert(status == StatusCodes.NotFound)
+        assert(contentType == ContentTypes.`application/json`)
       }
 
     }
