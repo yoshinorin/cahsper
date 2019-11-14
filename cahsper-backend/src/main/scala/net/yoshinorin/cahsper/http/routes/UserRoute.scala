@@ -17,24 +17,18 @@ class UserRoute(
   def route: Route = {
     pathPrefix("users") {
       pathEndOrSingleSlash {
-        read ~ write
-      }
-    }
-  }
-
-  private[this] def read: Route = {
-    get {
-      onSuccess(userService.getAll) { result =>
-        complete(HttpResponse(OK, entity = HttpEntity(ContentTypes.`application/json`, s"${result.asJson}")))
-      }
-    }
-  }
-
-  private[this] def write: Route = {
-    post {
-      auth.authenticate { user =>
-        onSuccess(userService.create(user)) { result =>
-          complete(HttpResponse(Created, entity = HttpEntity(ContentTypes.`application/json`, s"${result.asJson}")))
+        get {
+          onSuccess(userService.getAll) { result =>
+            complete(HttpResponse(OK, entity = HttpEntity(ContentTypes.`application/json`, s"${result.asJson}")))
+          }
+        } ~ {
+          post {
+            auth.authenticate { user =>
+              onSuccess(userService.create(user)) { result =>
+                complete(HttpResponse(Created, entity = HttpEntity(ContentTypes.`application/json`, s"${result.asJson}")))
+              }
+            }
+          }
         }
       }
     }
