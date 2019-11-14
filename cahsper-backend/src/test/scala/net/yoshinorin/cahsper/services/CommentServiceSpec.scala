@@ -2,7 +2,7 @@ package net.yoshinorin.cahsper.services
 
 import akka.actor.ActorSystem
 import akka.stream.ActorMaterializer
-import net.yoshinorin.cahsper.definitions.User
+import net.yoshinorin.cahsper.models.User
 import net.yoshinorin.cahsper.models.db.{CommentRepository, Comments}
 import net.yoshinorin.cahsper.models.request.CreateCommentRequestFormat
 import org.mockito.Mockito._

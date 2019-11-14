@@ -1,6 +1,6 @@
 package net.yoshinorin.cahsper.auth.aws
 
-import net.yoshinorin.cahsper.definitions.Jwt
+import net.yoshinorin.cahsper.models.Jwt
 import org.scalatest.WordSpec
 
 // testOnly *CognitoSpec

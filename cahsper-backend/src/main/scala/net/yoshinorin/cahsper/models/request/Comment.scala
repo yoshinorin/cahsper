@@ -3,7 +3,7 @@ package net.yoshinorin.cahsper.models.request
 import io.circe.Decoder
 import io.circe.parser.decode
 import io.circe.generic.semiauto.deriveDecoder
-import net.yoshinorin.cahsper.definitions.Message
+import net.yoshinorin.cahsper.models.Message
 import org.slf4j.LoggerFactory
 
 trait BaseCommentRequestFormat {}

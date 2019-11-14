@@ -8,8 +8,8 @@ import akka.http.scaladsl.server.AuthenticationFailedRejection.{CredentialsMissi
 import akka.http.scaladsl.testkit.ScalatestRouteTest
 import akka.stream.ActorMaterializer
 import net.yoshinorin.cahsper.auth.mock.BearerTokenAuth
-import net.yoshinorin.cahsper.definitions.User
 import net.yoshinorin.cahsper.http
+import net.yoshinorin.cahsper.models.User
 import net.yoshinorin.cahsper.models.db.Users
 import net.yoshinorin.cahsper.services.UserService
 import org.mockito.Mockito.when

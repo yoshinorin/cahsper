@@ -1,6 +1,6 @@
 package net.yoshinorin.cahsper.services
 
-import net.yoshinorin.cahsper.definitions.User
+import net.yoshinorin.cahsper.models.User
 
 import scala.concurrent.{ExecutionContext, Future}
 import net.yoshinorin.cahsper.models.db.{CommentRepository, Comments}

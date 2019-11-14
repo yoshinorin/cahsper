@@ -3,8 +3,8 @@ package net.yoshinorin.cahsper.auth.mock
 import akka.http.scaladsl.model.headers.{HttpChallenge, OAuth2BearerToken}
 import akka.http.scaladsl.server.Directives.authenticateOrRejectWithChallenge
 import akka.http.scaladsl.server.directives.{AuthenticationDirective, AuthenticationResult}
-import net.yoshinorin.cahsper.definitions.User
 import net.yoshinorin.cahsper.http.auth.Auth
+import net.yoshinorin.cahsper.models.User
 
 import scala.concurrent.Future
 

@@ -1,4 +1,4 @@
-package net.yoshinorin.cahsper.definitions
+package net.yoshinorin.cahsper.models
 
 import io.circe.Encoder
 import io.circe.generic.semiauto._

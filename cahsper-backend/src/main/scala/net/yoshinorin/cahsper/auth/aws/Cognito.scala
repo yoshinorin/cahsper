@@ -8,7 +8,7 @@ import com.nimbusds.jose.proc.{JWSVerificationKeySelector, SecurityContext}
 import com.nimbusds.jwt.JWTClaimsSet
 import com.nimbusds.jwt.proc.{BadJWTException, ConfigurableJWTProcessor, DefaultJWTProcessor}
 import net.yoshinorin.cahsper.config.Config
-import net.yoshinorin.cahsper.definitions.{Message, Jwt}
+import net.yoshinorin.cahsper.models.{Jwt, Message}
 import org.slf4j.LoggerFactory
 
 import scala.util.{Failure, Success, Try}

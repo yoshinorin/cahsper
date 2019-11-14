@@ -6,8 +6,8 @@ import akka.http.scaladsl.server.AuthenticationFailedRejection
 import akka.http.scaladsl.server.AuthenticationFailedRejection.{CredentialsMissing, CredentialsRejected}
 import akka.http.scaladsl.testkit.ScalatestRouteTest
 import net.yoshinorin.cahsper.auth.mock.BearerTokenAuth
-import net.yoshinorin.cahsper.definitions.User
 import net.yoshinorin.cahsper.http
+import net.yoshinorin.cahsper.models.User
 import net.yoshinorin.cahsper.models.db.Comments
 import net.yoshinorin.cahsper.models.request.CreateCommentRequestFormat
 import net.yoshinorin.cahsper.services.CommentService
