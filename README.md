@@ -6,18 +6,18 @@
 |---|---|---|
 |[![](https://travis-ci.org/YoshinoriN/cahsper.svg?branch=master)](https://travis-ci.org/YoshinoriN/cahsper)|[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6981167737cf4e21b6a9cf74d5c36c0a)](https://www.codacy.com/app/YoshinoriN/cahsper?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=YoshinoriN/cahsper&amp;utm_campaign=Badge_Grade)|[![Coverage Status](https://coveralls.io/repos/github/YoshinoriN/cahsper/badge.svg?branch=master)](https://coveralls.io/github/YoshinoriN/cahsper?branch=master)|
 
-# Demo
+## Demo
 
 * [Demo](https://about.yoshinorin.net/cahsper)
 * [Raw(JSON) data demo](https://cahsper.yoshinorin.io/comments)
 
-# Documentation
+## Documentation
 
 * [API](https://yoshinorin.github.io/cahsper/)
     * [Examples](#api-execution-example)
 * [Development](./docs/dev)
 
-# Table of contents
+## Table of contents
 
 * [Requirements](#requirements)
 * [Set up](#set-up)
@@ -29,14 +29,14 @@
 * [Start server](#start-server)
 * [API Execution example](#api-execution-example)
 
-# Requirements
+## Requirements
 
 * sbt 1.3.x
 * Scala 2.13.x
 * JVM 11
 * MariaDB 10.x
 
-# Set up
+## Set up
 
 <details>
   <summary>Preconditions</summary><br>
@@ -88,17 +88,17 @@ After done above procedure, [set system environment](#configuration) before star
 
 </details>
 
-# Docker integration
+## Docker integration
 
 Cahsper provide [docker image](https://cloud.docker.com/repository/docker/yoshinorin/docker-cahsper). Please see [docker-compose.yml](https://github.com/YoshinoriN/cahsper/blob/master/docker/docker-compose.yml)
 
-# Configuration
+## Configuration
 
 Cahsper backend (API server) read all settings from the system environment variable. You have to set the following system environment variables.
 
 > [Example](https://github.com/YoshinoriN/cahsper/blob/master/cahsper-backend/scripts/devenv.sh)
 
-## Database
+### Database
 
 |Property|Description|Type|Default|Example|
 |---|---|---|---|---|
@@ -108,14 +108,14 @@ Cahsper backend (API server) read all settings from the system environment varia
 |`CAHSPER_DB_CONNECTION_TIMEOUT`|Database connection timeout.|`int`|`30000`|`30000`|
 |`CAHSPER_DB_MAXIMUM_POOLSIZE`|Connection pool size.|`int`|`6`|`6`|
 
-## HTTP Server
+### HTTP Server
 
 |Property|Description|Type|Default|Example|
 |---|---|---|---|---|
 |`CAHSPER_HTTP_BIND_ADDRESS`|Http server bind address.|`string`|`0.0.0.0`|`127.0.0.1`|
 |`CAHSPER_HTTP_PORT`|Http server port.|`int`|`9001`|`9001`|
 
-## Authentication
+### Authentication
 
 Cahsper backend (API server) use AWS Cognito for authentication. Please create AWS Cognito user pool and set the following system environment variable.
 
@@ -124,14 +124,14 @@ Cahsper backend (API server) use AWS Cognito for authentication. Please create A
 |`CAHSPER_AWS_COGNITO_ISS `|AWS Cognito jwk iss|`string`|-|`https://cognito-idp.{region}.amazonaws.com/{userPoolId}`|
 |`CAHSPER_AWS_COGNITO_APP_CLIENT_ID `|AWS Cognito application Id|`string`|-|-|
 
-# Start server
+## Start server
 
 ```sbt
 $ cd <source code dir>
 $ sbt run
 ```
 
-# API Execution example
+## API Execution example
 
 <details>
   <summary>Create a new user</summary>
@@ -230,7 +230,7 @@ Content-Length: 94
 
 </details>
 
-# Using Stacks
+## Using Stacks
 
 |Stack|-|
 |---|---|
