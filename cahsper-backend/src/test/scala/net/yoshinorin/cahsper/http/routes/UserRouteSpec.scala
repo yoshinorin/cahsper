@@ -6,7 +6,6 @@ import akka.http.scaladsl.model.{ContentTypes, StatusCodes}
 import akka.http.scaladsl.server.AuthenticationFailedRejection
 import akka.http.scaladsl.server.AuthenticationFailedRejection.{CredentialsMissing, CredentialsRejected}
 import akka.http.scaladsl.testkit.ScalatestRouteTest
-import akka.stream.ActorMaterializer
 import net.yoshinorin.cahsper.auth.mock.BearerTokenAuth
 import net.yoshinorin.cahsper.http
 import net.yoshinorin.cahsper.models.User
@@ -22,7 +21,6 @@ import scala.concurrent.{ExecutionContextExecutor, Future}
 class UserRouteSpec extends WordSpec with MockitoSugar with ScalatestRouteTest {
 
   implicit val actorSystem: ActorSystem = ActorSystem("cahsper")
-  implicit val actorMaterializer: ActorMaterializer = ActorMaterializer()
   implicit val executionContextExecutor: ExecutionContextExecutor = actorSystem.dispatcher
 
   val mockUserService: UserService = mock[UserService]

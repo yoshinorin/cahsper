@@ -1,7 +1,6 @@
 package net.yoshinorin.cahsper
 
 import akka.actor.ActorSystem
-import akka.stream.ActorMaterializer
 import net.yoshinorin.cahsper.config.Config
 import net.yoshinorin.cahsper.http.routes.{ApiStatusRoute, CommentRoute, HomeRoute, UserRoute}
 import net.yoshinorin.cahsper.http.HttpServer
@@ -15,7 +14,6 @@ object BootStrap extends App {
   FlywayService.migrate()
 
   implicit val actorSystem: ActorSystem = ActorSystem("cahsper")
-  implicit val actorMaterializer: ActorMaterializer = ActorMaterializer()
   implicit val executionContextExecutor: ExecutionContextExecutor = actorSystem.dispatcher
 
   val auth = new http.auth.Cognito()

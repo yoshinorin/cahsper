@@ -1,12 +1,11 @@
 package net.yoshinorin.cahsper.http.routes
 
 import akka.http.scaladsl.server.Directives._
-import akka.actor.ActorSystem
 import akka.http.scaladsl.model.HttpResponse
 import akka.http.scaladsl.server.Route
 import net.yoshinorin.cahsper.utils.File
 
-class HomeRoute(implicit actorSystem: ActorSystem) {
+class HomeRoute {
 
   def route: Route = {
     pathEndOrSingleSlash {

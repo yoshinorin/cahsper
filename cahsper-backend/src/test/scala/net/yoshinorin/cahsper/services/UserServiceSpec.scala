@@ -1,7 +1,6 @@
 package net.yoshinorin.cahsper.services
 
 import akka.actor.ActorSystem
-import akka.stream.ActorMaterializer
 import net.yoshinorin.cahsper.models.User
 import net.yoshinorin.cahsper.models.db.{UserRepository, Users}
 import org.mockito.Mockito._
@@ -16,7 +15,6 @@ import scala.util.{Failure, Success}
 class UserServiceSpec extends WordSpec with MockitoSugar {
 
   implicit val actorSystem: ActorSystem = ActorSystem("cahsper")
-  implicit val actorMaterializer: ActorMaterializer = ActorMaterializer()
   implicit val executionContextExecutor: ExecutionContextExecutor = actorSystem.dispatcher
 
   val mockUserRepository: UserRepository = mock[UserRepository]

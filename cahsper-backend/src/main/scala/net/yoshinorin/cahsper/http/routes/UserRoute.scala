@@ -1,6 +1,5 @@
 package net.yoshinorin.cahsper.http.routes
 
-import akka.actor.ActorSystem
 import akka.http.scaladsl.model.StatusCodes._
 import akka.http.scaladsl.model.{ContentTypes, HttpEntity, HttpResponse}
 import akka.http.scaladsl.server.Directives._
@@ -13,7 +12,7 @@ import net.yoshinorin.cahsper.services.UserService
 class UserRoute(
   auth: Auth,
   userService: UserService
-)(implicit actorSystem: ActorSystem) {
+) {
 
   def route: Route = {
     pathPrefix("users") {
