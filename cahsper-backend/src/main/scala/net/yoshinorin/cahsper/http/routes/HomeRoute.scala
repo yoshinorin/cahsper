@@ -6,7 +6,7 @@ import akka.http.scaladsl.model.HttpResponse
 import akka.http.scaladsl.server.Route
 import net.yoshinorin.cahsper.utils.File
 
-class TopRoute(implicit actorSystem: ActorSystem) {
+class HomeRoute(implicit actorSystem: ActorSystem) {
 
   def route: Route = {
     pathEndOrSingleSlash {

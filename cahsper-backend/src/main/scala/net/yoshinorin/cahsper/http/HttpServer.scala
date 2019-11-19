@@ -3,10 +3,10 @@ package net.yoshinorin.cahsper.http
 import akka.actor.ActorSystem
 import akka.http.scaladsl.server.{HttpApp, Route}
 import ch.megard.akka.http.cors.scaladsl.CorsDirectives._
-import net.yoshinorin.cahsper.http.routes.{ApiStatusRoute, CommentRoute, TopRoute, UserRoute}
+import net.yoshinorin.cahsper.http.routes.{ApiStatusRoute, CommentRoute, HomeRoute, UserRoute}
 
 class HttpServer(
-  topRoute: TopRoute,
+  homeRoute: HomeRoute,
   apiStatusRoute: ApiStatusRoute,
   commentRoute: CommentRoute,
   userRoute: UserRoute
@@ -21,7 +21,7 @@ class HttpServer(
 
   override def routes: Route = cors() {
     httpLogging {
-      topRoute.route ~
+      homeRoute.route ~
         apiStatusRoute.route ~
         commentRoute.route ~
         userRoute.route

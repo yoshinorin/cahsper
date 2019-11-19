@@ -4,15 +4,15 @@ import akka.http.scaladsl.model.{ContentTypes, StatusCodes}
 import akka.http.scaladsl.testkit.ScalatestRouteTest
 import org.scalatest.WordSpec
 
-// testOnly *TopRouteSpec
-class TopRouteSpec extends WordSpec with ScalatestRouteTest {
+// testOnly *HomeRouteSpec
+class HomeRouteSpec extends WordSpec with ScalatestRouteTest {
 
-  val topRoute = new TopRoute()
+  val homeRoute = new HomeRoute()
 
-  "TopRoute" should {
+  "HomeRoute" should {
 
     "hello Cahsper!!" in {
-      Get("/") ~> topRoute.route ~> check {
+      Get("/") ~> homeRoute.route ~> check {
         assert(status == StatusCodes.OK)
         assert(contentType == ContentTypes.`text/plain(UTF-8)`)
         assert(responseAs[String].contains("Hello Cahsper!!"))
@@ -20,7 +20,7 @@ class TopRouteSpec extends WordSpec with ScalatestRouteTest {
     }
 
     "return robots.txt" in {
-      Get("/robots.txt") ~> topRoute.route ~> check {
+      Get("/robots.txt") ~> homeRoute.route ~> check {
         assert(status == StatusCodes.OK)
         assert(contentType == ContentTypes.`text/plain(UTF-8)`)
         assert(responseAs[String].startsWith("User-agent"))

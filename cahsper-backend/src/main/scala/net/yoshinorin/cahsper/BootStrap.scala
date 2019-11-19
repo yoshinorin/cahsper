@@ -3,7 +3,7 @@ package net.yoshinorin.cahsper
 import akka.actor.ActorSystem
 import akka.stream.ActorMaterializer
 import net.yoshinorin.cahsper.config.Config
-import net.yoshinorin.cahsper.http.routes.{ApiStatusRoute, CommentRoute, TopRoute, UserRoute}
+import net.yoshinorin.cahsper.http.routes.{ApiStatusRoute, CommentRoute, HomeRoute, UserRoute}
 import net.yoshinorin.cahsper.http.HttpServer
 import net.yoshinorin.cahsper.models.db.{CommentRepository, UserRepository}
 import net.yoshinorin.cahsper.services.{CommentService, FlywayService, UserService}
@@ -20,7 +20,7 @@ object BootStrap extends App {
 
   val auth = new http.auth.Cognito()
 
-  val topRoute: TopRoute = new TopRoute()
+  val homeRoute: HomeRoute = new HomeRoute()
   val apiStatusRoute: ApiStatusRoute = new ApiStatusRoute()
   val commentRepository: CommentRepository = new CommentRepository()
   val commentService: CommentService = new CommentService(commentRepository)
@@ -29,7 +29,7 @@ object BootStrap extends App {
   val userService: UserService = new UserService(userRepository)
   val userServiceRoute: UserRoute = new UserRoute(auth, userService)
 
-  val httpServer: HttpServer = new HttpServer(topRoute, apiStatusRoute, commentServiceRoute, userServiceRoute)
+  val httpServer: HttpServer = new HttpServer(homeRoute, apiStatusRoute, commentServiceRoute, userServiceRoute)
 
   httpServer.startServer(Config.httpHost, Config.httpPort)
 
