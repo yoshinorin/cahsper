@@ -17,34 +17,28 @@ class CommentRoute(
   def route: Route = {
     pathPrefix("comments") {
       pathEndOrSingleSlash {
-        read ~ write
-      }
-    }
-  }
-
-  private[this] def read: Route = {
-    get {
-      onSuccess(commentService.getAll) { result =>
-        complete(HttpResponse(OK, entity = HttpEntity(ContentTypes.`application/json`, s"${result.reverse.asJson}")))
-      }
-    }
-  }
-
-  private[this] def write: Route = {
-    post {
-      auth.authenticate { user =>
-        entity(as[String]) { payload =>
-          val result = for {
-            maybeCreateCommentFormat <- CommentRequestFormat.convertFromJsonString[CreateCommentRequestFormat](payload)
-            createCommentRequestFormat <- maybeCreateCommentFormat.validate
-          } yield createCommentRequestFormat
-          result match {
-            case Right(createCommentRequestFormat) =>
-              onSuccess(commentService.create(user, createCommentRequestFormat)) { result =>
-                complete(HttpResponse(Created, entity = HttpEntity(ContentTypes.`application/json`, s"${result.asJson}")))
+        get {
+          onSuccess(commentService.getAll) { result =>
+            complete(HttpResponse(OK, entity = HttpEntity(ContentTypes.`application/json`, s"${result.reverse.asJson}")))
+          }
+        } ~ {
+          post {
+            auth.authenticate { user =>
+              entity(as[String]) { payload =>
+                val result = for {
+                  maybeCreateCommentFormat <- CommentRequestFormat.convertFromJsonString[CreateCommentRequestFormat](payload)
+                  createCommentRequestFormat <- maybeCreateCommentFormat.validate
+                } yield createCommentRequestFormat
+                result match {
+                  case Right(createCommentRequestFormat) =>
+                    onSuccess(commentService.create(user, createCommentRequestFormat)) { result =>
+                      complete(HttpResponse(Created, entity = HttpEntity(ContentTypes.`application/json`, s"${result.asJson}")))
+                    }
+                  case Left(message) =>
+                    complete(HttpResponse(BadRequest, entity = HttpEntity(ContentTypes.`application/json`, s"${message.asJson}")))
+                }
               }
-            case Left(message) =>
-              complete(HttpResponse(BadRequest, entity = HttpEntity(ContentTypes.`application/json`, s"${message.asJson}")))
+            }
           }
         }
       }
