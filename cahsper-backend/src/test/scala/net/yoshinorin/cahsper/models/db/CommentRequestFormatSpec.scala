@@ -21,33 +21,33 @@ class CommentRequestFormatSpec extends WordSpec {
     "convert success when comment is max length" in {
       val payloadJson: String = s"""{"comment" : "${commentMaxString}"}"""
       val createCommentRequestFormat = CommentRequestFormat.convertFromJsonString[CreateCommentRequestFormat](payloadJson)
-      val result = createCommentRequestFormat.right.get.validate
+      val result = createCommentRequestFormat.toOption
 
-      assert(result.isRight)
+      assert(result.get.validate.isRight)
     }
 
     "convert success when comment length is three" in {
       val payloadJson: String = s"""{"comment" : "123"}"""
       val createCommentRequestFormat = CommentRequestFormat.convertFromJsonString[CreateCommentRequestFormat](payloadJson)
-      val result = createCommentRequestFormat.right.get.validate
+      val result = createCommentRequestFormat.toOption
 
-      assert(result.isRight)
+      assert(result.get.validate.isRight)
     }
 
     "convert failed when comment is exceed max length" in {
       val payloadJson: String = s"""{"comment" : "${commentExceedMaxString}"}"""
       val createCommentRequestFormat = CommentRequestFormat.convertFromJsonString[CreateCommentRequestFormat](payloadJson)
-      val result = createCommentRequestFormat.right.get.validate
+      val result = createCommentRequestFormat.toOption.get.validate
 
-      assert(result.left.get.messages == CommentRequestFormat.requireCommentMaxMessage.messages)
+      assert(result.left.toOption.get.messages == CommentRequestFormat.requireCommentMaxMessage.messages)
     }
 
     "convert failed when comment is too short" in {
       val payloadJson: String = """{"comment" : "aa"}"""
       val createCommentRequestFormat = CommentRequestFormat.convertFromJsonString[CreateCommentRequestFormat](payloadJson)
-      val result = createCommentRequestFormat.right.get.validate
+      val result = createCommentRequestFormat.toOption.get.validate
 
-      assert(result.left.get.messages == CommentRequestFormat.requireCommentMinMessage.messages)
+      assert(result.left.toOption.get.messages == CommentRequestFormat.requireCommentMinMessage.messages)
     }
 
     "convert failed when comment key does not extist in JSON" in {

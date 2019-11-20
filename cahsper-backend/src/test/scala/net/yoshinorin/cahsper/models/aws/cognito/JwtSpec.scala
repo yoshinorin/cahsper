@@ -26,7 +26,7 @@ class JwtSpec extends WordSpec {
           |  "username": "test1"
           |}
         """.stripMargin.toJwtClaims
-      assert(jwtClaims.right.get.isInstanceOf[Jwt])
+      assert(jwtClaims.toOption.get.isInstanceOf[Jwt])
     }
 
     "return left if string not convertible to case class" in {
