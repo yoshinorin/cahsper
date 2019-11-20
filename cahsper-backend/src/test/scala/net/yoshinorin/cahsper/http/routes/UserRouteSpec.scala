@@ -9,8 +9,9 @@ import akka.http.scaladsl.testkit.ScalatestRouteTest
 import net.yoshinorin.cahsper.auth.mock.BearerTokenAuth
 import net.yoshinorin.cahsper.http
 import net.yoshinorin.cahsper.models.User
-import net.yoshinorin.cahsper.models.db.Users
-import net.yoshinorin.cahsper.services.UserService
+import net.yoshinorin.cahsper.models.db.{Comments, Users}
+import net.yoshinorin.cahsper.models.request.CreateCommentRequestFormat
+import net.yoshinorin.cahsper.services.{CommentService, UserService}
 import org.mockito.Mockito.when
 import org.scalatest.WordSpec
 import org.scalatestplus.mockito.MockitoSugar
@@ -25,8 +26,8 @@ class UserRouteSpec extends WordSpec with MockitoSugar with ScalatestRouteTest {
 
   val mockUserService: UserService = mock[UserService]
 
-  when(mockUserService.create(User("JohnDoe")))
-    .thenReturn(Future(Users("JohnDoe")))
+  when(mockUserService.create(User("YoshinoriN")))
+    .thenReturn(Future(Users("YoshinoriN")))
 
   when(mockUserService.getAll)
     .thenReturn(
@@ -44,11 +45,23 @@ class UserRouteSpec extends WordSpec with MockitoSugar with ScalatestRouteTest {
   when(mockUserService.findByName("exampleUser"))
     .thenReturn(Future(None))
 
-  val auth = new http.auth.Cognito()
-  val userRoute: UserRoute = new UserRoute(auth, mockUserService)
+  val mockCommentService: CommentService = mock[CommentService]
 
-  val fakeAuth = new BearerTokenAuth("JohnDoe")
-  val userRouteWithFakeAuth: UserRoute = new UserRoute(fakeAuth, mockUserService)
+  when(mockCommentService.findById(1))
+    .thenReturn(Future(Some(Comments(1, "YoshinoriN", "This is a test one.", 1567814290))))
+
+  when(mockCommentService.create(User("YoshinoriN"), CreateCommentRequestFormat("Hello")))
+    .thenReturn(
+      Future(
+        Comments(3, "YoshinoriN", "Hello", 1567814391)
+      )
+    )
+
+  val auth = new http.auth.Cognito()
+  val userRoute: UserRoute = new UserRoute(auth, mockUserService, mockCommentService)
+
+  val fakeAuth = new BearerTokenAuth("YoshinoriN")
+  val userRouteWithFakeAuth: UserRoute = new UserRoute(fakeAuth, mockUserService, mockCommentService)
 
   "UserRoute" should {
 
@@ -56,7 +69,7 @@ class UserRouteSpec extends WordSpec with MockitoSugar with ScalatestRouteTest {
       Post("/users") ~> addCredentials(OAuth2BearerToken("Valid Token")) ~> userRouteWithFakeAuth.route ~> check {
         assert(status == StatusCodes.Created)
         assert(contentType == ContentTypes.`application/json`)
-        assert(responseAs[String].contains("JohnDoe")) //TODO: brush up
+        assert(responseAs[String].contains("YoshinoriN")) //TODO: brush up
       }
     }
 
@@ -127,6 +140,43 @@ class UserRouteSpec extends WordSpec with MockitoSugar with ScalatestRouteTest {
         assert(contentType == ContentTypes.`application/json`)
       }
 
+    }
+
+    "unauthorized when post comment that access token is invalid" in {
+      Post("/users/JohnDue/comments/") ~> addCredentials(OAuth2BearerToken("Invalid Token")) ~> userRoute.route ~> check {
+        assert(rejection.asInstanceOf[AuthenticationFailedRejection].cause == CredentialsRejected)
+      }
+    }
+
+    "reject post comment when Authorization header is nothing" in {
+      Post("/users/JohnDue/comments/") ~> userRoute.route ~> check {
+        assert(rejection.asInstanceOf[AuthenticationFailedRejection].cause == CredentialsMissing)
+      }
+    }
+
+    "return 404 when token claim user to directive user name does not unmatch" in {
+      Post("/users/JohnDue/comments/")
+        .withEntity(ContentTypes.`application/json`, """{"comment":"Hello"}""") ~> addCredentials(OAuth2BearerToken("Valid Token")) ~> userRouteWithFakeAuth.route ~> check {
+        assert(status == StatusCodes.NotFound)
+        assert(contentType == ContentTypes.`application/json`)
+      }
+    }
+
+    "return 400 when post comment's payload is wrong format" in {
+      val json = """{Not a JSON}""".stripMargin
+      Post("/users/YoshinoriN/comments/")
+        .withEntity(ContentTypes.`application/json`, json) ~> addCredentials(OAuth2BearerToken("Valid Token")) ~> userRouteWithFakeAuth.route ~> check {
+        assert(status == StatusCodes.BadRequest)
+        assert(contentType == ContentTypes.`application/json`)
+      }
+    }
+
+    "create a new comment" in {
+      Post("/users/YoshinoriN/comments/")
+        .withEntity(ContentTypes.`application/json`, """{"comment":"Hello"}""") ~> addCredentials(OAuth2BearerToken("Valid Token")) ~> userRouteWithFakeAuth.route ~> check {
+        assert(status == StatusCodes.Created)
+        assert(contentType == ContentTypes.`application/json`)
+      }
     }
 
   }

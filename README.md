@@ -213,7 +213,7 @@ Content-Length: 307
   <summary>Create new comment</summary>
 
 ```sh
-$ curl -D - -X POST -H "Authorization: Bearer 123456789" -H "Content-Type: application/json" -d '{"comment":"Hello Cahsper!!"}' 127.0.0.1:9001/comments
+$ curl -D - -X POST -H "Authorization: Bearer 123456789" -H "Content-Type: application/json" -d '{"comment":"Hello Cahsper!!"}' 127.0.0.1:9001/users/{userName}/comments
 
 HTTP/1.1 201 Created
 Server: akka-http/10.1.9
