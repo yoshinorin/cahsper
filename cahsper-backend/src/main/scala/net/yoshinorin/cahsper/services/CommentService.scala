@@ -40,6 +40,16 @@ class CommentService(commentRepository: CommentRepository)(implicit executeConte
   }
 
   /**
+   * Find comment by userName
+   *
+   * @param user
+   * @return
+   */
+  def findByUserName(user: User): Future[Seq[Comments]] = Future {
+    commentRepository.findByUserName(user)
+  }
+
+  /**
    * Get all comments
    *
    * @return

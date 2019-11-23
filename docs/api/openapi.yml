@@ -80,6 +80,17 @@ paths:
                 items:
                   $ref: '#/components/schemas/errorMessageNotFound'
   /users/{userName}/comments:
+    get:
+      summary: Get comments by user
+      responses:
+        200:
+          description: Response when Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/comment'
     post:
       summary: Create a new comment
       security:

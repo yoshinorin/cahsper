@@ -31,6 +31,22 @@ class CommentServiceSpec extends WordSpec with MockitoSugar {
       )
     )
 
+  when(mockCommentRepository.findByUserName(User("YoshinoriN")))
+    .thenReturn(
+      Seq(
+        Comments(1, "YoshinoriN", "This is a test one.", 1567814290),
+        Comments(2, "YoshinoriN", "This is a test two.", 1567814391)
+      )
+    )
+
+  when(mockCommentRepository.findByUserName(User("JhonDue")))
+    .thenReturn(
+      Seq(
+        Comments(1, "JhonDue", "This is a test one.", 1567814290),
+        Comments(2, "JhonDue", "This is a test two.", 1567814391)
+      )
+    )
+
   when(mockCommentRepository.insert(Comments(3, "YoshinoriN", "This is a test three.")))
     .thenReturn(3)
 
@@ -49,6 +65,23 @@ class CommentServiceSpec extends WordSpec with MockitoSugar {
         result == Seq(
           Comments(1, "YoshinoriN", "This is a test one.", 1567814290),
           Comments(2, "YoshinoriN", "This is a test two.", 1567814391)
+        )
+      )
+    }
+
+    "get all comments by userName when call findByUserName" in {
+      val result = Await.result(commentService.findByUserName(User("YoshinoriN")), Duration.Inf)
+      assert(
+        result == Seq(
+          Comments(1, "YoshinoriN", "This is a test one.", 1567814290),
+          Comments(2, "YoshinoriN", "This is a test two.", 1567814391)
+        )
+      )
+      val result2 = Await.result(commentService.findByUserName(User("JhonDue")), Duration.Inf)
+      assert(
+        result2 == Seq(
+          Comments(1, "JhonDue", "This is a test one.", 1567814290),
+          Comments(2, "JhonDue", "This is a test two.", 1567814391)
         )
       )
     }

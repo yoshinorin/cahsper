@@ -133,6 +133,8 @@ $ sbt run
 
 ## API Execution example
 
+Full endpoints are please see the [API document](https://yoshinorin.github.io/cahsper/).
+
 <details>
   <summary>Create a new user</summary>
 

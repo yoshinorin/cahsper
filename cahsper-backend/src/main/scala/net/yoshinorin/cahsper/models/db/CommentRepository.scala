@@ -1,5 +1,6 @@
 package net.yoshinorin.cahsper.models.db
 
+import net.yoshinorin.cahsper.models.User
 import net.yoshinorin.cahsper.services.QuillService
 
 class CommentRepository extends QuillService {
@@ -24,6 +25,16 @@ class CommentRepository extends QuillService {
    */
   def findById(id: Int): Option[Comments] = {
     run(query[Comments].filter(comment => comment.id == lift(id))).headOption
+  }
+
+  /**
+   * Find comment by userName
+   *
+   * @param user
+   * @return
+   */
+  def findByUserName(user: User): Seq[Comments] = {
+    run(query[Comments].filter(comment => comment.userName == lift(user.name)))
   }
 
   /**

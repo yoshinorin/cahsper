@@ -57,6 +57,19 @@ class UserRouteSpec extends WordSpec with MockitoSugar with ScalatestRouteTest {
       )
     )
 
+  when(mockCommentService.findByUserName(User("YoshinoriN")))
+    .thenReturn(
+      Future(
+        Seq(
+          Comments(1, "YoshinoriN", "This is a test one.", 1567814290),
+          Comments(2, "YoshinoriN", "This is a test two.", 1567814391)
+        )
+      )
+    )
+
+  when(mockCommentService.findByUserName(User("JhonDue")))
+    .thenReturn(Future(Seq.empty))
+
   val auth = new http.auth.Cognito()
   val userRoute: UserRoute = new UserRoute(auth, mockUserService, mockCommentService)
 
@@ -168,6 +181,38 @@ class UserRouteSpec extends WordSpec with MockitoSugar with ScalatestRouteTest {
         .withEntity(ContentTypes.`application/json`, json) ~> addCredentials(OAuth2BearerToken("Valid Token")) ~> userRouteWithFakeAuth.route ~> check {
         assert(status == StatusCodes.BadRequest)
         assert(contentType == ContentTypes.`application/json`)
+      }
+    }
+
+    "get comment by user" in {
+      val expectJson =
+        """
+          |[
+          |  {
+          |    "id" : 2,
+          |    "userName" : "YoshinoriN",
+          |    "comment" : "This is a test two.",
+          |    "createdAt" : 1567814391
+          |  },
+          |  {
+          |    "id" : 1,
+          |    "userName" : "YoshinoriN",
+          |    "comment" : "This is a test one.",
+          |    "createdAt" : 1567814290
+          |  }
+          |]
+      """.stripMargin.replaceAll("\n", "").replaceAll(" ", "")
+
+      Get("/users/YoshinoriN/comments/") ~> userRoute.route ~> check {
+        assert(status == StatusCodes.OK)
+        assert(contentType == ContentTypes.`application/json`)
+        assert(responseAs[String].replaceAll("\n", "").replaceAll(" ", "") == expectJson)
+      }
+
+      Get("/users/JhonDue/comments/") ~> userRoute.route ~> check {
+        assert(status == StatusCodes.OK)
+        assert(contentType == ContentTypes.`application/json`)
+        assert(responseAs[String].replaceAll("\n", "") == "[]")
       }
     }
 

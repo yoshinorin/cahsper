@@ -7,7 +7,7 @@ import akka.http.scaladsl.server.Route
 import akka.http.scaladsl.server.directives.AuthenticationResult
 import io.circe.syntax._
 import net.yoshinorin.cahsper.http.auth.Auth
-import net.yoshinorin.cahsper.models.Message
+import net.yoshinorin.cahsper.models.{Message, User}
 import net.yoshinorin.cahsper.models.request.{CommentRequestFormat, CreateCommentRequestFormat}
 import net.yoshinorin.cahsper.services.{CommentService, UserService}
 
@@ -47,30 +47,36 @@ class UserRoute(
             }
           } ~
             pathPrefix("comments") {
-              post {
-                auth.authenticate { user =>
-                  // TODO: clean up conditional operator
-                  if (user.name == userName) {
-                    entity(as[String]) { payload =>
-                      val result = for {
-                        maybeCreateCommentFormat <- CommentRequestFormat.convertFromJsonString[CreateCommentRequestFormat](payload)
-                        createCommentRequestFormat <- maybeCreateCommentFormat.validate
-                      } yield createCommentRequestFormat
-                      result match {
-                        case Right(createCommentRequestFormat) =>
-                          onSuccess(commentService.create(user, createCommentRequestFormat)) { result =>
-                            complete(HttpResponse(Created, entity = HttpEntity(ContentTypes.`application/json`, s"${result.asJson}")))
-                          }
-                        case Left(message) =>
-                          complete(HttpResponse(BadRequest, entity = HttpEntity(ContentTypes.`application/json`, s"${message.asJson}")))
+              get {
+                onSuccess(commentService.findByUserName(User(userName))) { comments =>
+                  // TODO: should sort using by SQL
+                  complete(HttpResponse(OK, entity = HttpEntity(ContentTypes.`application/json`, s"${comments.reverse.asJson}")))
+                }
+              } ~
+                post {
+                  auth.authenticate { user =>
+                    // TODO: clean up conditional operator
+                    if (user.name == userName) {
+                      entity(as[String]) { payload =>
+                        val result = for {
+                          maybeCreateCommentFormat <- CommentRequestFormat.convertFromJsonString[CreateCommentRequestFormat](payload)
+                          createCommentRequestFormat <- maybeCreateCommentFormat.validate
+                        } yield createCommentRequestFormat
+                        result match {
+                          case Right(createCommentRequestFormat) =>
+                            onSuccess(commentService.create(user, createCommentRequestFormat)) { result =>
+                              complete(HttpResponse(Created, entity = HttpEntity(ContentTypes.`application/json`, s"${result.asJson}")))
+                            }
+                          case Left(message) =>
+                            complete(HttpResponse(BadRequest, entity = HttpEntity(ContentTypes.`application/json`, s"${message.asJson}")))
+                        }
                       }
+                    } else {
+                      // TODO: 404??
+                      complete(HttpResponse(NotFound, entity = HttpEntity(ContentTypes.`application/json`, s"${Message("NotFound").asJson}")))
                     }
-                  } else {
-                    // TODO: 404??
-                    complete(HttpResponse(NotFound, entity = HttpEntity(ContentTypes.`application/json`, s"${Message("NotFound").asJson}")))
                   }
                 }
-              }
             }
         }
       }
