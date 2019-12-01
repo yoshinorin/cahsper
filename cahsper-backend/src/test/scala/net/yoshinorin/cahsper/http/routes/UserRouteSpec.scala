@@ -12,19 +12,19 @@ import net.yoshinorin.cahsper.models.User
 import net.yoshinorin.cahsper.models.db.{Comments, Users}
 import net.yoshinorin.cahsper.models.request.CreateCommentRequestFormat
 import net.yoshinorin.cahsper.services.{CommentService, UserService}
-import org.mockito.Mockito.when
-import org.scalatest.WordSpec
-import org.scalatestplus.mockito.MockitoSugar
+import org.mockito.Mockito
+import org.mockito.Mockito._
+import org.scalatest.wordspec.AnyWordSpec
 
 import scala.concurrent.{ExecutionContextExecutor, Future}
 
 // testOnly *UserRouteSpec
-class UserRouteSpec extends WordSpec with MockitoSugar with ScalatestRouteTest {
+class UserRouteSpec extends AnyWordSpec with ScalatestRouteTest {
 
   implicit val actorSystem: ActorSystem = ActorSystem("cahsper")
   implicit val executionContextExecutor: ExecutionContextExecutor = actorSystem.dispatcher
 
-  val mockUserService: UserService = mock[UserService]
+  val mockUserService: UserService = Mockito.mock(classOf[UserService])
 
   when(mockUserService.create(User("YoshinoriN")))
     .thenReturn(Future(Users("YoshinoriN")))
@@ -45,7 +45,7 @@ class UserRouteSpec extends WordSpec with MockitoSugar with ScalatestRouteTest {
   when(mockUserService.findByName("exampleUser"))
     .thenReturn(Future(None))
 
-  val mockCommentService: CommentService = mock[CommentService]
+  val mockCommentService: CommentService = Mockito.mock(classOf[CommentService])
 
   when(mockCommentService.findById(1))
     .thenReturn(Future(Some(Comments(1, "YoshinoriN", "This is a test one.", 1567814290))))

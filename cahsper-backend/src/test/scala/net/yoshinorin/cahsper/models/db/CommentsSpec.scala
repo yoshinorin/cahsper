@@ -2,10 +2,10 @@ package net.yoshinorin.cahsper.models.db
 
 import java.time.{Instant, ZoneOffset, ZonedDateTime}
 
-import org.scalatest.WordSpec
+import org.scalatest.wordspec.AnyWordSpec
 
 // testOnly *CommentsSpec
-class CommentsSpec extends WordSpec {
+class CommentsSpec extends AnyWordSpec {
 
   "Comments" should {
 

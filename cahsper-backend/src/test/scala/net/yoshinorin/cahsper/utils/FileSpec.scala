@@ -1,9 +1,9 @@
 package net.yoshinorin.cahsper.utils
 
-import org.scalatest.WordSpec
+import org.scalatest.wordspec.AnyWordSpec
 
 // testOnly *FileSpec
-class FileSpec extends WordSpec {
+class FileSpec extends AnyWordSpec {
 
   "File" should {
     "get file from resources" in {

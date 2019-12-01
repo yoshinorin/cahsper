@@ -4,21 +4,21 @@ import akka.actor.ActorSystem
 import net.yoshinorin.cahsper.models.User
 import net.yoshinorin.cahsper.models.db.{CommentRepository, Comments}
 import net.yoshinorin.cahsper.models.request.CreateCommentRequestFormat
+import org.mockito.Mockito
 import org.mockito.Mockito._
-import org.scalatest.WordSpec
-import org.scalatestplus.mockito.MockitoSugar
+import org.scalatest.wordspec.AnyWordSpec
 
 import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, ExecutionContextExecutor}
 import scala.util.{Failure, Success}
 
 // testOnly *CommentServiceSpec
-class CommentServiceSpec extends WordSpec with MockitoSugar {
+class CommentServiceSpec extends AnyWordSpec {
 
   implicit val actorSystem: ActorSystem = ActorSystem("cahsper")
   implicit val executionContextExecutor: ExecutionContextExecutor = actorSystem.dispatcher
 
-  val mockCommentRepository: CommentRepository = mock[CommentRepository]
+  val mockCommentRepository: CommentRepository = Mockito.mock(classOf[CommentRepository])
 
   when(mockCommentRepository.findById(1))
     .thenReturn(Some(Comments(1, "YoshinoriN", "This is a test one.", 1567814290)))

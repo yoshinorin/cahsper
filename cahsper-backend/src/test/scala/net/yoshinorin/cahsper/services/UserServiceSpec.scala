@@ -3,21 +3,21 @@ package net.yoshinorin.cahsper.services
 import akka.actor.ActorSystem
 import net.yoshinorin.cahsper.models.User
 import net.yoshinorin.cahsper.models.db.{UserRepository, Users}
+import org.mockito.Mockito
 import org.mockito.Mockito._
-import org.scalatest.WordSpec
-import org.scalatestplus.mockito.MockitoSugar
+import org.scalatest.wordspec.AnyWordSpec
 
 import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, ExecutionContextExecutor}
 import scala.util.{Failure, Success}
 
 // testOnly *UserServiceSpec
-class UserServiceSpec extends WordSpec with MockitoSugar {
+class UserServiceSpec extends AnyWordSpec {
 
   implicit val actorSystem: ActorSystem = ActorSystem("cahsper")
   implicit val executionContextExecutor: ExecutionContextExecutor = actorSystem.dispatcher
 
-  val mockUserRepository: UserRepository = mock[UserRepository]
+  val mockUserRepository: UserRepository = Mockito.mock(classOf[UserRepository])
 
   when(mockUserRepository.findByName("YoshinoriN"))
     .thenReturn(Some(Users("YoshinoriN", 1567814290)))

@@ -34,7 +34,7 @@ libraryDependencies ++= Seq(
   "org.flywaydb" % "flyway-core" % "6.0.6",
   "org.mariadb.jdbc" % "mariadb-java-client" % "2.5.0",
   "org.slf4j" % "slf4j-api" % "1.7.28",
-  "org.scalatest" %% "scalatest" % "3.0.8" % "test",
+  "org.scalatest" %% "scalatest" % "3.1.0" % "test",
   "org.mockito" % "mockito-core" % "3.1.0" % "test"
 )
 

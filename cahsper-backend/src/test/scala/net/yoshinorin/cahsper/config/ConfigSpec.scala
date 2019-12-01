@@ -1,9 +1,9 @@
 package net.yoshinorin.cahsper.config
 
-import org.scalatest.WordSpec
+import org.scalatest.wordspec.AnyWordSpec
 
 // testOnly *ConfigSpec
-class ConfigSpec extends WordSpec {
+class ConfigSpec extends AnyWordSpec {
 
   "Config" should {
     "database configuration gettable from application.conf" in {
