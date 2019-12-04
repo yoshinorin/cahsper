@@ -2,9 +2,9 @@ package net.yoshinorin.cahsper.models.db
 
 import net.yoshinorin.cahsper.infrastructure.DataBaseContext
 
-class UserRepository(dbCtx: DataBaseContext) {
+class UserRepository extends DataBaseContext[Users] {
 
-  import dbCtx.ctx._
+  import ctx._
 
   /**
    * Create user
