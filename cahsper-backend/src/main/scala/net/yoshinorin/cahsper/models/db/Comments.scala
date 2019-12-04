@@ -8,8 +8,8 @@ case class Comments(
   id: Int = 0,
   userName: String,
   comment: String,
-  createdAt: Long = ZonedDateTime.now.toEpochSecond
-)
+  override val createdAt: Long = ZonedDateTime.now.toEpochSecond
+) extends Table
 
 object Comments {
   implicit val encodeComment: Encoder[Comments] = deriveEncoder[Comments]

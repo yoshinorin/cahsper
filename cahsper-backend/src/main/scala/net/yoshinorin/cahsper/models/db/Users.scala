@@ -7,8 +7,8 @@ import io.circe.generic.semiauto._
 
 case class Users(
   name: String,
-  createdAt: Long = ZonedDateTime.now.toEpochSecond
-)
+  override val createdAt: Long = ZonedDateTime.now.toEpochSecond
+) extends Table
 
 object Users {
   implicit val encodeUser: Encoder[Users] = deriveEncoder[Users]
