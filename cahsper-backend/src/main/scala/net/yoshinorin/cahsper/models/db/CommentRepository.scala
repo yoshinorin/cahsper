@@ -3,9 +3,9 @@ package net.yoshinorin.cahsper.models.db
 import net.yoshinorin.cahsper.infrastructure.DataBaseContext
 import net.yoshinorin.cahsper.models.User
 
-class CommentRepository extends DataBaseContext {
+class CommentRepository(dbCtx: DataBaseContext) {
 
-  import ctx._
+  import dbCtx.ctx._
 
   /**
    * Create comment
