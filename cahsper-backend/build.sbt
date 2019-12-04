@@ -38,5 +38,5 @@ libraryDependencies ++= Seq(
   "org.mockito" % "mockito-core" % "3.1.0" % "test"
 )
 
-coverageExcludedPackages := "<empty>; net.yoshinorin.cahsper.BootStrap; net.yoshinorin.cahsper.services.FlywayService; net.yoshinorin.services.cahsper.QuillService; net.yoshinorin.cahsper.http.HttpServer;"
+coverageExcludedPackages := "<empty>; net.yoshinorin.cahsper.BootStrap; net.yoshinorin.cahsper.infrastructure.Migration; net.yoshinorin.services.infrastructure.DataBaseContext; net.yoshinorin.cahsper.http.HttpServer;"
 org.scoverage.coveralls.Imports.CoverallsKeys.coverallsGitRepoLocation := Some("..")

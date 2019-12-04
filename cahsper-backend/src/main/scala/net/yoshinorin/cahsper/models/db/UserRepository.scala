@@ -1,8 +1,8 @@
 package net.yoshinorin.cahsper.models.db
 
-import net.yoshinorin.cahsper.services.QuillService
+import net.yoshinorin.cahsper.infrastructure.DataBaseContext
 
-class UserRepository extends QuillService {
+class UserRepository extends DataBaseContext {
 
   import ctx._
 

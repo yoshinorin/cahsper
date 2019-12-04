@@ -1,10 +1,10 @@
-package net.yoshinorin.cahsper.services
+package net.yoshinorin.cahsper.infrastructure
 
 import net.yoshinorin.cahsper.config.Config
 import org.flywaydb.core.Flyway
 import org.flywaydb.core.api.configuration.FluentConfiguration
 
-object FlywayService {
+object Migration {
 
   private val flywayConfig: FluentConfiguration = Flyway.configure().dataSource(Config.dbUrl, Config.dbUser, Config.dbPassword)
   private val flyway: Flyway = new Flyway(flywayConfig)

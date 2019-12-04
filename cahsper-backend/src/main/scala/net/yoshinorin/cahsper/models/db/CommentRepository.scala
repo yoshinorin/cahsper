@@ -1,9 +1,9 @@
 package net.yoshinorin.cahsper.models.db
 
+import net.yoshinorin.cahsper.infrastructure.DataBaseContext
 import net.yoshinorin.cahsper.models.User
-import net.yoshinorin.cahsper.services.QuillService
 
-class CommentRepository extends QuillService {
+class CommentRepository extends DataBaseContext {
 
   import ctx._
 

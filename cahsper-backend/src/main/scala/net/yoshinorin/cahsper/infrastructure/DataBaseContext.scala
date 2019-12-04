@@ -1,8 +1,8 @@
-package net.yoshinorin.cahsper.services
+package net.yoshinorin.cahsper.infrastructure
 
 import io.getquill.{MysqlJdbcContext, SnakeCase}
 
-class QuillService {
+class DataBaseContext {
 
   lazy val ctx = new MysqlJdbcContext[SnakeCase](SnakeCase, "db.ctx")
 
