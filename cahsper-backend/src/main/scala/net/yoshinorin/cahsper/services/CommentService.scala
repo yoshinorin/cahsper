@@ -4,7 +4,7 @@ import net.yoshinorin.cahsper.models.User
 
 import scala.concurrent.{ExecutionContext, Future}
 import net.yoshinorin.cahsper.models.db.{CommentRepository, Comments}
-import net.yoshinorin.cahsper.models.request.CreateCommentRequestFormat
+import net.yoshinorin.cahsper.models.request.{CreateCommentRequestFormat, QueryParamater}
 
 class CommentService(commentRepository: CommentRepository)(implicit executeContext: ExecutionContext) {
 
@@ -43,19 +43,21 @@ class CommentService(commentRepository: CommentRepository)(implicit executeConte
    * Find comment by userName
    *
    * @param user
+   * @param queryParamater
    * @return
    */
-  def findByUserName(user: User): Future[Seq[Comments]] = Future {
-    commentRepository.findByUserName(user)
+  def findByUserName(user: User, queryParamater: QueryParamater): Future[Seq[Comments]] = Future {
+    commentRepository.findByUserName(user, queryParamater)
   }
 
   /**
    * Get all comments
    *
+   * @param queryParamater
    * @return
    */
-  def getAll: Future[Seq[Comments]] = Future {
-    commentRepository.getAll
+  def getAll(queryParamater: QueryParamater): Future[Seq[Comments]] = Future {
+    commentRepository.getAll(queryParamater)
   }
 
 }

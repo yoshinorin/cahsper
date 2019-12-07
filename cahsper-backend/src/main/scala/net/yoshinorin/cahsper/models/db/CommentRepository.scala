@@ -2,6 +2,7 @@ package net.yoshinorin.cahsper.models.db
 
 import net.yoshinorin.cahsper.infrastructure.DataBaseContext
 import net.yoshinorin.cahsper.models.User
+import net.yoshinorin.cahsper.models.request.QueryParamater
 
 class CommentRepository extends DataBaseContext[Comments] {
 
@@ -31,20 +32,24 @@ class CommentRepository extends DataBaseContext[Comments] {
    * Find comment by userName
    *
    * @param user
+   * @param queryParamater
    * @return
    */
-  def findByUserName(user: User): Seq[Comments] = {
-    run(query[Comments].filter(comment => comment.userName == lift(user.name)))
+  def findByUserName(user: User, queryParamater: QueryParamater): Seq[Comments] = {
+    run(
+      filterWithQueryParam(queryParamater)
+        .filter(comment => comment.userName == lift(user.name))
+    )
   }
 
   /**
    * Get all records in the comments table
    *
-   * TODO: implement like SQL limit and should change function name
+   * @param queryParamater
    * @return all comments
    */
-  def getAll: Seq[Comments] = {
-    run(query[Comments])
+  def getAll(queryParamater: QueryParamater): Seq[Comments] = {
+    run(filterWithQueryParam(queryParamater))
   }
 
 }

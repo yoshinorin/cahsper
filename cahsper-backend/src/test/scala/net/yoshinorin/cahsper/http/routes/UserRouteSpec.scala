@@ -10,7 +10,7 @@ import net.yoshinorin.cahsper.auth.mock.BearerTokenAuth
 import net.yoshinorin.cahsper.http
 import net.yoshinorin.cahsper.models.User
 import net.yoshinorin.cahsper.models.db.{Comments, Users}
-import net.yoshinorin.cahsper.models.request.CreateCommentRequestFormat
+import net.yoshinorin.cahsper.models.request.{CreateCommentRequestFormat, QueryParamater}
 import net.yoshinorin.cahsper.services.{CommentService, UserService}
 import org.mockito.Mockito
 import org.mockito.Mockito._
@@ -57,7 +57,7 @@ class UserRouteSpec extends AnyWordSpec with ScalatestRouteTest {
       )
     )
 
-  when(mockCommentService.findByUserName(User("YoshinoriN")))
+  when(mockCommentService.findByUserName(User("YoshinoriN"), QueryParamater()))
     .thenReturn(
       Future(
         Seq(
@@ -67,7 +67,7 @@ class UserRouteSpec extends AnyWordSpec with ScalatestRouteTest {
       )
     )
 
-  when(mockCommentService.findByUserName(User("JhonDue")))
+  when(mockCommentService.findByUserName(User("JhonDue"), QueryParamater()))
     .thenReturn(Future(Seq.empty))
 
   val auth = new http.auth.Cognito()

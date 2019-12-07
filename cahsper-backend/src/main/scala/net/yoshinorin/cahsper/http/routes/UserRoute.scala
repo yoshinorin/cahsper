@@ -8,7 +8,7 @@ import akka.http.scaladsl.server.directives.AuthenticationResult
 import io.circe.syntax._
 import net.yoshinorin.cahsper.http.auth.Auth
 import net.yoshinorin.cahsper.models.{Message, User}
-import net.yoshinorin.cahsper.models.request.{CommentRequestFormat, CreateCommentRequestFormat}
+import net.yoshinorin.cahsper.models.request.{CommentRequestFormat, CreateCommentRequestFormat, QueryParamater}
 import net.yoshinorin.cahsper.services.{CommentService, UserService}
 
 class UserRoute(
@@ -48,9 +48,11 @@ class UserRoute(
           } ~
             pathPrefix("comments") {
               get {
-                onSuccess(commentService.findByUserName(User(userName))) { comments =>
-                  // TODO: should sort using by SQL
-                  complete(HttpResponse(OK, entity = HttpEntity(ContentTypes.`application/json`, s"${comments.reverse.asJson}")))
+                parameters("page".as[Int].?, "limit".as[Int].?, "from".as[Long].?, "to".as[Long].?) { (page, limit, from, to) =>
+                  onSuccess(commentService.findByUserName(User(userName), QueryParamater(page, limit, from, to))) { comments =>
+                    // TODO: should sort using by SQL
+                    complete(HttpResponse(OK, entity = HttpEntity(ContentTypes.`application/json`, s"${comments.reverse.asJson}")))
+                  }
                 }
               } ~
                 post {

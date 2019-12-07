@@ -3,7 +3,7 @@ package net.yoshinorin.cahsper.services
 import akka.actor.ActorSystem
 import net.yoshinorin.cahsper.models.User
 import net.yoshinorin.cahsper.models.db.{CommentRepository, Comments}
-import net.yoshinorin.cahsper.models.request.CreateCommentRequestFormat
+import net.yoshinorin.cahsper.models.request.{CreateCommentRequestFormat, QueryParamater}
 import org.mockito.Mockito
 import org.mockito.Mockito._
 import org.scalatest.wordspec.AnyWordSpec
@@ -23,7 +23,7 @@ class CommentServiceSpec extends AnyWordSpec {
   when(mockCommentRepository.findById(1))
     .thenReturn(Some(Comments(1, "YoshinoriN", "This is a test one.", 1567814290)))
 
-  when(mockCommentRepository.getAll)
+  when(mockCommentRepository.getAll(QueryParamater()))
     .thenReturn(
       Seq(
         Comments(1, "YoshinoriN", "This is a test one.", 1567814290),
@@ -31,7 +31,7 @@ class CommentServiceSpec extends AnyWordSpec {
       )
     )
 
-  when(mockCommentRepository.findByUserName(User("YoshinoriN")))
+  when(mockCommentRepository.findByUserName(User("YoshinoriN"), QueryParamater()))
     .thenReturn(
       Seq(
         Comments(1, "YoshinoriN", "This is a test one.", 1567814290),
@@ -39,7 +39,7 @@ class CommentServiceSpec extends AnyWordSpec {
       )
     )
 
-  when(mockCommentRepository.findByUserName(User("JhonDue")))
+  when(mockCommentRepository.findByUserName(User("JhonDue"), QueryParamater()))
     .thenReturn(
       Seq(
         Comments(1, "JhonDue", "This is a test one.", 1567814290),
@@ -60,7 +60,7 @@ class CommentServiceSpec extends AnyWordSpec {
     }
 
     "get all comments when call getAll" in {
-      val result = Await.result(commentService.getAll, Duration.Inf)
+      val result = Await.result(commentService.getAll(QueryParamater()), Duration.Inf)
       assert(
         result == Seq(
           Comments(1, "YoshinoriN", "This is a test one.", 1567814290),
@@ -70,14 +70,14 @@ class CommentServiceSpec extends AnyWordSpec {
     }
 
     "get all comments by userName when call findByUserName" in {
-      val result = Await.result(commentService.findByUserName(User("YoshinoriN")), Duration.Inf)
+      val result = Await.result(commentService.findByUserName(User("YoshinoriN"), QueryParamater()), Duration.Inf)
       assert(
         result == Seq(
           Comments(1, "YoshinoriN", "This is a test one.", 1567814290),
           Comments(2, "YoshinoriN", "This is a test two.", 1567814391)
         )
       )
-      val result2 = Await.result(commentService.findByUserName(User("JhonDue")), Duration.Inf)
+      val result2 = Await.result(commentService.findByUserName(User("JhonDue"), QueryParamater()), Duration.Inf)
       assert(
         result2 == Seq(
           Comments(1, "JhonDue", "This is a test one.", 1567814290),

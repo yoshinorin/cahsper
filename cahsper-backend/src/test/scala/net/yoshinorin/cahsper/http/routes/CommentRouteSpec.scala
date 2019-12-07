@@ -5,6 +5,7 @@ import akka.http.scaladsl.testkit.ScalatestRouteTest
 import net.yoshinorin.cahsper.auth.mock.BearerTokenAuth
 import net.yoshinorin.cahsper.http
 import net.yoshinorin.cahsper.models.db.Comments
+import net.yoshinorin.cahsper.models.request.QueryParamater
 import net.yoshinorin.cahsper.services.CommentService
 import org.mockito.Mockito
 import org.mockito.Mockito._
@@ -17,7 +18,7 @@ class CommentRouteSpec extends AnyWordSpec with ScalatestRouteTest {
 
   val mockCommentService: CommentService = Mockito.mock(classOf[CommentService])
 
-  when(mockCommentService.getAll)
+  when(mockCommentService.getAll(QueryParamater()))
     .thenReturn(
       Future(
         Seq(

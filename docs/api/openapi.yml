@@ -82,6 +82,22 @@ paths:
   /users/{userName}/comments:
     get:
       summary: Get comments by user
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: The numbers of items to return. Max is 100.
+        - in: query
+          name: from
+          schema:
+            type: integer
+          description: Range of comment created time. UnixTime.
+        - in: query
+          name: to
+          schema:
+            type: integer
+          description: Range of comment created time. UnixTime.
       responses:
         200:
           description: Response when Success
@@ -132,6 +148,22 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/comment'
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: The numbers of items to return. Max is 100.
+        - in: query
+          name: from
+          schema:
+            type: integer
+          description: Range of comment created time. UnixTime.
+        - in: query
+          name: to
+          schema:
+            type: integer
+          description: Range of comment created time. UnixTime.
 components:
   schemas:
     user:

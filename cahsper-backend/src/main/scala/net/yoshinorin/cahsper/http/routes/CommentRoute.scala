@@ -6,6 +6,7 @@ import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import io.circe.syntax._
 import net.yoshinorin.cahsper.http.auth.Auth
+import net.yoshinorin.cahsper.models.request.QueryParamater
 import net.yoshinorin.cahsper.services.CommentService
 
 class CommentRoute(
@@ -17,8 +18,10 @@ class CommentRoute(
     pathPrefix("comments") {
       pathEndOrSingleSlash {
         get {
-          onSuccess(commentService.getAll) { result =>
-            complete(HttpResponse(OK, entity = HttpEntity(ContentTypes.`application/json`, s"${result.reverse.asJson}")))
+          parameters("page".as[Int].?, "limit".as[Int].?, "from".as[Long].?, "to".as[Long].?) { (page, limit, from, to) =>
+            onSuccess(commentService.getAll(QueryParamater(page, limit, from, to))) { result =>
+              complete(HttpResponse(OK, entity = HttpEntity(ContentTypes.`application/json`, s"${result.reverse.asJson}")))
+            }
           }
         }
       }
