@@ -20,6 +20,7 @@ class DataBaseContext[T <: Table] {
     query[T]
       .filter(_.createdAt >= lift(queryParamater.from))
       .filter(_.createdAt <= lift(queryParamater.to))
+      .drop(lift(queryParamater.page * queryParamater.limit))
       .take(lift(queryParamater.limit))
   }
 
