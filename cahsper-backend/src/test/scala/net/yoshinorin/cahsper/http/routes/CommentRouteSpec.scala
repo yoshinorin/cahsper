@@ -42,16 +42,16 @@ class CommentRouteSpec extends AnyWordSpec with ScalatestRouteTest {
         """
         |[
         |  {
-        |    "id" : 2,
-        |    "userName" : "YoshinoriN",
-        |    "comment" : "This is a test two.",
-        |    "createdAt" : 1567814391
-        |  },
-        |  {
         |    "id" : 1,
         |    "userName" : "YoshinoriN",
         |    "comment" : "This is a test one.",
         |    "createdAt" : 1567814290
+        |  },
+        |  {
+        |    "id" : 2,
+        |    "userName" : "YoshinoriN",
+        |    "comment" : "This is a test two.",
+        |    "createdAt" : 1567814391
         |  }
         |]
       """.stripMargin.replaceAll("\n", "").replaceAll(" ", "")
