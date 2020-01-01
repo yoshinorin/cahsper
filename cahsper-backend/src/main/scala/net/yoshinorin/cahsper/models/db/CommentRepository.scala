@@ -37,8 +37,10 @@ class CommentRepository extends DataBaseContext[Comments] {
    */
   def findByUserName(user: User, queryParamater: QueryParamater): Seq[Comments] = {
     run(
-      filterWithQueryParam(queryParamater)
-        .filter(comment => comment.userName == lift(user.name))
+      sortByCreatedAt(
+        filterWithQueryParam(queryParamater),
+        queryParamater.order
+      ).filter(comment => comment.userName == lift(user.name))
     )
   }
 
@@ -49,7 +51,7 @@ class CommentRepository extends DataBaseContext[Comments] {
    * @return all comments
    */
   def getAll(queryParamater: QueryParamater): Seq[Comments] = {
-    run(filterWithQueryParam(queryParamater))
+    run(sortByCreatedAt(filterWithQueryParam(queryParamater), queryParamater.order))
   }
 
 }

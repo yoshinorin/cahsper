@@ -18,9 +18,9 @@ class CommentRoute(
     pathPrefix("comments") {
       pathEndOrSingleSlash {
         get {
-          parameters("page".as[Int].?, "limit".as[Int].?, "from".as[Long].?, "to".as[Long].?) { (page, limit, from, to) =>
-            onSuccess(commentService.getAll(QueryParamater(page, limit, from, to))) { result =>
-              complete(HttpResponse(OK, entity = HttpEntity(ContentTypes.`application/json`, s"${result.reverse.asJson}")))
+          parameters("page".as[Int].?, "limit".as[Int].?, "from".as[Long].?, "to".as[Long].?, "order".as[String].?) { (page, limit, from, to, order) =>
+            onSuccess(commentService.getAll(QueryParamater(page, limit, from, to, order))) { result =>
+              complete(HttpResponse(OK, entity = HttpEntity(ContentTypes.`application/json`, s"${result.asJson}")))
             }
           }
         }

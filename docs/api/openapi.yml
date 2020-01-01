@@ -98,6 +98,11 @@ paths:
           schema:
             type: integer
           description: Range of comment created time. UnixTime.
+        - in: query
+          name: order
+          schema:
+            type: string
+          description: Determines whether the search result returned is the latest or oldest.
       responses:
         200:
           description: Response when Success
@@ -164,6 +169,11 @@ paths:
           schema:
             type: integer
           description: Range of comment created time. UnixTime.
+        - in: query
+          name: order
+          schema:
+            type: string
+          description: Determines whether the search result returned is the latest or oldest.
 components:
   schemas:
     user:

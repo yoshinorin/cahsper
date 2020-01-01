@@ -48,10 +48,10 @@ class UserRoute(
           } ~
             pathPrefix("comments") {
               get {
-                parameters("page".as[Int].?, "limit".as[Int].?, "from".as[Long].?, "to".as[Long].?) { (page, limit, from, to) =>
-                  onSuccess(commentService.findByUserName(User(userName), QueryParamater(page, limit, from, to))) { comments =>
+                parameters("page".as[Int].?, "limit".as[Int].?, "from".as[Long].?, "to".as[Long].?, "order".as[String].?) { (page, limit, from, to, order) =>
+                  onSuccess(commentService.findByUserName(User(userName), QueryParamater(page, limit, from, to, order))) { comments =>
                     // TODO: should sort using by SQL
-                    complete(HttpResponse(OK, entity = HttpEntity(ContentTypes.`application/json`, s"${comments.reverse.asJson}")))
+                    complete(HttpResponse(OK, entity = HttpEntity(ContentTypes.`application/json`, s"${comments.asJson}")))
                   }
                 }
               } ~
