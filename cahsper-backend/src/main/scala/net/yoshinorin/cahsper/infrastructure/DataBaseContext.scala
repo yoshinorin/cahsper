@@ -34,10 +34,9 @@ class DataBaseContext[T <: Table] {
   val ctx = DataBaseContext.ctx
 
   import ctx._
-  import net.yoshinorin.cahsper.infrastructure.OrderType.OrderConverter
 
-  def sortByCreatedAt(query: Quoted[Query[T]], order: String)(implicit schemaMeta: SchemaMeta[T]): Quoted[Query[T]] = {
-    order.toOrder match {
+  def sortByCreatedAt(query: Quoted[Query[T]], orderType: OrderType)(implicit schemaMeta: SchemaMeta[T]): Quoted[Query[T]] = {
+    orderType match {
       case OrderType.ASC =>
         quote {
           query.sortBy(_.createdAt)(Ord.asc)

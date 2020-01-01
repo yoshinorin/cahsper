@@ -1,6 +1,7 @@
 package net.yoshinorin.cahsper.models.db
 
 import net.yoshinorin.cahsper.infrastructure.DataBaseContext
+import net.yoshinorin.cahsper.infrastructure.OrderType.OrderConverter
 import net.yoshinorin.cahsper.models.User
 import net.yoshinorin.cahsper.models.request.QueryParamater
 
@@ -39,7 +40,7 @@ class CommentRepository extends DataBaseContext[Comments] {
     run(
       sortByCreatedAt(
         filterWithQueryParam(queryParamater),
-        queryParamater.order
+        queryParamater.order.toOrder
       ).filter(comment => comment.userName == lift(user.name))
     )
   }
@@ -51,7 +52,7 @@ class CommentRepository extends DataBaseContext[Comments] {
    * @return all comments
    */
   def getAll(queryParamater: QueryParamater): Seq[Comments] = {
-    run(sortByCreatedAt(filterWithQueryParam(queryParamater), queryParamater.order))
+    run(sortByCreatedAt(filterWithQueryParam(queryParamater), queryParamater.order.toOrder))
   }
 
 }
