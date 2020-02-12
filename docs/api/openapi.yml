@@ -42,7 +42,7 @@ paths:
       description: |
         Create a new user with the AWS Cognito username attribute
       security:
-        - OAuth2:
+        - bearer:
           - write
       responses:
         201:
@@ -115,7 +115,7 @@ paths:
     post:
       summary: Create a new comment
       security:
-        - OAuth2:
+        - bearer:
           - write
       responses:
         201:
@@ -216,8 +216,10 @@ components:
           type: string
           example: NotFound
   securitySchemes:
-    OAuth2:
-      type: oauth2
+    bearer:
+      type: http
+      scheme: bearer
+      format: JWT
       description: |
         Use AWS Cognito JWT for authorization and authentication. [Please see AWS document](https://docs.aws.amazon.com/cognito/latest/developerguide/what-is-amazon-cognito.html).
       flows:
