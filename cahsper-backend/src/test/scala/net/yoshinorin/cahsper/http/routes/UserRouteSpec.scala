@@ -208,7 +208,9 @@ class UserRouteSpec extends AnyWordSpec with ScalatestRouteTest {
         assert(contentType == ContentTypes.`application/json`)
         assert(responseAs[String].replaceAll("\n", "").replaceAll(" ", "") == expectJson)
       }
+    }
 
+    "get empty comment by user" in {
       Get("/users/JhonDue/comments/") ~> userRoute.route ~> check {
         assert(status == StatusCodes.OK)
         assert(contentType == ContentTypes.`application/json`)
