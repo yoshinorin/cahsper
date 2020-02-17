@@ -13,7 +13,7 @@ scalacOptions ++= Seq(
   "UTF-8"
 )
 
-val circeVersion = "0.12.3"
+val circeVersion = "0.13.0"
 val akkaVersion = "2.6.3"
 val akkaHttpVersion = "10.1.11"
 libraryDependencies ++= Seq(
