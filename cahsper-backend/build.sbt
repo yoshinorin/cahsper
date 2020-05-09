@@ -18,8 +18,8 @@ val akkaVersion = "2.6.3"
 val akkaHttpVersion = "10.1.11"
 libraryDependencies ++= Seq(
   "ch.qos.logback" % "logback-classic" % "1.2.3",
-  "ch.megard" %% "akka-http-cors" % "0.4.2",
-  "com.nimbusds" % "nimbus-jose-jwt" % "8.6",
+  "ch.megard" %% "akka-http-cors" % "0.4.3",
+  "com.nimbusds" % "nimbus-jose-jwt" % "8.16",
   "com.typesafe.akka" %% "akka-http" % akkaHttpVersion,
   "com.typesafe.akka" %% "akka-actor" % akkaVersion,
   "com.typesafe.akka" %% "akka-slf4j" % akkaVersion,
@@ -30,12 +30,12 @@ libraryDependencies ++= Seq(
   "io.circe" %% "circe-core" % circeVersion,
   "io.circe" %% "circe-generic" % circeVersion,
   "io.circe" %% "circe-parser" % circeVersion,
-  "io.getquill" %% "quill-jdbc" % "3.5.0",
-  "org.flywaydb" % "flyway-core" % "6.2.3",
-  "org.mariadb.jdbc" % "mariadb-java-client" % "2.5.4",
+  "io.getquill" %% "quill-jdbc" % "3.5.1",
+  "org.flywaydb" % "flyway-core" % "6.4.1",
+  "org.mariadb.jdbc" % "mariadb-java-client" % "2.6.0",
   "org.slf4j" % "slf4j-api" % "1.7.29",
   "org.scalatest" %% "scalatest" % "3.1.0" % "test",
-  "org.mockito" % "mockito-core" % "3.2.0" % "test"
+  "org.mockito" % "mockito-core" % "3.3.3" % "test"
 )
 
 coverageExcludedPackages := "<empty>; net.yoshinorin.cahsper.BootStrap; net.yoshinorin.cahsper.infrastructure.Migration; net.yoshinorin.services.infrastructure.DataBaseContext; net.yoshinorin.cahsper.http.HttpServer;"
