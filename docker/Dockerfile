@@ -2,11 +2,11 @@ FROM yoshinorin/docker-sbt:1.3.9
 
 MAINTAINER YoshinoriN
 
-RUN apt update -y \
-  && apt upgrade -y \
-  && apt install -y git vim \
-  && apt autoremove \
-  && apt autoclean
+RUN apt-get update -y \
+  && apt-get upgrade -y \
+  && apt-get install -y git vim \
+  && apt-get autoremove \
+  && apt-get clean
 
 WORKDIR /usr/opt
 
