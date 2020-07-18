@@ -1,6 +1,6 @@
 version: '3'
 services:
-  mariadb:
+  cahsper_mariadb:
     image: yoshinorin/docker-mariadb:10.4.7
     environment:
       MYSQL_ROOT_PASSWORD: pass
@@ -10,7 +10,11 @@ services:
     volumes:
       - ./data:/var/lib/mysql
     hostname: cahsper-mariadb
+    networks:
+      - cahsper
     container_name: cahsper-mariadb
+    expose:
+      - "3306"
     ports:
       - "3306:3306"
     command: ["mysqld", "--character-set-server=utf8mb4"]
@@ -28,7 +32,13 @@ services:
     volumes:
       - ./logs:/usr/opt/cahsper/logs
     hostname: cahsper
+    networks:
+      - cahsper
     container_name: cahsper
     ports:
       - "9001:9001"
     command: ["sbt", "run"]
+    depends_on:
+      - cahsper_mariadb
+networks:
+  cahsper:
