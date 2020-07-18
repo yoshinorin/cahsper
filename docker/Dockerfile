@@ -21,4 +21,4 @@ RUN rm -rf .git docs \
   && mv cahsper-backend/* . \
   && rm -rf scripts \
   && rm -rf cahsper-backend docker \
-  && sbt compile
+  && sbt compile exit
