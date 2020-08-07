@@ -11,7 +11,7 @@ import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, ExecutionContextExecutor}
 import scala.util.{Failure, Success}
 
-// testOnly *UserServiceSpec
+// testOnly net.yoshinorin.cahsper.services.UserServiceSpec
 class UserServiceSpec extends AnyWordSpec {
 
   implicit val actorSystem: ActorSystem = ActorSystem("cahsper")

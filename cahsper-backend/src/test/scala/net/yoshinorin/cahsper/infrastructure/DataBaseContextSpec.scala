@@ -3,7 +3,7 @@ package net.yoshinorin.cahsper.infrastructure
 import net.yoshinorin.cahsper.infrastructure.OrderType.OrderConverter
 import org.scalatest.wordspec.AnyWordSpec
 
-// testOnly *DataBaseContextSpec
+// testOnly net.yoshinorin.cahsper.infrastructure.DataBaseContextSpec
 class DataBaseContextSpec extends AnyWordSpec {
 
   "DataBaseContext" should {

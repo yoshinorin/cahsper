@@ -3,7 +3,7 @@ package net.yoshinorin.cahsper.models.aws.cognito
 import net.yoshinorin.cahsper.models.aws.cognito.Jwt.convertJwtClaims
 import org.scalatest.wordspec.AnyWordSpec
 
-// testOnly *JwtSpec
+// testOnly net.yoshinorin.cahsper.models.aws.cognito.JwtSpec
 class JwtSpec extends AnyWordSpec {
 
   "Jwt" should {

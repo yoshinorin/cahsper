@@ -13,7 +13,7 @@ import org.scalatest.wordspec.AnyWordSpec
 
 import scala.concurrent.Future
 
-// testOnly *CommentRouteSpec
+// testOnly net.yoshinorin.cahsper.http.routes.CommentRouteSpec
 class CommentRouteSpec extends AnyWordSpec with ScalatestRouteTest {
 
   val mockCommentService: CommentService = Mockito.mock(classOf[CommentService])

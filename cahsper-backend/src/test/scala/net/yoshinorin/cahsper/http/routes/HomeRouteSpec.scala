@@ -4,7 +4,7 @@ import akka.http.scaladsl.model.{ContentTypes, StatusCodes}
 import akka.http.scaladsl.testkit.ScalatestRouteTest
 import org.scalatest.wordspec.AnyWordSpec
 
-// testOnly *HomeRouteSpec
+// testOnly net.yoshinorin.cahsper.http.routes.HomeRouteSpec
 class HomeRouteSpec extends AnyWordSpec with ScalatestRouteTest {
 
   val homeRoute = new HomeRoute()

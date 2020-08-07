@@ -4,7 +4,7 @@ import java.time.{Instant, ZoneOffset, ZonedDateTime}
 
 import org.scalatest.wordspec.AnyWordSpec
 
-// testOnly *CommentsSpec
+// testOnly net.yoshinorin.cahsper.models.db.CommentsSpec
 class CommentsSpec extends AnyWordSpec {
 
   "Comments" should {

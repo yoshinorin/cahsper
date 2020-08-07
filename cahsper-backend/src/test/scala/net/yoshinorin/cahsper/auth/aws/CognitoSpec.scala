@@ -3,7 +3,7 @@ package net.yoshinorin.cahsper.auth.aws
 import net.yoshinorin.cahsper.models.Jwt
 import org.scalatest.wordspec.AnyWordSpec
 
-// testOnly *CognitoSpec
+// testOnly net.yoshinorin.cahsper.auth.aws.CognitoSpec
 class CognitoSpec extends AnyWordSpec {
 
   "AwsCognitoSpec" should {

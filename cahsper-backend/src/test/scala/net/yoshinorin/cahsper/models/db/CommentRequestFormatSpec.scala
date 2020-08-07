@@ -3,7 +3,7 @@ package net.yoshinorin.cahsper.models.db
 import org.scalatest.wordspec.AnyWordSpec
 import net.yoshinorin.cahsper.models.request.{CommentRequestFormat, CreateCommentRequestFormat}
 
-// testOnly *CommentRequestFormatSpec
+// testOnly net.yoshinorin.cahsper.models.db.CommentRequestFormatSpec
 class CommentRequestFormatSpec extends AnyWordSpec {
 
   val commentMaxString = new StringBuilder

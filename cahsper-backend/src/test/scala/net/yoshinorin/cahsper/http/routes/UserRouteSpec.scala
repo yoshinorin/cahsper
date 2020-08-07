@@ -18,7 +18,7 @@ import org.scalatest.wordspec.AnyWordSpec
 
 import scala.concurrent.{ExecutionContextExecutor, Future}
 
-// testOnly *UserRouteSpec
+// testOnly net.yoshinorin.cahsper.http.routes.UserRouteSpec
 class UserRouteSpec extends AnyWordSpec with ScalatestRouteTest {
 
   implicit val actorSystem: ActorSystem = ActorSystem("cahsper")

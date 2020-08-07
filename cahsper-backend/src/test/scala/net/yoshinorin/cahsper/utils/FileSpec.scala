@@ -2,7 +2,7 @@ package net.yoshinorin.cahsper.utils
 
 import org.scalatest.wordspec.AnyWordSpec
 
-// testOnly *FileSpec
+// testOnly net.yoshinorin.cahsper.utils.FileSpec
 class FileSpec extends AnyWordSpec {
 
   "File" should {

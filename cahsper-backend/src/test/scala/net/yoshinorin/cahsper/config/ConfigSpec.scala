@@ -2,7 +2,7 @@ package net.yoshinorin.cahsper.config
 
 import org.scalatest.wordspec.AnyWordSpec
 
-// testOnly *ConfigSpec
+// testOnly net.yoshinorin.cahsper.config.ConfigSpec
 class ConfigSpec extends AnyWordSpec {
 
   "Config" should {

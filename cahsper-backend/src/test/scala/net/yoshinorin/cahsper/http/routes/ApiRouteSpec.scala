@@ -4,7 +4,7 @@ import akka.http.scaladsl.model.{ContentTypes, StatusCodes}
 import akka.http.scaladsl.testkit.ScalatestRouteTest
 import org.scalatest.wordspec.AnyWordSpec
 
-// testOnly *ApiRouteSpec
+// testOnly net.yoshinorin.cahsper.http.routes.ApiRouteSpec
 class ApiRouteSpec extends AnyWordSpec with ScalatestRouteTest {
 
   val apiStatusRoute = new ApiStatusRoute()
