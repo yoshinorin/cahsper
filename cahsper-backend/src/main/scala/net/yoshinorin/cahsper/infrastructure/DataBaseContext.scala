@@ -1,6 +1,6 @@
 package net.yoshinorin.cahsper.infrastructure
 
-import io.getquill.{MysqlJdbcContext, SnakeCase}
+import io.getquill.{MysqlJdbcContext, Ord, Query, SnakeCase}
 import net.yoshinorin.cahsper.models.db.Table
 import net.yoshinorin.cahsper.models.request.QueryParamater
 
