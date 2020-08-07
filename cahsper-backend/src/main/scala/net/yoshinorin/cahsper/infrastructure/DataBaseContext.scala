@@ -31,7 +31,7 @@ object DataBaseContext {
 
 class DataBaseContext[T <: Table] {
 
-  val ctx = DataBaseContext.ctx
+  val ctx: MysqlJdbcContext[SnakeCase] = DataBaseContext.ctx
 
   import ctx._
 
