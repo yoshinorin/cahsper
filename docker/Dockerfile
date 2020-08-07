@@ -16,7 +16,7 @@ RUN git clone https://github.com/YoshinoriN/cahsper.git
 WORKDIR /usr/opt/cahsper
 
 RUN rm -rf .git docs \
-  && rm .gitignore .editorconfig .travis.yml \
+  && rm .gitignore .editorconfig \
   && pwd && ls -la \
   && mv cahsper-backend/* . \
   && rm -rf scripts \

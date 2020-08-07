@@ -4,7 +4,7 @@
 
 |Build|Quality|Coverage|
 |---|---|---|
-|[![CI](https://img.shields.io/github/workflow/status/YoshinoriN/cahsper/CI/master?label=CI)](https://travis-ci.org/YoshinoriN/cahsper)|[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6981167737cf4e21b6a9cf74d5c36c0a)](https://www.codacy.com/app/YoshinoriN/cahsper?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=YoshinoriN/cahsper&amp;utm_campaign=Badge_Grade)|[![Coverage Status](https://coveralls.io/repos/github/YoshinoriN/cahsper/badge.svg?branch=master)](https://coveralls.io/github/YoshinoriN/cahsper?branch=master)|
+|[![CI](https://img.shields.io/github/workflow/status/YoshinoriN/cahsper/CI/master?label=CI)](https://github.com/YoshinoriN/cahsper/actions)|[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6981167737cf4e21b6a9cf74d5c36c0a)](https://www.codacy.com/app/YoshinoriN/cahsper?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=YoshinoriN/cahsper&amp;utm_campaign=Badge_Grade)|[![Coverage Status](https://coveralls.io/repos/github/YoshinoriN/cahsper/badge.svg?branch=master)](https://coveralls.io/github/YoshinoriN/cahsper?branch=master)|
 
 ## Demo
 
@@ -245,7 +245,7 @@ Content-Length: 94
 |[MariaDB](https://mariadb.org/)|Database|
 |[ScalaTest](http://www.scalatest.org/)|Unit test|
 |[Scalafmt](https://scalameta.org/scalafmt/)|Code formatter|
-|[TravisCI](https://travis-ci.org/YoshinoriN/cahsper)|CI|
+|[GitHub Action](https://github.com/YoshinoriN/cahsper/actions)|CI|
 |[Codacy](https://app.codacy.com/manual/YoshinoriN/cahsper/dashboard)|Check Code quality|
 |[COVERALLS](https://coveralls.io/github/YoshinoriN/cahsper?branch=master)|Coverage report|
 |[ReDoc](https://github.com/Rebilly/ReDoc)|Generate API documentation |
