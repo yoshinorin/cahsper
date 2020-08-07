@@ -25,4 +25,4 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
       - name: Run tests
-        run: sbt scalafmtSbtCheck scalafmtCheck test:scalafmtCheck test
+        run: sbt test
