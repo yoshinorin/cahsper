@@ -67,7 +67,7 @@ case class CreateCommentRequestFormat(
 
 object CommentRequestFormat {
 
-  private val logger = LoggerFactory.getLogger(this.getClass)
+  private[this] val logger = LoggerFactory.getLogger(this.getClass)
 
   val requireCommentMinMessage: Message = Message("Comment must be more 3 characters.")
   val requireCommentMaxMessage: Message = Message("Comment must be less than 256 characters.")

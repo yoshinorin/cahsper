@@ -8,7 +8,7 @@ import akka.http.scaladsl.server.directives.{DebuggingDirectives, LogEntry}
 trait HttpLogger {
 
   // TODO: Change log format
-  private def requestAndResponseLogging(request: HttpRequest): RouteResult => Option[LogEntry] = {
+  private[this] def requestAndResponseLogging(request: HttpRequest): RouteResult => Option[LogEntry] = {
     case RouteResult.Complete(response) =>
       Some(LogEntry(request.method.name + " - " + request.uri + " - " + response.status, Logging.InfoLevel))
     case RouteResult.Rejected(rejections) =>

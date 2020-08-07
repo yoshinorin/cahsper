@@ -19,13 +19,13 @@ object Cognito {
   val badJwtMessage: Message = Message("Invalid JWT.")
   val exceptionOccured: Message = Message("Exception occured.")
 
-  private val logger = LoggerFactory.getLogger(this.getClass)
+  private[this] val logger = LoggerFactory.getLogger(this.getClass)
 
-  private val awsCognitoJwk = Config.awsCognitoJwkUrl
-  private val jwkSet: JWKSource[SecurityContext] = new RemoteJWKSet(new URL(awsCognitoJwk))
+  private[this] val awsCognitoJwk = Config.awsCognitoJwkUrl
+  private[this] val jwkSet: JWKSource[SecurityContext] = new RemoteJWKSet(new URL(awsCognitoJwk))
 
-  private val jwtProcessor: ConfigurableJWTProcessor[SecurityContext] = new DefaultJWTProcessor[SecurityContext]
-  private val jWSVerificationKeySelector: JWSVerificationKeySelector[SecurityContext] = new JWSVerificationKeySelector(JWSAlgorithm.RS256, jwkSet)
+  private[this] val jwtProcessor: ConfigurableJWTProcessor[SecurityContext] = new DefaultJWTProcessor[SecurityContext]
+  private[this] val jWSVerificationKeySelector: JWSVerificationKeySelector[SecurityContext] = new JWSVerificationKeySelector(JWSAlgorithm.RS256, jwkSet)
 
   jwtProcessor.setJWSKeySelector(jWSVerificationKeySelector)
 

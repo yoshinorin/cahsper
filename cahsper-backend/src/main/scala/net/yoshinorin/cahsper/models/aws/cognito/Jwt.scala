@@ -25,7 +25,7 @@ case class Jwt(
 
 object Jwt {
 
-  private val logger = LoggerFactory.getLogger(this.getClass)
+  private[this] val logger = LoggerFactory.getLogger(this.getClass)
   implicit val decodeAwsJwtClaims: Decoder[Jwt] = deriveDecoder[Jwt]
 
   implicit class convertJwtClaims(string: String) {

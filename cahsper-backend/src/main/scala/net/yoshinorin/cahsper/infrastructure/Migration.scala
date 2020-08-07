@@ -6,8 +6,8 @@ import org.flywaydb.core.api.configuration.FluentConfiguration
 
 object Migration {
 
-  private val flywayConfig: FluentConfiguration = Flyway.configure().dataSource(Config.dbUrl, Config.dbUser, Config.dbPassword)
-  private val flyway: Flyway = new Flyway(flywayConfig)
+  private[this] val flywayConfig: FluentConfiguration = Flyway.configure().dataSource(Config.dbUrl, Config.dbUser, Config.dbPassword)
+  private[this] val flyway: Flyway = new Flyway(flywayConfig)
 
   /**
    * Do migration
