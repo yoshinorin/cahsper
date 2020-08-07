@@ -56,7 +56,7 @@ class CommentServiceSpec extends AnyWordSpec {
 
     "find comments instance when call findById with an argument is 1" in {
       val result = Await.result(commentService.findById(1), Duration.Inf)
-      assert(result == Some(Comments(1, "YoshinoriN", "This is a test one.", 1567814290)))
+      assert(result.contains(Comments(1, "YoshinoriN", "This is a test one.", 1567814290)))
     }
 
     "get all comments when call getAll" in {

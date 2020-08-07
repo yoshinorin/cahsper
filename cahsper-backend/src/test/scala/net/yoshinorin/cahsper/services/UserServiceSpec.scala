@@ -39,7 +39,7 @@ class UserServiceSpec extends AnyWordSpec {
 
     "find users instance when call findById with an argument is 1" in {
       val result = Await.result(userService.findByName("YoshinoriN"), Duration.Inf)
-      assert(result == Some(Users("YoshinoriN", 1567814290)))
+      assert(result.contains(Users("YoshinoriN", 1567814290)))
     }
 
     "create new user" in {
