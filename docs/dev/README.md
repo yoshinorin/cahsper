@@ -6,6 +6,12 @@
 CREATE DATABASE cahsper;
 ```
 
+## Code format
+
+```
+$ scalafmt
+```
+
 ## Test
 
 Run all tests
