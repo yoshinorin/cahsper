@@ -4,7 +4,6 @@ import akka.http.scaladsl.model.StatusCodes._
 import akka.http.scaladsl.model.{ContentTypes, HttpEntity, HttpResponse}
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
-import akka.http.scaladsl.server.directives.AuthenticationResult
 import io.circe.syntax._
 import net.yoshinorin.cahsper.http.auth.Auth
 import net.yoshinorin.cahsper.models.{Message, User}
