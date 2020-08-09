@@ -30,3 +30,6 @@ docs/api/dist
 # Docker
 docker/data
 docker/config
+
+# Artifacts
+*.jar
