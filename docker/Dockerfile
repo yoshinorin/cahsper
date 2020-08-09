@@ -19,7 +19,6 @@ COPY entry-point.sh entry-point.sh
 
 RUN rm -rf .git docs \
   && rm .gitignore .editorconfig \
-  && pwd && ls -la \
   && mv cahsper-backend/* . \
   && rm -rf scripts \
   && rm -rf cahsper-backend docker \
