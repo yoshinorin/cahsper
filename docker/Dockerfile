@@ -23,6 +23,7 @@ RUN rm -rf .git docs \
   && rm -rf scripts \
   && rm -rf cahsper-backend docker \
   && sbt assembly exit \
-  && cp ./target/scala-2.13/cahsper-assembly-0.0.1.jar cahsper-assembly.jar
+  && cp ./target/scala-2.13/cahsper-assembly-0.0.1.jar cahsper-assembly.jar \
+  && chmod +x entry-point.sh
 
 ENTRYPOINT [ "/usr/opt/cahsper/entry-point.sh" ]
