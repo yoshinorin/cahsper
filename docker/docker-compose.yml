@@ -28,7 +28,7 @@ services:
       CAHSPER_HTTP_BIND_ADDRESS: 0.0.0.0
       CAHSPER_AWS_COGNITO_ISS: https://cognito-idp.{region}.amazonaws.com/{userPoolId}
       CAHSPER_AWS_COGNITO_APP_CLIENT_ID: cognito_application_client_id
-      SBT_OPTS: "-Xms512M -Xmx768M -Xss2M"
+      JAVA_OPTS: "-Xms512M -Xmx768M -Xss2M"
     volumes:
       - ./logs:/usr/opt/cahsper/logs
     hostname: cahsper
@@ -37,7 +37,6 @@ services:
     container_name: cahsper
     ports:
       - "9001:9001"
-    command: ["sbt", "run"]
     depends_on:
       - cahsper_mariadb
 networks:

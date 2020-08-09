@@ -15,10 +15,15 @@ RUN git clone https://github.com/YoshinoriN/cahsper.git
 
 WORKDIR /usr/opt/cahsper
 
+COPY entry-point.sh entry-point.sh
+
 RUN rm -rf .git docs \
   && rm .gitignore .editorconfig \
   && pwd && ls -la \
   && mv cahsper-backend/* . \
   && rm -rf scripts \
   && rm -rf cahsper-backend docker \
-  && sbt compile exit
+  && sbt assembly exit \
+  && cp ./target/scala-2.13/cahsper-assembly-0.0.1.jar cahsper-assembly.jar
+
+ENTRYPOINT [ "/usr/opt/cahsper/entry-point.sh" ]
