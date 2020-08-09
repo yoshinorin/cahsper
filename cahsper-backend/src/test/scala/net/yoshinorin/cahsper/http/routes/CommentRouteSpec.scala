@@ -29,10 +29,10 @@ class CommentRouteSpec extends AnyWordSpec with ScalatestRouteTest {
     )
 
   val auth = new http.auth.Cognito()
-  val commentServiceRoute: CommentRoute = new CommentRoute(auth, mockCommentService)
+  val commentServiceRoute: CommentRoute = new CommentRoute(mockCommentService)
 
   val fakeAuth = new BearerTokenAuth("JohnDue")
-  val commentServiceRouteWithFakeAuth: CommentRoute = new CommentRoute(fakeAuth, mockCommentService)
+  val commentServiceRouteWithFakeAuth: CommentRoute = new CommentRoute(mockCommentService)
 
   "CommentServiceRoute" should {
 

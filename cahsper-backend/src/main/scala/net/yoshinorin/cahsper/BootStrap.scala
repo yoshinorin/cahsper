@@ -24,7 +24,7 @@ object BootStrap extends App {
 
   val commentRepository: CommentRepository = new CommentRepository()
   val commentService: CommentService = new CommentService(commentRepository)
-  val commentServiceRoute: CommentRoute = new CommentRoute(auth, commentService)
+  val commentServiceRoute: CommentRoute = new CommentRoute(commentService)
 
   val userRepository: UserRepository = new UserRepository()
   val userService: UserService = new UserService(userRepository)
