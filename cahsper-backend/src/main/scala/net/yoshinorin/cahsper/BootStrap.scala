@@ -38,10 +38,16 @@ object BootStrap extends App {
     case Success(binding) =>
       val address = binding.localAddress
       println(s"Server online at http://${address.getHostString}:${address.getPort}/")
+
+    // Cahsper exit with 0 when run on the docker.
+    // TODO: exit with press key for development
+    /*
       StdIn.readLine()
       binding
         .unbind()
         .onComplete(_ => actorSystem.terminate())
+
+     */
     case Failure(ex) =>
       println("Failed to bind HTTP endpoint, terminating system", ex)
       actorSystem.terminate()
