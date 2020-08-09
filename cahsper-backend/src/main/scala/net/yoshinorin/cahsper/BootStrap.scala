@@ -9,6 +9,8 @@ import net.yoshinorin.cahsper.models.db.{CommentRepository, UserRepository}
 import net.yoshinorin.cahsper.services.{CommentService, UserService}
 
 import scala.concurrent.ExecutionContextExecutor
+import scala.io.StdIn
+import scala.util.{Failure, Success}
 
 object BootStrap extends App {
 
@@ -32,6 +34,17 @@ object BootStrap extends App {
 
   val httpServer: HttpServer = new HttpServer(homeRoute, apiStatusRoute, commentServiceRoute, userServiceRoute)
 
-  httpServer.startServer(Config.httpHost, Config.httpPort)
+  httpServer.startServer(Config.httpHost, Config.httpPort).onComplete {
+    case Success(binding) =>
+      val address = binding.localAddress
+      println(s"Server online at http://${address.getHostString}:${address.getPort}/")
+      StdIn.readLine()
+      binding
+        .unbind()
+        .onComplete(_ => actorSystem.terminate())
+    case Failure(ex) =>
+      println("Failed to bind HTTP endpoint, terminating system", ex)
+      actorSystem.terminate()
+  }
 
 }
