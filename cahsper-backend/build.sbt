@@ -14,7 +14,7 @@ scalacOptions ++= Seq(
 )
 
 val circeVersion = "0.13.0"
-val akkaVersion = "2.6.3"
+val akkaVersion = "2.6.9"
 val akkaHttpVersion = "10.2.0"
 libraryDependencies ++= Seq(
   "ch.qos.logback" % "logback-classic" % "1.2.3",
