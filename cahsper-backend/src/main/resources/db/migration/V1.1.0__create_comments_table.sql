@@ -1,3 +1,4 @@
+/* This file version (V1.1.0) does not relate to the application version. */
 CREATE TABLE comments (
   id INT(11) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
   user_name VARCHAR(32) NOT NULL,
