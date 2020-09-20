@@ -9,7 +9,6 @@ import net.yoshinorin.cahsper.models.db.{CommentRepository, UserRepository}
 import net.yoshinorin.cahsper.services.{CommentService, UserService}
 
 import scala.concurrent.ExecutionContextExecutor
-import scala.io.StdIn
 import scala.util.{Failure, Success}
 
 object BootStrap extends App {
