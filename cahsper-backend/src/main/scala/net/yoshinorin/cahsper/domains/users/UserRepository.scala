@@ -2,9 +2,7 @@ package net.yoshinorin.cahsper.domains.users
 
 import net.yoshinorin.cahsper.infrastructure.quill.DataBaseContext
 
-class UserRepository extends DataBaseContext[Users] {
-
-  import ctx._
+trait UserRepository {
 
   /**
    * Create user
@@ -12,11 +10,7 @@ class UserRepository extends DataBaseContext[Users] {
    * @param data Users Instance
    * @return created User
    */
-  def insert(data: Users): Users = {
-    //run(query[Users].insert(lift(data)).returning(_.value))
-    run(query[Users].insert(lift(data))) //TODO: Mysql hasn't returning clause
-    data
-  }
+  def insert(data: Users): Users
 
   /**
    * Find userName by Name
@@ -24,18 +18,13 @@ class UserRepository extends DataBaseContext[Users] {
    * @param userName
    * @return Users
    */
-  def findByName(userName: UserName): Option[Users] = {
-    run(query[Users].filter(u => u.name == lift(userName.value))).headOption
-  }
+  def findByName(userName: UserName): Option[Users]
 
   /**
    * Get all users
    *
-   * TODO: implement like SQL limit and should change function name
    * @return all users
    */
-  def getAll: Seq[Users] = {
-    run(query[Users])
-  }
+  def getAll: Seq[Users]
 
 }

@@ -1,13 +1,14 @@
 package net.yoshinorin.cahsper.services
 
 import akka.actor.ActorSystem
+import net.yoshinorin.cahsper.application.users.{UserCreator, UserFinder}
 import net.yoshinorin.cahsper.domains.users.{UserName, UserRepository, Users}
 import org.mockito.Mockito
 import org.mockito.Mockito._
 import org.scalatest.wordspec.AnyWordSpec
 
 import scala.concurrent.duration.Duration
-import scala.concurrent.{Await, ExecutionContextExecutor}
+import scala.concurrent.{Await, ExecutionContextExecutor, Future}
 import scala.util.{Failure, Success}
 
 // testOnly net.yoshinorin.cahsper.services.UserServiceSpec
@@ -16,23 +17,27 @@ class UserServiceSpec extends AnyWordSpec {
   implicit val actorSystem: ActorSystem = ActorSystem("cahsper")
   implicit val executionContextExecutor: ExecutionContextExecutor = actorSystem.dispatcher
 
+  val mockUserCreator: UserCreator = Mockito.mock(classOf[UserCreator])
+  val mockUserFinder: UserFinder = Mockito.mock(classOf[UserFinder])
   val mockUserRepository: UserRepository = Mockito.mock(classOf[UserRepository])
 
-  when(mockUserRepository.findByName(UserName("YoshinoriN")))
-    .thenReturn(Some(Users("YoshinoriN", 1567814290)))
+  when(mockUserFinder.findByName(UserName("YoshinoriN")))
+    .thenReturn(Future(Option(Users("YoshinoriN", 1567814290))))
 
-  when(mockUserRepository.insert(Users("YoshinoriN")))
-    .thenReturn(Users("YoshinoriN"))
+  when(mockUserCreator.create(Users("YoshinoriN")))
+    .thenReturn(Future(Users("YoshinoriN")))
 
-  when(mockUserRepository.getAll)
+  when(mockUserFinder.getAll)
     .thenReturn(
-      Seq(
-        Users("YoshinoriN", 1567814290),
-        Users("NoshinoriN", 1567814391)
+      Future(
+        Seq(
+          Users("YoshinoriN", 1567814290),
+          Users("NoshinoriN", 1567814391)
+        )
       )
     )
 
-  val userService: UserService = new UserService(mockUserRepository)
+  val userService: UserService = new UserService(mockUserCreator, mockUserFinder)
 
   "UserService" should {
 

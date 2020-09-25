@@ -1,14 +1,11 @@
 package net.yoshinorin.cahsper.services
 
-import net.yoshinorin.cahsper.domains.users.{UserName, Users, UserRepository}
+import net.yoshinorin.cahsper.application.users.{UserCreator, UserFinder}
+import net.yoshinorin.cahsper.domains.users.{UserName, Users}
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class UserService(userRepository: UserRepository)(implicit executionContext: ExecutionContext) {
-
-  private[this] def create(user: Users): Future[Users] = Future {
-    userRepository.insert(user)
-  }
+class UserService(userCreator: UserCreator, userFinder: UserFinder)(implicit executionContext: ExecutionContext) {
 
   /**
    * Create User from UserName
@@ -20,8 +17,8 @@ class UserService(userRepository: UserRepository)(implicit executionContext: Exe
     // TODO: Check userName already exists or not
 
     for {
-      maybeUser <- this.create(Users(userName.value))
-      maybeUser <- this.findByName(UserName(maybeUser.name))
+      maybeUser <- userCreator.create(Users(userName.value))
+      maybeUser <- userFinder.findByName(UserName(maybeUser.name))
     } yield maybeUser.head
 
   }
@@ -32,17 +29,13 @@ class UserService(userRepository: UserRepository)(implicit executionContext: Exe
    * @param userName
    * @return
    */
-  def findByName(userName: UserName): Future[Option[Users]] = Future {
-    userRepository.findByName(userName)
-  }
+  def findByName(userName: UserName): Future[Option[Users]] = userFinder.findByName(userName)
 
   /**
    * Get all users
    *
    * @return
    */
-  def getAll: Future[Seq[Users]] = Future {
-    userRepository.getAll
-  }
+  def getAll: Future[Seq[Users]] = userFinder.getAll
 
 }
