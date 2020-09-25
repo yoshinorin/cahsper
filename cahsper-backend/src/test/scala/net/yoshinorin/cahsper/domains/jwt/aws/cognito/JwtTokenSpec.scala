@@ -1,10 +1,9 @@
-package net.yoshinorin.cahsper.models.aws.cognito
+package net.yoshinorin.cahsper.domains.jwt.aws.cognito
 
-import net.yoshinorin.cahsper.domains.jwt.aws.cognito.Jwt
-import net.yoshinorin.cahsper.models.aws.cognito.Jwt.convertJwtClaims
+import net.yoshinorin.cahsper.domains.jwt.aws.cognito.Jwt.convertJwtClaims
 import org.scalatest.wordspec.AnyWordSpec
 
-// testOnly net.yoshinorin.cahsper.models.aws.cognito.JwtTokenSpec
+// testOnly net.yoshinorin.cahsper.domains.jwt.aws.cognito.JwtTokenSpec
 class JwtTokenSpec extends AnyWordSpec {
 
   "JwtToken" should {

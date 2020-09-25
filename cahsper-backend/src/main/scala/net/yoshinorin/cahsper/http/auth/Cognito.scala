@@ -6,7 +6,7 @@ import akka.http.scaladsl.server.directives.{AuthenticationDirective, Authentica
 import net.yoshinorin.cahsper.auth.aws.Cognito
 import net.yoshinorin.cahsper.domains.jwt.JwtToken
 import net.yoshinorin.cahsper.domains.users.UserName
-import net.yoshinorin.cahsper.models.aws.cognito.Jwt.convertJwtClaims
+import net.yoshinorin.cahsper.domains.jwt.aws.cognito.Jwt.convertJwtClaims
 
 import scala.concurrent.Future
 
