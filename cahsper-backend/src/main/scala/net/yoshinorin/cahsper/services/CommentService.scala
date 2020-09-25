@@ -1,6 +1,6 @@
 package net.yoshinorin.cahsper.services
 
-import net.yoshinorin.cahsper.domains.users.{User, Users}
+import net.yoshinorin.cahsper.domains.users.{UserName, Users}
 
 import scala.concurrent.{ExecutionContext, Future}
 import net.yoshinorin.cahsper.models.db.{CommentRepository, Comments}
@@ -42,12 +42,12 @@ class CommentService(commentRepository: CommentRepository)(implicit executeConte
   /**
    * Find comment by userName
    *
-   * @param user
+   * @param userName
    * @param queryParamater
    * @return
    */
-  def findByUserName(user: User, queryParamater: QueryParamater): Future[Seq[Comments]] = Future {
-    commentRepository.findByUserName(user, queryParamater)
+  def findByUserName(userName: UserName, queryParamater: QueryParamater): Future[Seq[Comments]] = Future {
+    commentRepository.findByUserName(userName, queryParamater)
   }
 
   /**

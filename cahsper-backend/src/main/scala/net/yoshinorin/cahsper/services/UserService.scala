@@ -1,6 +1,6 @@
 package net.yoshinorin.cahsper.services
 
-import net.yoshinorin.cahsper.domains.users.{User, Users, UserRepository}
+import net.yoshinorin.cahsper.domains.users.{UserName, Users, UserRepository}
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -11,29 +11,29 @@ class UserService(userRepository: UserRepository)(implicit executionContext: Exe
   }
 
   /**
-   * Create User
+   * Create User from UserName
    *
-   * @param user
+   * @param userName
    * @return
    */
-  def create(user: User): Future[Users] = {
-    // TODO: Check user already exists or not
+  def create(userName: UserName): Future[Users] = {
+    // TODO: Check userName already exists or not
 
     for {
-      maybeUser <- this.create(Users(user.name))
-      maybeUser <- this.findByName(User(maybeUser.name))
+      maybeUser <- this.create(Users(userName.value))
+      maybeUser <- this.findByName(UserName(maybeUser.name))
     } yield maybeUser.head
 
   }
 
   /**
-   * Find user by name
+   * Find User by value
    *
-   * @param user user name
+   * @param userName
    * @return
    */
-  def findByName(user: User): Future[Option[Users]] = Future {
-    userRepository.findByName(user)
+  def findByName(userName: UserName): Future[Option[Users]] = Future {
+    userRepository.findByName(userName)
   }
 
   /**

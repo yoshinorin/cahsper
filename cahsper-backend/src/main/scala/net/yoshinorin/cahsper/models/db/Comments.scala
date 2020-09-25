@@ -6,7 +6,7 @@ import io.circe.generic.semiauto.deriveEncoder
 
 final case class Comments(
   id: Int = 0,
-  userName: String,
+  userName: String, // TODO: Should use UserName case class
   comment: String,
   override val createdAt: Long = ZonedDateTime.now.toEpochSecond
 ) extends Table

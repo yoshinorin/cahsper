@@ -7,7 +7,7 @@ import io.circe.generic.semiauto._
 import net.yoshinorin.cahsper.models.db.Table
 
 case class Users(
-  name: String,
+  name: String, // TODO: Should use UserName case class
   override val createdAt: Long = ZonedDateTime.now.toEpochSecond
 ) extends Table
 

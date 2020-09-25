@@ -1,6 +1,6 @@
 package net.yoshinorin.cahsper.models.db
 
-import net.yoshinorin.cahsper.domains.users.{User, Users}
+import net.yoshinorin.cahsper.domains.users.{UserName, Users}
 import net.yoshinorin.cahsper.infrastructure.DataBaseContext
 import net.yoshinorin.cahsper.infrastructure.OrderType.OrderConverter
 import net.yoshinorin.cahsper.models.request.QueryParamater
@@ -32,16 +32,16 @@ class CommentRepository extends DataBaseContext[Comments] {
   /**
    * Find comment by userName
    *
-   * @param user
+   * @param userName
    * @param queryParamater
    * @return
    */
-  def findByUserName(user: User, queryParamater: QueryParamater): Seq[Comments] = {
+  def findByUserName(userName: UserName, queryParamater: QueryParamater): Seq[Comments] = {
     run(
       sortByCreatedAt(
         filterWithQueryParam(queryParamater),
         queryParamater.order.toOrder
-      ).filter(comment => comment.userName == lift(user.name))
+      ).filter(comment => comment.userName == lift(userName.value))
     )
   }
 

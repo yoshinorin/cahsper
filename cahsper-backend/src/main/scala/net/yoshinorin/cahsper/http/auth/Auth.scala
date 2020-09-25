@@ -1,10 +1,10 @@
 package net.yoshinorin.cahsper.http.auth
 
 import akka.http.scaladsl.server.directives.AuthenticationDirective
-import net.yoshinorin.cahsper.domains.users.User
+import net.yoshinorin.cahsper.domains.users.UserName
 
 trait Auth {
 
-  def authenticate: AuthenticationDirective[User]
+  def authenticate: AuthenticationDirective[UserName]
 
 }

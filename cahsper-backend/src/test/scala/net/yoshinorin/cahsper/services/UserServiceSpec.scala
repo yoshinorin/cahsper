@@ -1,7 +1,7 @@
 package net.yoshinorin.cahsper.services
 
 import akka.actor.ActorSystem
-import net.yoshinorin.cahsper.domains.users.{User, UserRepository, Users}
+import net.yoshinorin.cahsper.domains.users.{UserName, UserRepository, Users}
 import org.mockito.Mockito
 import org.mockito.Mockito._
 import org.scalatest.wordspec.AnyWordSpec
@@ -18,7 +18,7 @@ class UserServiceSpec extends AnyWordSpec {
 
   val mockUserRepository: UserRepository = Mockito.mock(classOf[UserRepository])
 
-  when(mockUserRepository.findByName(User("YoshinoriN")))
+  when(mockUserRepository.findByName(UserName("YoshinoriN")))
     .thenReturn(Some(Users("YoshinoriN", 1567814290)))
 
   when(mockUserRepository.insert(Users("YoshinoriN")))
@@ -37,12 +37,12 @@ class UserServiceSpec extends AnyWordSpec {
   "UserService" should {
 
     "find users instance when call findById with an argument is 1" in {
-      val result = Await.result(userService.findByName(User("YoshinoriN")), Duration.Inf)
+      val result = Await.result(userService.findByName(UserName("YoshinoriN")), Duration.Inf)
       assert(result.contains(Users("YoshinoriN", 1567814290)))
     }
 
     "create new user" in {
-      userService.create(User("YoshinoriN")).onComplete {
+      userService.create(UserName("YoshinoriN")).onComplete {
         case Success(user) => assert(user.name == "YoshinoriN")
         case Failure(exception) => // Nothing to do
       }

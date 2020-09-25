@@ -10,22 +10,22 @@ class UserRepository extends DataBaseContext[Users] {
    * Create user
    *
    * @param data Users Instance
-   * @return created user name
+   * @return created User
    */
   def insert(data: Users): Users = {
-    //run(query[Users].insert(lift(data)).returning(_.name))
+    //run(query[Users].insert(lift(data)).returning(_.value))
     run(query[Users].insert(lift(data))) //TODO: Mysql hasn't returning clause
     data
   }
 
   /**
-   * Find user by Name
+   * Find userName by Name
    *
-   * @param user
+   * @param userName
    * @return Users
    */
-  def findByName(user: User): Option[Users] = {
-    run(query[Users].filter(u => u.name == lift(user.name))).headOption
+  def findByName(userName: UserName): Option[Users] = {
+    run(query[Users].filter(u => u.name == lift(userName.value))).headOption
   }
 
   /**

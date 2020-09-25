@@ -4,7 +4,7 @@ import akka.http.scaladsl.model.headers.{HttpChallenge, OAuth2BearerToken}
 import akka.http.scaladsl.server.Directives.authenticateOrRejectWithChallenge
 import akka.http.scaladsl.server.directives.{AuthenticationDirective, AuthenticationResult}
 import net.yoshinorin.cahsper.auth.aws.Cognito
-import net.yoshinorin.cahsper.domains.users.User
+import net.yoshinorin.cahsper.domains.users.UserName
 import net.yoshinorin.cahsper.models.Jwt
 import net.yoshinorin.cahsper.models.aws.cognito.Jwt.convertJwtClaims
 
@@ -13,14 +13,14 @@ import scala.concurrent.Future
 class Cognito extends Auth {
 
   // TODO: Clean up
-  override def authenticate: AuthenticationDirective[User] = {
+  override def authenticate: AuthenticationDirective[UserName] = {
 
-    authenticateOrRejectWithChallenge[OAuth2BearerToken, User] {
+    authenticateOrRejectWithChallenge[OAuth2BearerToken, UserName] {
       case Some(OAuth2BearerToken(bearerToken)) => {
         Cognito.validateJwt(Jwt(bearerToken)) match {
           case Right(jwtClaimsSet) => {
             jwtClaimsSet.toJSONObject.toJSONString.toJwtClaims match {
-              case Right(jwtClaims) => Future.successful(AuthenticationResult.success(User(jwtClaims.username)))
+              case Right(jwtClaims) => Future.successful(AuthenticationResult.success(UserName(jwtClaims.username)))
               case Left(_) =>
                 Future.successful(AuthenticationResult.failWithChallenge(HttpChallenge("Bearer", None, Map("error" -> "Internal server error"))))
             }

@@ -5,7 +5,7 @@ import akka.http.scaladsl.model.{ContentTypes, HttpEntity, HttpResponse}
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import io.circe.syntax._
-import net.yoshinorin.cahsper.domains.users.{User, Users}
+import net.yoshinorin.cahsper.domains.users.{UserName, Users}
 import net.yoshinorin.cahsper.http.auth.Auth
 import net.yoshinorin.cahsper.models.Message
 import net.yoshinorin.cahsper.models.request.{CommentRequestFormat, CreateCommentRequestFormat, QueryParamater}
@@ -26,8 +26,8 @@ class UserRoute(
           }
         } ~ {
           post {
-            auth.authenticate { user =>
-              onSuccess(userService.create(User(user.name))) { result =>
+            auth.authenticate { userName =>
+              onSuccess(userService.create(UserName(userName.value))) { result =>
                 complete(HttpResponse(Created, entity = HttpEntity(ContentTypes.`application/json`, s"${result.asJson}")))
               }
             }
@@ -38,7 +38,7 @@ class UserRoute(
         pathPrefix(".+".r) { userName =>
           pathEndOrSingleSlash {
             get {
-              onSuccess(userService.findByName(User(userName))) {
+              onSuccess(userService.findByName(UserName(userName))) {
                 case Some(user) =>
                   complete(HttpResponse(OK, entity = HttpEntity(ContentTypes.`application/json`, s"${user.asJson}")))
                 case _ =>
@@ -49,33 +49,28 @@ class UserRoute(
             pathPrefix("comments") {
               get {
                 parameters("page".as[Int].?, "limit".as[Int].?, "from".as[Long].?, "to".as[Long].?, "order".as[String].?) { (page, limit, from, to, order) =>
-                  onSuccess(commentService.findByUserName(User(userName), QueryParamater(page, limit, from, to, order))) { comments =>
+                  onSuccess(commentService.findByUserName(UserName(userName), QueryParamater(page, limit, from, to, order))) { comments =>
                     // TODO: should sort using by SQL
                     complete(HttpResponse(OK, entity = HttpEntity(ContentTypes.`application/json`, s"${comments.asJson}")))
                   }
                 }
               } ~
                 post {
-                  auth.authenticate { user =>
-                    // TODO: clean up conditional operator
-                    if (user.name == userName) {
-                      entity(as[String]) { payload =>
-                        val result = for {
-                          maybeCreateCommentFormat <- CommentRequestFormat.convertFromJsonString[CreateCommentRequestFormat](payload)
-                          createCommentRequestFormat <- maybeCreateCommentFormat.validate
-                        } yield createCommentRequestFormat
-                        result match {
-                          case Right(createCommentRequestFormat) =>
-                            onSuccess(commentService.create(Users(user.name), createCommentRequestFormat)) { result =>
-                              complete(HttpResponse(Created, entity = HttpEntity(ContentTypes.`application/json`, s"${result.asJson}")))
-                            }
-                          case Left(message) =>
-                            complete(HttpResponse(BadRequest, entity = HttpEntity(ContentTypes.`application/json`, s"${message.asJson}")))
-                        }
+                  auth.authenticate { userName =>
+                    // TODO: check user existence
+                    entity(as[String]) { payload =>
+                      val result = for {
+                        maybeCreateCommentFormat <- CommentRequestFormat.convertFromJsonString[CreateCommentRequestFormat](payload)
+                        createCommentRequestFormat <- maybeCreateCommentFormat.validate
+                      } yield createCommentRequestFormat
+                      result match {
+                        case Right(createCommentRequestFormat) =>
+                          onSuccess(commentService.create(Users(userName.value), createCommentRequestFormat)) { result =>
+                            complete(HttpResponse(Created, entity = HttpEntity(ContentTypes.`application/json`, s"${result.asJson}")))
+                          }
+                        case Left(message) =>
+                          complete(HttpResponse(BadRequest, entity = HttpEntity(ContentTypes.`application/json`, s"${message.asJson}")))
                       }
-                    } else {
-                      // TODO: 404??
-                      complete(HttpResponse(NotFound, entity = HttpEntity(ContentTypes.`application/json`, s"${Message("NotFound").asJson}")))
                     }
                   }
                 }
