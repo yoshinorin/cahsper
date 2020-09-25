@@ -1,7 +1,7 @@
 package net.yoshinorin.cahsper.services
 
 import akka.actor.ActorSystem
-import net.yoshinorin.cahsper.models.User
+import net.yoshinorin.cahsper.domains.users.{User, Users}
 import net.yoshinorin.cahsper.models.db.{CommentRepository, Comments}
 import net.yoshinorin.cahsper.models.request.{CreateCommentRequestFormat, QueryParamater}
 import org.mockito.Mockito
@@ -87,7 +87,7 @@ class CommentServiceSpec extends AnyWordSpec {
     }
 
     "create new comment" in {
-      commentService.create(User("YoshinoriN"), CreateCommentRequestFormat("This is a test three.")).onComplete {
+      commentService.create(Users("YoshinoriN"), CreateCommentRequestFormat("This is a test three.")).onComplete {
         case Success(comment) => assert(comment.id == 3)
         case Failure(exception) => // Nothing to do
       }

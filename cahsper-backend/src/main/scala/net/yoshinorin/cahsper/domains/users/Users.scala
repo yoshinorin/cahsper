@@ -1,9 +1,10 @@
-package net.yoshinorin.cahsper.models.db
+package net.yoshinorin.cahsper.domains.users
 
 import java.time.ZonedDateTime
 
 import io.circe.Encoder
 import io.circe.generic.semiauto._
+import net.yoshinorin.cahsper.models.db.Table
 
 case class Users(
   name: String,

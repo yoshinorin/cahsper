@@ -1,4 +1,4 @@
-package net.yoshinorin.cahsper.models.db
+package net.yoshinorin.cahsper.domains.users
 
 import net.yoshinorin.cahsper.infrastructure.DataBaseContext
 
@@ -12,20 +12,20 @@ class UserRepository extends DataBaseContext[Users] {
    * @param data Users Instance
    * @return created user name
    */
-  def insert(data: Users): String = {
+  def insert(data: Users): Users = {
     //run(query[Users].insert(lift(data)).returning(_.name))
     run(query[Users].insert(lift(data))) //TODO: Mysql hasn't returning clause
-    data.name
+    data
   }
 
   /**
    * Find user by Name
    *
-   * @param name
+   * @param user
    * @return Users
    */
-  def findByName(name: String): Option[Users] = {
-    run(query[Users].filter(user => user.name == lift(name))).headOption
+  def findByName(user: User): Option[Users] = {
+    run(query[Users].filter(u => u.name == lift(user.name))).headOption
   }
 
   /**

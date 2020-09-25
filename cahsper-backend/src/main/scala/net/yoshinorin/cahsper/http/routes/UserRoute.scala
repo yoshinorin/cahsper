@@ -5,8 +5,9 @@ import akka.http.scaladsl.model.{ContentTypes, HttpEntity, HttpResponse}
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import io.circe.syntax._
+import net.yoshinorin.cahsper.domains.users.{User, Users}
 import net.yoshinorin.cahsper.http.auth.Auth
-import net.yoshinorin.cahsper.models.{Message, User}
+import net.yoshinorin.cahsper.models.Message
 import net.yoshinorin.cahsper.models.request.{CommentRequestFormat, CreateCommentRequestFormat, QueryParamater}
 import net.yoshinorin.cahsper.services.{CommentService, UserService}
 
@@ -26,7 +27,7 @@ class UserRoute(
         } ~ {
           post {
             auth.authenticate { user =>
-              onSuccess(userService.create(user)) { result =>
+              onSuccess(userService.create(User(user.name))) { result =>
                 complete(HttpResponse(Created, entity = HttpEntity(ContentTypes.`application/json`, s"${result.asJson}")))
               }
             }
@@ -37,7 +38,7 @@ class UserRoute(
         pathPrefix(".+".r) { userName =>
           pathEndOrSingleSlash {
             get {
-              onSuccess(userService.findByName(userName)) {
+              onSuccess(userService.findByName(User(userName))) {
                 case Some(user) =>
                   complete(HttpResponse(OK, entity = HttpEntity(ContentTypes.`application/json`, s"${user.asJson}")))
                 case _ =>
@@ -65,7 +66,7 @@ class UserRoute(
                         } yield createCommentRequestFormat
                         result match {
                           case Right(createCommentRequestFormat) =>
-                            onSuccess(commentService.create(user, createCommentRequestFormat)) { result =>
+                            onSuccess(commentService.create(Users(user.name), createCommentRequestFormat)) { result =>
                               complete(HttpResponse(Created, entity = HttpEntity(ContentTypes.`application/json`, s"${result.asJson}")))
                             }
                           case Left(message) =>

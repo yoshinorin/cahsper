@@ -1,10 +1,10 @@
 package net.yoshinorin.cahsper.models.db
 
 import java.time.ZonedDateTime
-import io.circe.generic.semiauto._
 import io.circe.Encoder
+import io.circe.generic.semiauto.deriveEncoder
 
-case class Comments(
+final case class Comments(
   id: Int = 0,
   userName: String,
   comment: String,

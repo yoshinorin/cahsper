@@ -4,7 +4,8 @@ import akka.http.scaladsl.model.headers.{HttpChallenge, OAuth2BearerToken}
 import akka.http.scaladsl.server.Directives.authenticateOrRejectWithChallenge
 import akka.http.scaladsl.server.directives.{AuthenticationDirective, AuthenticationResult}
 import net.yoshinorin.cahsper.auth.aws.Cognito
-import net.yoshinorin.cahsper.models.{Jwt, User}
+import net.yoshinorin.cahsper.domains.users.User
+import net.yoshinorin.cahsper.models.Jwt
 import net.yoshinorin.cahsper.models.aws.cognito.Jwt.convertJwtClaims
 
 import scala.concurrent.Future

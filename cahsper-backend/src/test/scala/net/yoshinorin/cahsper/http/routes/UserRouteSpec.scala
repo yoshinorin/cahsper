@@ -7,9 +7,9 @@ import akka.http.scaladsl.server.AuthenticationFailedRejection
 import akka.http.scaladsl.server.AuthenticationFailedRejection.{CredentialsMissing, CredentialsRejected}
 import akka.http.scaladsl.testkit.ScalatestRouteTest
 import net.yoshinorin.cahsper.auth.mock.BearerTokenAuth
+import net.yoshinorin.cahsper.domains.users.{User, Users}
 import net.yoshinorin.cahsper.http
-import net.yoshinorin.cahsper.models.User
-import net.yoshinorin.cahsper.models.db.{Comments, Users}
+import net.yoshinorin.cahsper.models.db.Comments
 import net.yoshinorin.cahsper.models.request.{CreateCommentRequestFormat, QueryParamater}
 import net.yoshinorin.cahsper.services.{CommentService, UserService}
 import org.mockito.Mockito
@@ -39,10 +39,10 @@ class UserRouteSpec extends AnyWordSpec with ScalatestRouteTest {
       )
     )
 
-  when(mockUserService.findByName("YoshinoriN"))
+  when(mockUserService.findByName(User("YoshinoriN")))
     .thenReturn(Future(Option(Users("YoshinoriN", 1567814290))))
 
-  when(mockUserService.findByName("exampleUser"))
+  when(mockUserService.findByName(User("exampleUser")))
     .thenReturn(Future(None))
 
   val mockCommentService: CommentService = Mockito.mock(classOf[CommentService])
@@ -50,7 +50,7 @@ class UserRouteSpec extends AnyWordSpec with ScalatestRouteTest {
   when(mockCommentService.findById(1))
     .thenReturn(Future(Some(Comments(1, "YoshinoriN", "This is a test one.", 1567814290))))
 
-  when(mockCommentService.create(User("YoshinoriN"), CreateCommentRequestFormat("Hello")))
+  when(mockCommentService.create(Users("YoshinoriN"), CreateCommentRequestFormat("Hello")))
     .thenReturn(
       Future(
         Comments(3, "YoshinoriN", "Hello", 1567814391)

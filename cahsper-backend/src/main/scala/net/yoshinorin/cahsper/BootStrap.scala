@@ -2,10 +2,11 @@ package net.yoshinorin.cahsper
 
 import akka.actor.ActorSystem
 import net.yoshinorin.cahsper.config.Config
+import net.yoshinorin.cahsper.domains.users.UserRepository
 import net.yoshinorin.cahsper.http.routes.{ApiStatusRoute, CommentRoute, HomeRoute, UserRoute}
 import net.yoshinorin.cahsper.http.HttpServer
 import net.yoshinorin.cahsper.infrastructure.Migration
-import net.yoshinorin.cahsper.models.db.{CommentRepository, UserRepository}
+import net.yoshinorin.cahsper.models.db.CommentRepository
 import net.yoshinorin.cahsper.services.{CommentService, UserService}
 
 import scala.concurrent.ExecutionContextExecutor
