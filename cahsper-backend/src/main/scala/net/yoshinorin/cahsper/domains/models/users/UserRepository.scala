@@ -1,6 +1,4 @@
-package net.yoshinorin.cahsper.domains.users
-
-import net.yoshinorin.cahsper.infrastructure.quill.DataBaseContext
+package net.yoshinorin.cahsper.domains.models.users
 
 trait UserRepository {
 

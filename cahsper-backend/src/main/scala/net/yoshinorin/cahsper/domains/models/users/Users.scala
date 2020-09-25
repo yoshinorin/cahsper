@@ -1,4 +1,4 @@
-package net.yoshinorin.cahsper.domains.users
+package net.yoshinorin.cahsper.domains.models.users
 
 import java.time.ZonedDateTime
 

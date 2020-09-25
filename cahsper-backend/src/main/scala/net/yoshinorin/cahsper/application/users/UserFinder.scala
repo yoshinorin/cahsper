@@ -1,7 +1,6 @@
 package net.yoshinorin.cahsper.application.users
 
-import net.yoshinorin.cahsper.domains.users.{UserName, UserRepository, Users}
-
+import net.yoshinorin.cahsper.domains.models.users.{UserName, UserRepository, Users}
 import scala.concurrent.{ExecutionContext, Future}
 
 class UserFinder(userRepository: UserRepository)(implicit executionContext: ExecutionContext) {

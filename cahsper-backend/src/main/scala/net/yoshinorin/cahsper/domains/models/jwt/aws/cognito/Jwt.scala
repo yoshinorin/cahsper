@@ -1,4 +1,4 @@
-package net.yoshinorin.cahsper.domains.jwt.aws.cognito
+package net.yoshinorin.cahsper.domains.models.jwt.aws.cognito
 
 import io.circe.Decoder
 import io.circe.generic.semiauto.deriveDecoder

@@ -3,7 +3,7 @@ package net.yoshinorin.cahsper
 import akka.actor.ActorSystem
 import net.yoshinorin.cahsper.application.users.{UserCreator, UserFinder}
 import net.yoshinorin.cahsper.config.Config
-import net.yoshinorin.cahsper.domains.users.UserRepository
+import net.yoshinorin.cahsper.domains.models.users.UserRepository
 import net.yoshinorin.cahsper.http.routes.{ApiStatusRoute, CommentRoute, HomeRoute, UserRoute}
 import net.yoshinorin.cahsper.http.HttpServer
 import net.yoshinorin.cahsper.infrastructure.Migration

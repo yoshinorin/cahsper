@@ -1,6 +1,6 @@
 package net.yoshinorin.cahsper.infrastructure.quill
 
-import net.yoshinorin.cahsper.domains.users.{UserName, UserRepository, Users}
+import net.yoshinorin.cahsper.domains.models.users.{UserName, UserRepository, Users}
 
 class QuillUserRepository extends DataBaseContext[Users] with UserRepository {
 
