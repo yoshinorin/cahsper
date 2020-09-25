@@ -1,5 +1,6 @@
 package net.yoshinorin.cahsper.models.aws.cognito
 
+import net.yoshinorin.cahsper.domains.jwt.aws.cognito.Jwt
 import net.yoshinorin.cahsper.models.aws.cognito.Jwt.convertJwtClaims
 import org.scalatest.wordspec.AnyWordSpec
 
