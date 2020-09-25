@@ -1,8 +1,8 @@
 package net.yoshinorin.cahsper.models.db
 
 import net.yoshinorin.cahsper.domains.users.{UserName, Users}
-import net.yoshinorin.cahsper.infrastructure.DataBaseContext
-import net.yoshinorin.cahsper.infrastructure.OrderType.OrderConverter
+import net.yoshinorin.cahsper.infrastructure.quill.OrderType.OrderConverter
+import net.yoshinorin.cahsper.infrastructure.quill.DataBaseContext
 import net.yoshinorin.cahsper.models.request.QueryParamater
 
 class CommentRepository extends DataBaseContext[Comments] {

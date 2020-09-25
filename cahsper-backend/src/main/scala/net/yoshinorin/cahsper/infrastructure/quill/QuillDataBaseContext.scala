@@ -1,4 +1,4 @@
-package net.yoshinorin.cahsper.infrastructure
+package net.yoshinorin.cahsper.infrastructure.quill
 
 import io.getquill.{MysqlJdbcContext, Ord, Query, SnakeCase}
 import net.yoshinorin.cahsper.models.db.Table

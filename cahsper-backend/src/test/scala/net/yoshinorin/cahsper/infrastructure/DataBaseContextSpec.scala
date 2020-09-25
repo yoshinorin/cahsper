@@ -1,6 +1,7 @@
 package net.yoshinorin.cahsper.infrastructure
 
-import net.yoshinorin.cahsper.infrastructure.OrderType.OrderConverter
+import net.yoshinorin.cahsper.infrastructure.quill.OrderType
+import net.yoshinorin.cahsper.infrastructure.quill.OrderType.OrderConverter
 import org.scalatest.wordspec.AnyWordSpec
 
 // testOnly net.yoshinorin.cahsper.infrastructure.DataBaseContextSpec

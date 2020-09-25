@@ -1,6 +1,6 @@
 package net.yoshinorin.cahsper.domains.users
 
-import net.yoshinorin.cahsper.infrastructure.DataBaseContext
+import net.yoshinorin.cahsper.infrastructure.quill.DataBaseContext
 
 class UserRepository extends DataBaseContext[Users] {
 
