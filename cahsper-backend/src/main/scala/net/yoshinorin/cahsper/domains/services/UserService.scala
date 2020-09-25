@@ -1,7 +1,8 @@
-package net.yoshinorin.cahsper.services
+package net.yoshinorin.cahsper.domains.services
 
 import net.yoshinorin.cahsper.application.users.{UserCreator, UserFinder}
 import net.yoshinorin.cahsper.domains.models.users.{UserName, Users}
+
 import scala.concurrent.{ExecutionContext, Future}
 
 class UserService(userCreator: UserCreator, userFinder: UserFinder)(implicit executionContext: ExecutionContext) {

@@ -3,6 +3,7 @@ package net.yoshinorin.cahsper.services
 import akka.actor.ActorSystem
 import net.yoshinorin.cahsper.application.users.{UserCreator, UserFinder}
 import net.yoshinorin.cahsper.domains.models.users.{UserName, UserRepository, Users}
+import net.yoshinorin.cahsper.domains.services.UserService
 import org.mockito.Mockito
 import org.mockito.Mockito._
 import org.scalatest.wordspec.AnyWordSpec

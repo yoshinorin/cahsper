@@ -1,9 +1,10 @@
-package net.yoshinorin.cahsper.services
+package net.yoshinorin.cahsper.domains.services
 
-import scala.concurrent.{ExecutionContext, Future}
 import net.yoshinorin.cahsper.domains.models.users.{UserName, Users}
 import net.yoshinorin.cahsper.models.db.{CommentRepository, Comments}
 import net.yoshinorin.cahsper.models.request.{CreateCommentRequestFormat, QueryParamater}
+
+import scala.concurrent.{ExecutionContext, Future}
 
 class CommentService(commentRepository: CommentRepository)(implicit executeContext: ExecutionContext) {
 
