@@ -3,10 +3,10 @@ package net.yoshinorin.cahsper.models.aws.cognito
 import net.yoshinorin.cahsper.models.aws.cognito.Jwt.convertJwtClaims
 import org.scalatest.wordspec.AnyWordSpec
 
-// testOnly net.yoshinorin.cahsper.models.aws.cognito.JwtSpec
-class JwtSpec extends AnyWordSpec {
+// testOnly net.yoshinorin.cahsper.models.aws.cognito.JwtTokenSpec
+class JwtTokenSpec extends AnyWordSpec {
 
-  "Jwt" should {
+  "JwtToken" should {
 
     // https://github.com/awslabs/aws-support-tools/tree/master/Cognito/decode-verify-jwt
     "AWS Cognito JWT claims convertible to case class" in {

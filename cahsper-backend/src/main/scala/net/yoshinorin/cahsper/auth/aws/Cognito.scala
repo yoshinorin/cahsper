@@ -8,7 +8,8 @@ import com.nimbusds.jose.proc.{JWSVerificationKeySelector, SecurityContext}
 import com.nimbusds.jwt.JWTClaimsSet
 import com.nimbusds.jwt.proc.{BadJWTException, ConfigurableJWTProcessor, DefaultJWTProcessor}
 import net.yoshinorin.cahsper.config.Config
-import net.yoshinorin.cahsper.models.{Jwt, Message}
+import net.yoshinorin.cahsper.domains.jwt.JwtToken
+import net.yoshinorin.cahsper.models.Message
 import org.slf4j.LoggerFactory
 
 import scala.util.{Failure, Success, Try}
@@ -32,12 +33,12 @@ object Cognito {
   /**
    * Validate jwt is valid or invalid
    *
-   * @param jwt
+   * @param jwtToken
    * @return
    */
-  def validateJwt(jwt: Jwt): Either[Message, JWTClaimsSet] = {
+  def validateJwt(jwtToken: JwtToken): Either[Message, JWTClaimsSet] = {
 
-    Try(jwtProcessor.process(jwt.token, null)) match {
+    Try(jwtProcessor.process(jwtToken.value, null)) match {
       case Success(jwtClaimsSet: JWTClaimsSet) =>
         // TODO: clean up
         if (jwtClaimsSet.getStringClaim("client_id") != Config.awsCognitoAppClientId) {
