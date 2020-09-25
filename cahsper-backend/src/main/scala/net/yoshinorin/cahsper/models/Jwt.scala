@@ -1,5 +1,5 @@
 package net.yoshinorin.cahsper.models
 
-case class Jwt(
+final case class Jwt(
   token: String
 )

@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory
 /**
  * AWS Cognito Jwt Claims case class
  */
-case class Jwt(
+final case class Jwt(
   sub: String,
   event_id: String,
   token_use: String,

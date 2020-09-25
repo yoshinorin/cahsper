@@ -3,7 +3,7 @@ package net.yoshinorin.cahsper.models
 import io.circe.Encoder
 import io.circe.generic.semiauto._
 
-case class Message(
+final case class Message(
   messages: String
 )
 

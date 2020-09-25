@@ -2,7 +2,7 @@ package net.yoshinorin.cahsper.models.request
 
 import java.time.ZonedDateTime
 
-case class QueryParamater(
+final case class QueryParamater(
   page: Int = 0,
   limit: Int = 100,
   from: Long = 0,
