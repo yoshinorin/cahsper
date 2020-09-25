@@ -1,9 +1,8 @@
-package net.yoshinorin.cahsper.services
+package net.yoshinorin.cahsper.domains.services
 
 import akka.actor.ActorSystem
 import net.yoshinorin.cahsper.application.users.{UserCreator, UserFinder}
 import net.yoshinorin.cahsper.domains.models.users.{UserName, UserRepository, Users}
-import net.yoshinorin.cahsper.domains.services.UserService
 import org.mockito.Mockito
 import org.mockito.Mockito._
 import org.scalatest.wordspec.AnyWordSpec
@@ -12,7 +11,7 @@ import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, ExecutionContextExecutor, Future}
 import scala.util.{Failure, Success}
 
-// testOnly net.yoshinorin.cahsper.services.UserServiceSpec
+// testOnly net.yoshinorin.cahsper.domains.services.UserServiceSpec
 class UserServiceSpec extends AnyWordSpec {
 
   implicit val actorSystem: ActorSystem = ActorSystem("cahsper")

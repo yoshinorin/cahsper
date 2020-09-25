@@ -1,8 +1,7 @@
-package net.yoshinorin.cahsper.services
+package net.yoshinorin.cahsper.domains.services
 
 import akka.actor.ActorSystem
 import net.yoshinorin.cahsper.domains.models.users.{UserName, Users}
-import net.yoshinorin.cahsper.domains.services.CommentService
 import net.yoshinorin.cahsper.models.db.{CommentRepository, Comments}
 import net.yoshinorin.cahsper.models.request.{CreateCommentRequestFormat, QueryParamater}
 import org.mockito.Mockito
@@ -13,7 +12,7 @@ import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, ExecutionContextExecutor}
 import scala.util.{Failure, Success}
 
-// testOnly net.yoshinorin.cahsper.services.CommentServiceSpec
+// testOnly net.yoshinorin.cahsper.domains.services.CommentServiceSpec
 class CommentServiceSpec extends AnyWordSpec {
 
   implicit val actorSystem: ActorSystem = ActorSystem("cahsper")
