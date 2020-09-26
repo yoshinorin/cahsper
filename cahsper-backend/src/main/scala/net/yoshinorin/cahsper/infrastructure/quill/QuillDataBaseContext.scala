@@ -23,15 +23,15 @@ object OrderType {
 
 }
 
-object DataBaseContext {
+object QuillDataBaseContext {
 
   lazy val ctx = new MysqlJdbcContext[SnakeCase](SnakeCase, "db.ctx")
 
 }
 
-class DataBaseContext[T <: Table] {
+class QuillDataBaseContext[T <: Table] {
 
-  val ctx: MysqlJdbcContext[SnakeCase] = DataBaseContext.ctx
+  val ctx: MysqlJdbcContext[SnakeCase] = QuillDataBaseContext.ctx
 
   import ctx._
 

@@ -7,7 +7,7 @@ import org.scalatest.wordspec.AnyWordSpec
 // testOnly net.yoshinorin.cahsper.infrastructure.DataBaseContextSpec
 class DataBaseContextSpec extends AnyWordSpec {
 
-  "DataBaseContext" should {
+  "QuillDataBaseContext" should {
 
     "string asc return Order.ASC" in {
       assert("asc".toOrder == OrderType.ASC)

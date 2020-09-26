@@ -2,10 +2,10 @@ package net.yoshinorin.cahsper.models.db
 
 import net.yoshinorin.cahsper.domains.models.users.UserName
 import net.yoshinorin.cahsper.infrastructure.quill.OrderType.OrderConverter
-import net.yoshinorin.cahsper.infrastructure.quill.DataBaseContext
+import net.yoshinorin.cahsper.infrastructure.quill.QuillDataBaseContext
 import net.yoshinorin.cahsper.models.request.QueryParamater
 
-class CommentRepository extends DataBaseContext[Comments] {
+class CommentRepository extends QuillDataBaseContext[Comments] {
 
   import ctx._
 

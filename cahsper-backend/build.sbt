@@ -41,5 +41,5 @@ libraryDependencies ++= Seq(
 // skip test when create assembly (because sometimes test fails)
 test in assembly := {}
 
-coverageExcludedPackages := "<empty>; net.yoshinorin.cahsper.BootStrap; net.yoshinorin.cahsper.infrastructure.Migration; net.yoshinorin.services.infrastructure.DataBaseContext; net.yoshinorin.cahsper.http.HttpServer;"
+coverageExcludedPackages := "<empty>; net.yoshinorin.cahsper.BootStrap; net.yoshinorin.cahsper.infrastructure.Migration; net.yoshinorin.services.infrastructure.QuillDataBaseContext; net.yoshinorin.cahsper.http.HttpServer;"
 org.scoverage.coveralls.Imports.CoverallsKeys.coverallsGitRepoLocation := Some("..")
