@@ -2,12 +2,9 @@ package net.yoshinorin.cahsper.domains.models.comments
 
 import net.yoshinorin.cahsper.domains.models.users.UserName
 import net.yoshinorin.cahsper.infrastructure.quill.OrderType.OrderConverter
-import net.yoshinorin.cahsper.infrastructure.quill.QuillDataBaseContext
 import net.yoshinorin.cahsper.models.request.QueryParamater
 
-class CommentRepository extends QuillDataBaseContext[Comments] {
-
-  import ctx._
+trait CommentRepository {
 
   /**
    * Create comment
@@ -15,9 +12,7 @@ class CommentRepository extends QuillDataBaseContext[Comments] {
    * @param data Comments Instance
    * @return created comment id
    */
-  def insert(data: Comments): Int = {
-    run(query[Comments].insert(lift(data)).returningGenerated(_.id))
-  }
+  def insert(data: Comments): Int
 
   /**
    * Find comment by id
@@ -25,9 +20,7 @@ class CommentRepository extends QuillDataBaseContext[Comments] {
    * @param id
    * @return Comment
    */
-  def findById(id: Int): Option[Comments] = {
-    run(query[Comments].filter(comment => comment.id == lift(id))).headOption
-  }
+  def findById(id: Int): Option[Comments]
 
   /**
    * Find comment by userName
@@ -36,14 +29,7 @@ class CommentRepository extends QuillDataBaseContext[Comments] {
    * @param queryParamater
    * @return
    */
-  def findByUserName(userName: UserName, queryParamater: QueryParamater): Seq[Comments] = {
-    run(
-      sortByCreatedAt(
-        filterWithQueryParam(queryParamater),
-        queryParamater.order.toOrder
-      ).filter(comment => comment.userName == lift(userName.value))
-    )
-  }
+  def findByUserName(userName: UserName, queryParamater: QueryParamater): Seq[Comments]
 
   /**
    * Get all records in the comments table
@@ -51,8 +37,6 @@ class CommentRepository extends QuillDataBaseContext[Comments] {
    * @param queryParamater
    * @return all comments
    */
-  def getAll(queryParamater: QueryParamater): Seq[Comments] = {
-    run(sortByCreatedAt(filterWithQueryParam(queryParamater), queryParamater.order.toOrder))
-  }
+  def getAll(queryParamater: QueryParamater): Seq[Comments]
 
 }

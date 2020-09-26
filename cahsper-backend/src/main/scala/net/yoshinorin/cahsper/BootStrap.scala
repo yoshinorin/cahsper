@@ -9,7 +9,7 @@ import net.yoshinorin.cahsper.domains.services.{CommentService, UserService}
 import net.yoshinorin.cahsper.http.routes.{ApiStatusRoute, CommentRoute, HomeRoute, UserRoute}
 import net.yoshinorin.cahsper.http.HttpServer
 import net.yoshinorin.cahsper.infrastructure.Migration
-import net.yoshinorin.cahsper.infrastructure.quill.QuillUserRepository
+import net.yoshinorin.cahsper.infrastructure.quill.{QuillCommentRepository, QuillUserRepository}
 
 import scala.concurrent.ExecutionContextExecutor
 import scala.util.{Failure, Success}
@@ -26,7 +26,7 @@ object BootStrap extends App {
   val homeRoute: HomeRoute = new HomeRoute()
   val apiStatusRoute: ApiStatusRoute = new ApiStatusRoute()
 
-  val commentRepository: CommentRepository = new CommentRepository()
+  val commentRepository: CommentRepository = new QuillCommentRepository()
   val commentService: CommentService = new CommentService(commentRepository)
   val commentServiceRoute: CommentRoute = new CommentRoute(commentService)
 
