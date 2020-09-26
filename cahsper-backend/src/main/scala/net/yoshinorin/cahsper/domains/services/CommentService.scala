@@ -1,16 +1,13 @@
 package net.yoshinorin.cahsper.domains.services
 
-import net.yoshinorin.cahsper.domains.models.comments.{CommentRepository, Comments, CreateCommentRequestFormat}
+import net.yoshinorin.cahsper.application.comments.{CommentCreator, CommentFinder}
+import net.yoshinorin.cahsper.domains.models.comments.{Comments, CreateCommentRequestFormat}
 import net.yoshinorin.cahsper.domains.models.users.{UserName, Users}
 import net.yoshinorin.cahsper.models.request.QueryParamater
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class CommentService(commentRepository: CommentRepository)(implicit executeContext: ExecutionContext) {
-
-  private[this] def create(comment: Comments): Future[Int] = Future {
-    commentRepository.insert(comment)
-  }
+class CommentService(commentCreator: CommentCreator, commentFinder: CommentFinder)(implicit executeContext: ExecutionContext) {
 
   /**
    * Create comment
@@ -23,8 +20,8 @@ class CommentService(commentRepository: CommentRepository)(implicit executeConte
 
     val comment = Comments(userName = user.name, comment = createCommentFormat.comment)
     for {
-      mayBeCommentId <- this.create(comment)
-      mayBeComment <- this.findById(mayBeCommentId)
+      mayBeCommentId <- commentCreator.create(comment)
+      mayBeComment <- commentFinder.findById(mayBeCommentId)
     } yield mayBeComment.head
 
   }
@@ -35,8 +32,8 @@ class CommentService(commentRepository: CommentRepository)(implicit executeConte
    * @param id
    * @return
    */
-  def findById(id: Int): Future[Option[Comments]] = Future {
-    commentRepository.findById(id)
+  def findById(id: Int): Future[Option[Comments]] = {
+    commentFinder.findById(id)
   }
 
   /**
@@ -46,8 +43,8 @@ class CommentService(commentRepository: CommentRepository)(implicit executeConte
    * @param queryParamater
    * @return
    */
-  def findByUserName(userName: UserName, queryParamater: QueryParamater): Future[Seq[Comments]] = Future {
-    commentRepository.findByUserName(userName, queryParamater)
+  def findByUserName(userName: UserName, queryParamater: QueryParamater): Future[Seq[Comments]] = {
+    commentFinder.findByUserName(userName, queryParamater)
   }
 
   /**
@@ -56,8 +53,8 @@ class CommentService(commentRepository: CommentRepository)(implicit executeConte
    * @param queryParamater
    * @return
    */
-  def getAll(queryParamater: QueryParamater): Future[Seq[Comments]] = Future {
-    commentRepository.getAll(queryParamater)
+  def getAll(queryParamater: QueryParamater): Future[Seq[Comments]] = {
+    commentFinder.getAll(queryParamater)
   }
 
 }

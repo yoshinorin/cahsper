@@ -1,6 +1,7 @@
 package net.yoshinorin.cahsper
 
 import akka.actor.ActorSystem
+import net.yoshinorin.cahsper.application.comments.{CommentCreator, CommentFinder}
 import net.yoshinorin.cahsper.application.users.{UserCreator, UserFinder}
 import net.yoshinorin.cahsper.config.Config
 import net.yoshinorin.cahsper.domains.models.comments.CommentRepository
@@ -27,7 +28,9 @@ object BootStrap extends App {
   val apiStatusRoute: ApiStatusRoute = new ApiStatusRoute()
 
   val commentRepository: CommentRepository = new QuillCommentRepository()
-  val commentService: CommentService = new CommentService(commentRepository)
+  val commentCreateor: CommentCreator = new CommentCreator(commentRepository)
+  val commentFinder: CommentFinder = new CommentFinder(commentRepository)
+  val commentService: CommentService = new CommentService(commentCreateor, commentFinder)
   val commentServiceRoute: CommentRoute = new CommentRoute(commentService)
 
   val userRepository: UserRepository = new QuillUserRepository()

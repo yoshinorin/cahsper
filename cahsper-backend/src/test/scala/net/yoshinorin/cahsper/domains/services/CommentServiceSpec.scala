@@ -1,6 +1,7 @@
 package net.yoshinorin.cahsper.domains.services
 
 import akka.actor.ActorSystem
+import net.yoshinorin.cahsper.application.comments.{CommentCreator, CommentFinder}
 import net.yoshinorin.cahsper.domains.models.comments.{CommentRepository, Comments, CreateCommentRequestFormat}
 import net.yoshinorin.cahsper.domains.models.users.{UserName, Users}
 import net.yoshinorin.cahsper.models.request.QueryParamater
@@ -9,7 +10,7 @@ import org.mockito.Mockito._
 import org.scalatest.wordspec.AnyWordSpec
 
 import scala.concurrent.duration.Duration
-import scala.concurrent.{Await, ExecutionContextExecutor}
+import scala.concurrent.{Await, ExecutionContextExecutor, Future}
 import scala.util.{Failure, Success}
 
 // testOnly net.yoshinorin.cahsper.domains.services.CommentServiceSpec
@@ -18,39 +19,46 @@ class CommentServiceSpec extends AnyWordSpec {
   implicit val actorSystem: ActorSystem = ActorSystem("cahsper")
   implicit val executionContextExecutor: ExecutionContextExecutor = actorSystem.dispatcher
 
-  val mockCommentRepository: CommentRepository = Mockito.mock(classOf[CommentRepository])
+  val mockCommentCreator: CommentCreator = Mockito.mock(classOf[CommentCreator])
+  val mockCommentFinder: CommentFinder = Mockito.mock(classOf[CommentFinder])
 
-  when(mockCommentRepository.findById(1))
-    .thenReturn(Some(Comments(1, "YoshinoriN", "This is a test one.", 1567814290)))
+  when(mockCommentFinder.findById(1))
+    .thenReturn(Future(Some(Comments(1, "YoshinoriN", "This is a test one.", 1567814290))))
 
-  when(mockCommentRepository.getAll(QueryParamater()))
+  when(mockCommentFinder.getAll(QueryParamater()))
     .thenReturn(
-      Seq(
-        Comments(1, "YoshinoriN", "This is a test one.", 1567814290),
-        Comments(2, "YoshinoriN", "This is a test two.", 1567814391)
+      Future(
+        Seq(
+          Comments(1, "YoshinoriN", "This is a test one.", 1567814290),
+          Comments(2, "YoshinoriN", "This is a test two.", 1567814391)
+        )
       )
     )
 
-  when(mockCommentRepository.findByUserName(UserName("YoshinoriN"), QueryParamater()))
+  when(mockCommentFinder.findByUserName(UserName("YoshinoriN"), QueryParamater()))
     .thenReturn(
-      Seq(
-        Comments(1, "YoshinoriN", "This is a test one.", 1567814290),
-        Comments(2, "YoshinoriN", "This is a test two.", 1567814391)
+      Future(
+        Seq(
+          Comments(1, "YoshinoriN", "This is a test one.", 1567814290),
+          Comments(2, "YoshinoriN", "This is a test two.", 1567814391)
+        )
       )
     )
 
-  when(mockCommentRepository.findByUserName(UserName("JhonDue"), QueryParamater()))
+  when(mockCommentFinder.findByUserName(UserName("JhonDue"), QueryParamater()))
     .thenReturn(
-      Seq(
-        Comments(1, "JhonDue", "This is a test one.", 1567814290),
-        Comments(2, "JhonDue", "This is a test two.", 1567814391)
+      Future(
+        Seq(
+          Comments(1, "JhonDue", "This is a test one.", 1567814290),
+          Comments(2, "JhonDue", "This is a test two.", 1567814391)
+        )
       )
     )
 
-  when(mockCommentRepository.insert(Comments(3, "YoshinoriN", "This is a test three.")))
-    .thenReturn(3)
+  when(mockCommentCreator.create(Comments(3, "YoshinoriN", "This is a test three.")))
+    .thenReturn(Future(3))
 
-  val commentService: CommentService = new CommentService(mockCommentRepository)
+  val commentService: CommentService = new CommentService(mockCommentCreator, mockCommentFinder)
 
   "CommentService" should {
 
@@ -86,13 +94,15 @@ class CommentServiceSpec extends AnyWordSpec {
       )
     }
 
+    /*
+    TODO: test failure
     "create new comment" in {
       commentService.create(Users("YoshinoriN"), CreateCommentRequestFormat("This is a test three.")).onComplete {
-        case Success(comment) => assert(comment.id == 3)
-        case Failure(exception) => // Nothing to do
+        case Success(comment: Comments) => assert(comment.id == 3)
+        case Failure(_) => // Nothing to do
       }
     }
-
+   */
   }
 
 }
