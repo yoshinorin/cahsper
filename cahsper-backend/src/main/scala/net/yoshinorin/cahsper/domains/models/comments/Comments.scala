@@ -1,8 +1,10 @@
-package net.yoshinorin.cahsper.models.db
+package net.yoshinorin.cahsper.domains.models.comments
 
 import java.time.ZonedDateTime
+
 import io.circe.Encoder
 import io.circe.generic.semiauto.deriveEncoder
+import net.yoshinorin.cahsper.models.db.Table
 
 final case class Comments(
   id: Int = 0,

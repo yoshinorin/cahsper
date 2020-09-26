@@ -5,11 +5,12 @@ import akka.http.scaladsl.model.{ContentTypes, HttpEntity, HttpResponse}
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import io.circe.syntax._
+import net.yoshinorin.cahsper.domains.models.comments.{CommentRequestFormat, CreateCommentRequestFormat}
 import net.yoshinorin.cahsper.domains.models.users.{UserName, Users}
 import net.yoshinorin.cahsper.domains.services.{CommentService, UserService}
 import net.yoshinorin.cahsper.http.auth.Auth
 import net.yoshinorin.cahsper.models.Message
-import net.yoshinorin.cahsper.models.request.{CommentRequestFormat, CreateCommentRequestFormat, QueryParamater}
+import net.yoshinorin.cahsper.models.request.QueryParamater
 
 class UserRoute(
   auth: Auth,

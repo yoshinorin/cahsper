@@ -3,9 +3,9 @@ package net.yoshinorin.cahsper.http.routes
 import akka.http.scaladsl.model.{ContentTypes, StatusCodes}
 import akka.http.scaladsl.testkit.ScalatestRouteTest
 import net.yoshinorin.cahsper.auth.mock.BearerTokenAuth
+import net.yoshinorin.cahsper.domains.models.comments.Comments
 import net.yoshinorin.cahsper.domains.services.CommentService
 import net.yoshinorin.cahsper.http
-import net.yoshinorin.cahsper.models.db.Comments
 import net.yoshinorin.cahsper.models.request.QueryParamater
 import org.mockito.Mockito
 import org.mockito.Mockito._

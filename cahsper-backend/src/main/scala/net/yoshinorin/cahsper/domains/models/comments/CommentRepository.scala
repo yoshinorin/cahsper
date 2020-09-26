@@ -1,4 +1,4 @@
-package net.yoshinorin.cahsper.models.db
+package net.yoshinorin.cahsper.domains.models.comments
 
 import net.yoshinorin.cahsper.domains.models.users.UserName
 import net.yoshinorin.cahsper.infrastructure.quill.OrderType.OrderConverter

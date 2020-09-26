@@ -1,8 +1,8 @@
 package net.yoshinorin.cahsper.domains.services
 
+import net.yoshinorin.cahsper.domains.models.comments.{CommentRepository, Comments, CreateCommentRequestFormat}
 import net.yoshinorin.cahsper.domains.models.users.{UserName, Users}
-import net.yoshinorin.cahsper.models.db.{CommentRepository, Comments}
-import net.yoshinorin.cahsper.models.request.{CreateCommentRequestFormat, QueryParamater}
+import net.yoshinorin.cahsper.models.request.QueryParamater
 
 import scala.concurrent.{ExecutionContext, Future}
 

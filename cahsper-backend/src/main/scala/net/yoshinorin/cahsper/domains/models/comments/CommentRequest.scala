@@ -1,8 +1,8 @@
-package net.yoshinorin.cahsper.models.request
+package net.yoshinorin.cahsper.domains.models.comments
 
 import io.circe.Decoder
-import io.circe.parser.decode
 import io.circe.generic.semiauto.deriveDecoder
+import io.circe.parser.decode
 import net.yoshinorin.cahsper.models.Message
 import org.slf4j.LoggerFactory
 
