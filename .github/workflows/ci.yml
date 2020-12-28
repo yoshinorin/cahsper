@@ -26,3 +26,8 @@ jobs:
           java-version: ${{ matrix.java }}
       - name: Run tests
         run: sbt test
+
+      - name: Send Coverage Report
+        run: sbt ++${{ matrix.scala }} coverageAggregate coveralls
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
