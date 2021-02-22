@@ -15,7 +15,7 @@ class HomeRoute {
           entity = """
           |Hello Cahsper!!
           |
-          |Repository: https://github.com/YoshinoriN/cahsper/
+          |Repository: https://github.com/yoshinorin/cahsper/
           |API Docs: https://yoshinorin.github.io/cahsper/
           |""".stripMargin
         )

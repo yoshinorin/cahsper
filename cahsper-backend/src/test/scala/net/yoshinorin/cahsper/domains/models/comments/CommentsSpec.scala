@@ -11,11 +11,11 @@ class CommentsSpec extends AnyWordSpec {
 
     "default instance" in {
       val currentUTCDateTime = ZonedDateTime.now(ZoneOffset.UTC)
-      val comment = Comments(userName = "YoshinoriN", comment = "This is a test")
+      val comment = Comments(userName = "yoshinorin", comment = "This is a test")
       val instanceUTCDateTime = ZonedDateTime.ofInstant(Instant.ofEpochSecond(comment.createdAt), ZoneOffset.UTC)
 
       assert(comment.id == 0)
-      assert(comment.userName == "YoshinoriN")
+      assert(comment.userName == "yoshinorin")
       assert(comment.comment == "This is a test")
       assert(instanceUTCDateTime.getYear == currentUTCDateTime.getYear)
       assert(instanceUTCDateTime.getMonth == currentUTCDateTime.getMonth)
@@ -24,9 +24,9 @@ class CommentsSpec extends AnyWordSpec {
     }
 
     "specific id and createdAt" in {
-      val comment = Comments(9, "YoshinoriN", "This is a test", 1567814286)
+      val comment = Comments(9, "yoshinorin", "This is a test", 1567814286)
       assert(comment.id == 9)
-      assert(comment.userName == "YoshinoriN")
+      assert(comment.userName == "yoshinorin")
       assert(comment.comment == "This is a test")
       assert(comment.createdAt == 1567814286)
     }

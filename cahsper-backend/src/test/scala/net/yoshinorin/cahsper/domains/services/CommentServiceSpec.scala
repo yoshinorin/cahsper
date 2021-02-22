@@ -23,24 +23,24 @@ class CommentServiceSpec extends AnyWordSpec {
   val mockCommentFinder: CommentFinder = Mockito.mock(classOf[CommentFinder])
 
   when(mockCommentFinder.findById(1))
-    .thenReturn(Future(Some(Comments(1, "YoshinoriN", "This is a test one.", 1567814290))))
+    .thenReturn(Future(Some(Comments(1, "yoshinorin", "This is a test one.", 1567814290))))
 
   when(mockCommentFinder.getAll(QueryParamater()))
     .thenReturn(
       Future(
         Seq(
-          Comments(1, "YoshinoriN", "This is a test one.", 1567814290),
-          Comments(2, "YoshinoriN", "This is a test two.", 1567814391)
+          Comments(1, "yoshinorin", "This is a test one.", 1567814290),
+          Comments(2, "yoshinorin", "This is a test two.", 1567814391)
         )
       )
     )
 
-  when(mockCommentFinder.findByUserName(UserName("YoshinoriN"), QueryParamater()))
+  when(mockCommentFinder.findByUserName(UserName("yoshinorin"), QueryParamater()))
     .thenReturn(
       Future(
         Seq(
-          Comments(1, "YoshinoriN", "This is a test one.", 1567814290),
-          Comments(2, "YoshinoriN", "This is a test two.", 1567814391)
+          Comments(1, "yoshinorin", "This is a test one.", 1567814290),
+          Comments(2, "yoshinorin", "This is a test two.", 1567814391)
         )
       )
     )
@@ -55,7 +55,7 @@ class CommentServiceSpec extends AnyWordSpec {
       )
     )
 
-  when(mockCommentCreator.create(Comments(3, "YoshinoriN", "This is a test three.")))
+  when(mockCommentCreator.create(Comments(3, "yoshinorin", "This is a test three.")))
     .thenReturn(Future(3))
 
   val commentService: CommentService = new CommentService(mockCommentCreator, mockCommentFinder)
@@ -64,25 +64,25 @@ class CommentServiceSpec extends AnyWordSpec {
 
     "find comments instance when call findById with an argument is 1" in {
       val result = Await.result(commentService.findById(1), Duration.Inf)
-      assert(result.contains(Comments(1, "YoshinoriN", "This is a test one.", 1567814290)))
+      assert(result.contains(Comments(1, "yoshinorin", "This is a test one.", 1567814290)))
     }
 
     "get all comments when call getAll" in {
       val result = Await.result(commentService.getAll(QueryParamater()), Duration.Inf)
       assert(
         result == Seq(
-          Comments(1, "YoshinoriN", "This is a test one.", 1567814290),
-          Comments(2, "YoshinoriN", "This is a test two.", 1567814391)
+          Comments(1, "yoshinorin", "This is a test one.", 1567814290),
+          Comments(2, "yoshinorin", "This is a test two.", 1567814391)
         )
       )
     }
 
     "get all comments by userName when call findByUserName" in {
-      val result = Await.result(commentService.findByUserName(UserName("YoshinoriN"), QueryParamater()), Duration.Inf)
+      val result = Await.result(commentService.findByUserName(UserName("yoshinorin"), QueryParamater()), Duration.Inf)
       assert(
         result == Seq(
-          Comments(1, "YoshinoriN", "This is a test one.", 1567814290),
-          Comments(2, "YoshinoriN", "This is a test two.", 1567814391)
+          Comments(1, "yoshinorin", "This is a test one.", 1567814290),
+          Comments(2, "yoshinorin", "This is a test two.", 1567814391)
         )
       )
       val result2 = Await.result(commentService.findByUserName(UserName("JhonDue"), QueryParamater()), Duration.Inf)
@@ -97,7 +97,7 @@ class CommentServiceSpec extends AnyWordSpec {
     /*
     TODO: test failure
     "create new comment" in {
-      commentService.create(Users("YoshinoriN"), CreateCommentRequestFormat("This is a test three.")).onComplete {
+      commentService.create(Users("yoshinorin"), CreateCommentRequestFormat("This is a test three.")).onComplete {
         case Success(comment: Comments) => assert(comment.id == 3)
         case Failure(_) => // Nothing to do
       }

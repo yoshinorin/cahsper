@@ -26,21 +26,21 @@ class UserRouteSpec extends AnyWordSpec with ScalatestRouteTest {
 
   val mockUserService: UserService = Mockito.mock(classOf[UserService])
 
-  when(mockUserService.create(UserName("YoshinoriN")))
-    .thenReturn(Future(Users("YoshinoriN")))
+  when(mockUserService.create(UserName("yoshinorin")))
+    .thenReturn(Future(Users("yoshinorin")))
 
   when(mockUserService.getAll)
     .thenReturn(
       Future(
         Seq(
-          Users("YoshinoriN", 1567814290),
+          Users("yoshinorin", 1567814290),
           Users("NoshinoriN", 1567814391)
         )
       )
     )
 
-  when(mockUserService.findByName(UserName("YoshinoriN")))
-    .thenReturn(Future(Option(Users("YoshinoriN", 1567814290))))
+  when(mockUserService.findByName(UserName("yoshinorin")))
+    .thenReturn(Future(Option(Users("yoshinorin", 1567814290))))
 
   when(mockUserService.findByName(UserName("exampleUser")))
     .thenReturn(Future(None))
@@ -48,21 +48,21 @@ class UserRouteSpec extends AnyWordSpec with ScalatestRouteTest {
   val mockCommentService: CommentService = Mockito.mock(classOf[CommentService])
 
   when(mockCommentService.findById(1))
-    .thenReturn(Future(Some(Comments(1, "YoshinoriN", "This is a test one.", 1567814290))))
+    .thenReturn(Future(Some(Comments(1, "yoshinorin", "This is a test one.", 1567814290))))
 
-  when(mockCommentService.create(Users("YoshinoriN"), CreateCommentRequestFormat("Hello")))
+  when(mockCommentService.create(Users("yoshinorin"), CreateCommentRequestFormat("Hello")))
     .thenReturn(
       Future(
-        Comments(3, "YoshinoriN", "Hello", 1567814391)
+        Comments(3, "yoshinorin", "Hello", 1567814391)
       )
     )
 
-  when(mockCommentService.findByUserName(UserName("YoshinoriN"), QueryParamater()))
+  when(mockCommentService.findByUserName(UserName("yoshinorin"), QueryParamater()))
     .thenReturn(
       Future(
         Seq(
-          Comments(1, "YoshinoriN", "This is a test one.", 1567814290),
-          Comments(2, "YoshinoriN", "This is a test two.", 1567814391)
+          Comments(1, "yoshinorin", "This is a test one.", 1567814290),
+          Comments(2, "yoshinorin", "This is a test two.", 1567814391)
         )
       )
     )
@@ -73,7 +73,7 @@ class UserRouteSpec extends AnyWordSpec with ScalatestRouteTest {
   val auth = new http.auth.Cognito()
   val userRoute: UserRoute = new UserRoute(auth, mockUserService, mockCommentService)
 
-  val fakeAuth = new BearerTokenAuth("YoshinoriN")
+  val fakeAuth = new BearerTokenAuth("yoshinorin")
   val userRouteWithFakeAuth: UserRoute = new UserRoute(fakeAuth, mockUserService, mockCommentService)
 
   "UserRoute" should {
@@ -82,7 +82,7 @@ class UserRouteSpec extends AnyWordSpec with ScalatestRouteTest {
       Post("/users") ~> addCredentials(OAuth2BearerToken("Valid Token")) ~> userRouteWithFakeAuth.route ~> check {
         assert(status == StatusCodes.Created)
         assert(contentType == ContentTypes.`application/json`)
-        assert(responseAs[String].contains("YoshinoriN")) //TODO: brush up
+        assert(responseAs[String].contains("yoshinorin")) //TODO: brush up
       }
     }
 
@@ -104,7 +104,7 @@ class UserRouteSpec extends AnyWordSpec with ScalatestRouteTest {
         """
           |[
           |  {
-          |    "name" : "YoshinoriN",
+          |    "name" : "yoshinorin",
           |    "createdAt" : 1567814290
           |  },
           |  {
@@ -133,12 +133,12 @@ class UserRouteSpec extends AnyWordSpec with ScalatestRouteTest {
       val expectJson =
         """
           |{
-          |  "name" : "YoshinoriN",
+          |  "name" : "yoshinorin",
           |  "createdAt" : 1567814290
           |}
       """.stripMargin.replaceAll("\n", "").replaceAll(" ", "")
 
-      Get("/users/YoshinoriN") ~> userRoute.route ~> check {
+      Get("/users/yoshinorin") ~> userRoute.route ~> check {
         assert(status == StatusCodes.OK)
         assert(contentType == ContentTypes.`application/json`)
         assert(responseAs[String].replaceAll("\n", "").replaceAll(" ", "") == expectJson)
@@ -180,7 +180,7 @@ class UserRouteSpec extends AnyWordSpec with ScalatestRouteTest {
 
     "return 400 when post comment's payload is wrong format" in {
       val json = """{Not a JSON}""".stripMargin
-      Post("/users/YoshinoriN/comments/")
+      Post("/users/yoshinorin/comments/")
         .withEntity(ContentTypes.`application/json`, json) ~> addCredentials(OAuth2BearerToken("Valid Token")) ~> userRouteWithFakeAuth.route ~> check {
         assert(status == StatusCodes.BadRequest)
         assert(contentType == ContentTypes.`application/json`)
@@ -193,20 +193,20 @@ class UserRouteSpec extends AnyWordSpec with ScalatestRouteTest {
           |[
           |  {
           |    "id" : 1,
-          |    "userName" : "YoshinoriN",
+          |    "userName" : "yoshinorin",
           |    "comment" : "This is a test one.",
           |    "createdAt" : 1567814290
           |  },
           |  {
           |    "id" : 2,
-          |    "userName" : "YoshinoriN",
+          |    "userName" : "yoshinorin",
           |    "comment" : "This is a test two.",
           |    "createdAt" : 1567814391
           |  }
           |]
       """.stripMargin.replaceAll("\n", "").replaceAll(" ", "")
 
-      Get("/users/YoshinoriN/comments/") ~> userRoute.route ~> check {
+      Get("/users/yoshinorin/comments/") ~> userRoute.route ~> check {
         assert(status == StatusCodes.OK)
         assert(contentType == ContentTypes.`application/json`)
         assert(responseAs[String].replaceAll("\n", "").replaceAll(" ", "") == expectJson)
@@ -222,7 +222,7 @@ class UserRouteSpec extends AnyWordSpec with ScalatestRouteTest {
     }
 
     "create a new comment" in {
-      Post("/users/YoshinoriN/comments/")
+      Post("/users/yoshinorin/comments/")
         .withEntity(ContentTypes.`application/json`, """{"comment":"Hello"}""") ~> addCredentials(OAuth2BearerToken("Valid Token")) ~> userRouteWithFakeAuth.route ~> check {
         assert(status == StatusCodes.Created)
         assert(contentType == ContentTypes.`application/json`)

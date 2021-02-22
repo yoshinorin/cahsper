@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "API document for cahsper",
   "main": "index.js",
-  "author": "YoshinoriN",
+  "author": "yoshinorin",
   "scripts": {
     "build": "redoc-cli bundle openapi.yml -o ./dist/index.html",
     "publish": "npm run build && cd dist && git checkout gh-pages && git commit index.html -m \"update api document\" && git push"

@@ -21,17 +21,17 @@ class UserServiceSpec extends AnyWordSpec {
   val mockUserFinder: UserFinder = Mockito.mock(classOf[UserFinder])
   val mockUserRepository: UserRepository = Mockito.mock(classOf[UserRepository])
 
-  when(mockUserFinder.findByName(UserName("YoshinoriN")))
-    .thenReturn(Future(Option(Users("YoshinoriN", 1567814290))))
+  when(mockUserFinder.findByName(UserName("yoshinorin")))
+    .thenReturn(Future(Option(Users("yoshinorin", 1567814290))))
 
-  when(mockUserCreator.create(Users("YoshinoriN")))
-    .thenReturn(Future(Users("YoshinoriN")))
+  when(mockUserCreator.create(Users("yoshinorin")))
+    .thenReturn(Future(Users("yoshinorin")))
 
   when(mockUserFinder.getAll)
     .thenReturn(
       Future(
         Seq(
-          Users("YoshinoriN", 1567814290),
+          Users("yoshinorin", 1567814290),
           Users("NoshinoriN", 1567814391)
         )
       )
@@ -42,13 +42,13 @@ class UserServiceSpec extends AnyWordSpec {
   "UserService" should {
 
     "find users instance when call findById with an argument is 1" in {
-      val result = Await.result(userService.findByName(UserName("YoshinoriN")), Duration.Inf)
-      assert(result.contains(Users("YoshinoriN", 1567814290)))
+      val result = Await.result(userService.findByName(UserName("yoshinorin")), Duration.Inf)
+      assert(result.contains(Users("yoshinorin", 1567814290)))
     }
 
     "create new user" in {
-      userService.create(UserName("YoshinoriN")).onComplete {
-        case Success(user) => assert(user.name == "YoshinoriN")
+      userService.create(UserName("yoshinorin")).onComplete {
+        case Success(user) => assert(user.name == "yoshinorin")
         case Failure(exception) => // Nothing to do
       }
     }
@@ -57,7 +57,7 @@ class UserServiceSpec extends AnyWordSpec {
       val result = Await.result(userService.getAll, Duration.Inf)
       assert(
         result == Seq(
-          Users("YoshinoriN", 1567814290),
+          Users("yoshinorin", 1567814290),
           Users("NoshinoriN", 1567814391)
         )
       )
