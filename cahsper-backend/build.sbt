@@ -14,28 +14,28 @@ scalacOptions ++= Seq(
 )
 
 val circeVersion = "0.13.0"
-val akkaVersion = "2.6.9"
-val akkaHttpVersion = "10.2.0"
+val akkaVersion = "2.6.12"
+val akkaHttpVersion = "10.2.3"
 libraryDependencies ++= Seq(
   "ch.qos.logback" % "logback-classic" % "1.2.3",
-  "ch.megard" %% "akka-http-cors" % "1.1.0",
   "com.nimbusds" % "nimbus-jose-jwt" % "8.20",
+  "ch.megard" %% "akka-http-cors" % "1.1.1",
   "com.typesafe.akka" %% "akka-http" % akkaHttpVersion,
   "com.typesafe.akka" %% "akka-actor" % akkaVersion,
   "com.typesafe.akka" %% "akka-slf4j" % akkaVersion,
   "com.typesafe.akka" %% "akka-stream" % akkaVersion,
   "com.typesafe.akka" %% "akka-http-testkit" % akkaHttpVersion,
   "com.typesafe.akka" %% "akka-testkit" % akkaVersion % Test,
-  "com.typesafe" % "config" % "1.4.0",
+  "com.typesafe" % "config" % "1.4.1",
   "io.circe" %% "circe-core" % circeVersion,
   "io.circe" %% "circe-generic" % circeVersion,
   "io.circe" %% "circe-parser" % circeVersion,
-  "io.getquill" %% "quill-jdbc" % "3.5.2",
+  "io.getquill" %% "quill-jdbc" % "3.6.1",
   "org.flywaydb" % "flyway-core" % "6.5.3",
-  "org.mariadb.jdbc" % "mariadb-java-client" % "2.6.2",
+  "org.mariadb.jdbc" % "mariadb-java-client" % "2.7.2",
   "org.slf4j" % "slf4j-api" % "1.7.29",
-  "org.scalatest" %% "scalatest" % "3.2.0" % "test",
-  "org.mockito" % "mockito-core" % "3.4.6" % "test"
+  "org.scalatest" %% "scalatest" % "3.2.5" % "test",
+  "org.mockito" % "mockito-core" % "3.7.7" % "test"
 )
 
 // skip test when create assembly (because sometimes test fails)
