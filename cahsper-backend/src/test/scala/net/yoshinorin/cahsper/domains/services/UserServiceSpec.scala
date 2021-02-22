@@ -22,17 +22,17 @@ class UserServiceSpec extends AnyWordSpec {
   val mockUserRepository: UserRepository = Mockito.mock(classOf[UserRepository])
 
   when(mockUserFinder.findByName(UserName("yoshinorin")))
-    .thenReturn(Future(Option(Users("yoshinorin", 1567814290))))
+    .thenReturn(Future(Option(Users("yoshinorin", "yoshinorin-dispname", 1567814290))))
 
-  when(mockUserCreator.create(Users("yoshinorin")))
-    .thenReturn(Future(Users("yoshinorin")))
+  when(mockUserCreator.create(Users("yoshinorin", "yoshinorin")))
+    .thenReturn(Future(Users("yoshinorin", "yoshinorin")))
 
   when(mockUserFinder.getAll)
     .thenReturn(
       Future(
         Seq(
-          Users("yoshinorin", 1567814290),
-          Users("NoshinoriN", 1567814391)
+          Users("yoshinorin", "yoshinorin-dispname", 1567814290),
+          Users("NoshinoriN", "yoshinorin-dispname", 1567814391)
         )
       )
     )
@@ -43,7 +43,7 @@ class UserServiceSpec extends AnyWordSpec {
 
     "find users instance when call findById with an argument is 1" in {
       val result = Await.result(userService.findByName(UserName("yoshinorin")), Duration.Inf)
-      assert(result.contains(Users("yoshinorin", 1567814290)))
+      assert(result.contains(Users("yoshinorin", "yoshinorin-dispname", 1567814290)))
     }
 
     "create new user" in {
@@ -57,8 +57,8 @@ class UserServiceSpec extends AnyWordSpec {
       val result = Await.result(userService.getAll, Duration.Inf)
       assert(
         result == Seq(
-          Users("yoshinorin", 1567814290),
-          Users("NoshinoriN", 1567814391)
+          Users("yoshinorin", "yoshinorin-dispname", 1567814290),
+          Users("NoshinoriN", "yoshinorin-dispname", 1567814391)
         )
       )
     }

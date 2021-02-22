@@ -66,7 +66,7 @@ class UserRoute(
                       } yield createCommentRequestFormat
                       result match {
                         case Right(createCommentRequestFormat) =>
-                          onSuccess(commentService.create(Users(userName.value), createCommentRequestFormat)) { result =>
+                          onSuccess(commentService.create(Users(userName.value, userName.value), createCommentRequestFormat)) { result =>
                             complete(HttpResponse(Created, entity = HttpEntity(ContentTypes.`application/json`, s"${result.asJson}")))
                           }
                         case Left(message) =>

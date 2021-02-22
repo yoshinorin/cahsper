@@ -8,6 +8,7 @@ import net.yoshinorin.cahsper.models.db.Table
 
 final case class Users(
   name: String, // TODO: Should use UserName case class
+  displayName: String,
   override val createdAt: Long = ZonedDateTime.now.toEpochSecond
 ) extends Table
 

@@ -27,20 +27,20 @@ class UserRouteSpec extends AnyWordSpec with ScalatestRouteTest {
   val mockUserService: UserService = Mockito.mock(classOf[UserService])
 
   when(mockUserService.create(UserName("yoshinorin")))
-    .thenReturn(Future(Users("yoshinorin")))
+    .thenReturn(Future(Users("yoshinorin", "yoshinorin-dispname")))
 
   when(mockUserService.getAll)
     .thenReturn(
       Future(
         Seq(
-          Users("yoshinorin", 1567814290),
-          Users("NoshinoriN", 1567814391)
+          Users("yoshinorin", "yoshinorin-dispname", 1567814290),
+          Users("NoshinoriN", "yoshinorin-dispname", 1567814391)
         )
       )
     )
 
   when(mockUserService.findByName(UserName("yoshinorin")))
-    .thenReturn(Future(Option(Users("yoshinorin", 1567814290))))
+    .thenReturn(Future(Option(Users("yoshinorin", "yoshinorin-dispname", 1567814290))))
 
   when(mockUserService.findByName(UserName("exampleUser")))
     .thenReturn(Future(None))
@@ -50,7 +50,7 @@ class UserRouteSpec extends AnyWordSpec with ScalatestRouteTest {
   when(mockCommentService.findById(1))
     .thenReturn(Future(Some(Comments(1, "yoshinorin", "This is a test one.", 1567814290))))
 
-  when(mockCommentService.create(Users("yoshinorin"), CreateCommentRequestFormat("Hello")))
+  when(mockCommentService.create(Users("yoshinorin", "yoshinorin-dispname"), CreateCommentRequestFormat("Hello")))
     .thenReturn(
       Future(
         Comments(3, "yoshinorin", "Hello", 1567814391)
@@ -105,10 +105,12 @@ class UserRouteSpec extends AnyWordSpec with ScalatestRouteTest {
           |[
           |  {
           |    "name" : "yoshinorin",
+          |    "displayName" : "yoshinorin-dispname",
           |    "createdAt" : 1567814290
           |  },
           |  {
           |    "name" : "NoshinoriN",
+          |    "displayName" : "yoshinorin-dispname",
           |    "createdAt" : 1567814391
           |  }
           |]
@@ -134,6 +136,7 @@ class UserRouteSpec extends AnyWordSpec with ScalatestRouteTest {
         """
           |{
           |  "name" : "yoshinorin",
+          |  "displayName" : "yoshinorin-dispname",
           |  "createdAt" : 1567814290
           |}
       """.stripMargin.replaceAll("\n", "").replaceAll(" ", "")

@@ -17,7 +17,7 @@ class UserService(userCreator: UserCreator, userFinder: UserFinder)(implicit exe
     // TODO: Check userName already exists or not
 
     for {
-      maybeUser <- userCreator.create(Users(userName.value))
+      maybeUser <- userCreator.create(Users(userName.value, userName.value))
       maybeUser <- userFinder.findByName(UserName(maybeUser.name))
     } yield maybeUser.head
 
