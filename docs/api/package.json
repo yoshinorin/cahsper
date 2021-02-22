@@ -9,7 +9,7 @@
     "publish": "npm run build && cd dist && git checkout gh-pages && git commit index.html -m \"update api document\" && git push"
   },
   "devDependencies": {
-    "redoc-cli": "0.9.10"
+    "redoc-cli": "0.10.2"
   },
   "dependencies": {}
 }
