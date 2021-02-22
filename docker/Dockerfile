@@ -1,6 +1,6 @@
 FROM yoshinorin/docker-sbt:1.3.13
 
-MAINTAINER YoshinoriN
+MAINTAINER yoshinorin
 
 RUN apt-get update -y \
   && apt-get upgrade -y \
@@ -11,7 +11,7 @@ RUN apt-get update -y \
 WORKDIR /usr/opt
 
 # TODO: download latest from GitHub releases after first release.
-RUN git clone https://github.com/YoshinoriN/cahsper.git
+RUN git clone https://github.com/yoshinorin/cahsper.git
 
 WORKDIR /usr/opt/cahsper
 
