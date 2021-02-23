@@ -12,9 +12,9 @@ jobs:
       - name: Push to GitHub Packages
         uses: docker/build-push-action@v1
         with:
+          context: ./docker
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
           repository: yoshinorin/docker-cahsper/docker-cahsper
           tag_with_ref: true
-          working-directory: ./docker
