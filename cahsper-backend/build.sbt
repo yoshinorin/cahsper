@@ -31,7 +31,7 @@ libraryDependencies ++= Seq(
   "io.circe" %% "circe-generic" % circeVersion,
   "io.circe" %% "circe-parser" % circeVersion,
   "io.getquill" %% "quill-jdbc" % "3.6.1",
-  "org.flywaydb" % "flyway-core" % "6.5.3",
+  "org.flywaydb" % "flyway-core" % "7.5.3",
   "org.mariadb.jdbc" % "mariadb-java-client" % "2.7.2",
   "org.slf4j" % "slf4j-api" % "1.7.29",
   "org.scalatest" %% "scalatest" % "3.2.5" % "test",
