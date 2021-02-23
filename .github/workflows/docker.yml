@@ -17,3 +17,4 @@ jobs:
           registry: docker.pkg.github.com
           repository: yoshinorin/docker-cahsper/docker-cahsper
           tag_with_ref: true
+          working-directory: ./docker
