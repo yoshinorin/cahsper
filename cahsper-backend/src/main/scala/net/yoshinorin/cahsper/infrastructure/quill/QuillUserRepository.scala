@@ -25,7 +25,7 @@ class QuillUserRepository extends QuillDataBaseContext[Users] with UserRepositor
    * @return Users
    */
   def findByName(userName: UserName): Option[Users] = {
-    run(query[Users].filter(u => u.name == lift(userName.value))).headOption
+    run(query[Users].filter(u => u.name.toLowerCase == lift(userName.value.toLowerCase))).headOption
   }
 
   /**

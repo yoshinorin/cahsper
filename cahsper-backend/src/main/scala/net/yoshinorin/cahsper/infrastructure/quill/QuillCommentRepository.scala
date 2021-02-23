@@ -22,7 +22,7 @@ class QuillCommentRepository extends QuillDataBaseContext[Comments] with Comment
       sortByCreatedAt(
         filterWithQueryParam(queryParamater),
         queryParamater.order.toOrder
-      ).filter(comment => comment.userName == lift(userName.value))
+      ).filter(comment => comment.userName.toLowerCase == lift(userName.value.toLowerCase))
     )
   }
 
