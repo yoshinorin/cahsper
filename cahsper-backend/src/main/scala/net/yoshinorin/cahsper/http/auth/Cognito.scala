@@ -19,7 +19,7 @@ class Cognito extends Auth {
       case Some(OAuth2BearerToken(bearerToken)) => {
         Cognito.validateJwt(JwtToken(bearerToken)) match {
           case Right(jwtClaimsSet) => {
-            jwtClaimsSet.toJSONObject.toJSONString.toJwtClaims match {
+            jwtClaimsSet.toString.toJwtClaims match {
               case Right(jwtClaims) => Future.successful(AuthenticationResult.success(UserName(jwtClaims.username)))
               case Left(_) =>
                 Future.successful(AuthenticationResult.failWithChallenge(HttpChallenge("Bearer", None, Map("error" -> "Internal server error"))))
