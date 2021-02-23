@@ -17,4 +17,5 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
           repository: yoshinorin/docker-cahsper/docker-cahsper
+          push: true
           tag_with_ref: true
