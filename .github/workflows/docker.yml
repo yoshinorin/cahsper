@@ -18,4 +18,4 @@ jobs:
           registry: docker.pkg.github.com
           repository: yoshinorin/docker-cahsper/docker-cahsper
           push: true
-          tag_with_ref: true
+          tags: ${{ steps.docker_meta.outputs.tags }}
