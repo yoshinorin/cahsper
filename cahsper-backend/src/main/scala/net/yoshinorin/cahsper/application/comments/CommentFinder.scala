@@ -1,5 +1,7 @@
 package net.yoshinorin.cahsper.application.comments
 
+import java.util.UUID
+
 import net.yoshinorin.cahsper.domains.models.comments.{CommentRepository, Comments}
 import net.yoshinorin.cahsper.domains.models.users.UserName
 import net.yoshinorin.cahsper.models.request.QueryParamater
@@ -11,11 +13,11 @@ class CommentFinder(commentRepository: CommentRepository)(implicit executionCont
   /**
    * Find comment by id
    *
-   * @param id
+   * @param uuid
    * @return
    */
-  def findById(id: Int): Future[Option[Comments]] = Future {
-    commentRepository.findById(id)
+  def findById(uuid: UUID): Future[Option[Comments]] = Future {
+    commentRepository.findById(uuid)
   }
 
   /**

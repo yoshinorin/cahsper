@@ -1,6 +1,7 @@
 package net.yoshinorin.cahsper.domains.models.comments
 
 import java.time.{Instant, ZoneOffset, ZonedDateTime}
+import java.util.UUID
 
 import org.scalatest.wordspec.AnyWordSpec
 
@@ -14,7 +15,7 @@ class CommentsSpec extends AnyWordSpec {
       val comment = Comments(userName = "yoshinorin", comment = "This is a test")
       val instanceUTCDateTime = ZonedDateTime.ofInstant(Instant.ofEpochSecond(comment.createdAt), ZoneOffset.UTC)
 
-      assert(comment.id == 0)
+      assert(UUID.fromString(comment.id).isInstanceOf[UUID])
       assert(comment.userName == "yoshinorin")
       assert(comment.comment == "This is a test")
       assert(instanceUTCDateTime.getYear == currentUTCDateTime.getYear)
@@ -24,8 +25,8 @@ class CommentsSpec extends AnyWordSpec {
     }
 
     "specific id and createdAt" in {
-      val comment = Comments(9, "yoshinorin", "This is a test", 1567814286)
-      assert(comment.id == 9)
+      val comment = Comments("cc827369-769d-11eb-a81e-663f66aa018c", "yoshinorin", "This is a test", 1567814286)
+      assert(comment.id == "cc827369-769d-11eb-a81e-663f66aa018c")
       assert(comment.userName == "yoshinorin")
       assert(comment.comment == "This is a test")
       assert(comment.createdAt == 1567814286)
