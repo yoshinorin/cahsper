@@ -1,5 +1,7 @@
 package net.yoshinorin.cahsper.infrastructure.quill
 
+import java.util.UUID
+
 import net.yoshinorin.cahsper.domains.models.comments.{CommentRepository, Comments}
 import net.yoshinorin.cahsper.domains.models.users.UserName
 import net.yoshinorin.cahsper.infrastructure.quill.OrderType.OrderConverter
@@ -9,12 +11,13 @@ class QuillCommentRepository extends QuillDataBaseContext[Comments] with Comment
 
   import ctx._
 
-  def insert(data: Comments): Int = {
-    run(query[Comments].insert(lift(data)).returningGenerated(_.id))
+  def insert(data: Comments): UUID = {
+    run(query[Comments].insert(lift(data)))
+    UUID.fromString(data.id)
   }
 
-  def findById(id: Int): Option[Comments] = {
-    run(query[Comments].filter(comment => comment.id == lift(id))).headOption
+  def findById(uuid: UUID): Option[Comments] = {
+    run(query[Comments].filter(comment => comment.id == lift(uuid.toString))).headOption
   }
 
   def findByUserName(userName: UserName, queryParamater: QueryParamater): Seq[Comments] = {

@@ -1,5 +1,7 @@
 package net.yoshinorin.cahsper.http.routes
 
+import java.util.UUID
+
 import akka.actor.ActorSystem
 import akka.http.scaladsl.model.headers.OAuth2BearerToken
 import akka.http.scaladsl.model.{ContentTypes, StatusCodes}
@@ -47,13 +49,13 @@ class UserRouteSpec extends AnyWordSpec with ScalatestRouteTest {
 
   val mockCommentService: CommentService = Mockito.mock(classOf[CommentService])
 
-  when(mockCommentService.findById(1))
-    .thenReturn(Future(Some(Comments(1, "yoshinorin", "This is a test one.", 1567814290))))
+  when(mockCommentService.findById(UUID.fromString("04b89f7a-6d0c-46c5-87a2-2a35307765bf")))
+    .thenReturn(Future(Some(Comments("04b89f7a-6d0c-46c5-87a2-2a35307765bf", "yoshinorin", "This is a test one.", 1567814290))))
 
   when(mockCommentService.create(Users("yoshinorin", "yoshinorin-dispname"), CreateCommentRequestFormat("Hello")))
     .thenReturn(
       Future(
-        Comments(3, "yoshinorin", "Hello", 1567814391)
+        Comments("d4327554-ea36-4547-9b8d-d01087af6fe4", "yoshinorin", "Hello", 1567814391)
       )
     )
 
@@ -61,8 +63,8 @@ class UserRouteSpec extends AnyWordSpec with ScalatestRouteTest {
     .thenReturn(
       Future(
         Seq(
-          Comments(1, "yoshinorin", "This is a test one.", 1567814290),
-          Comments(2, "yoshinorin", "This is a test two.", 1567814391)
+          Comments("cc82737d-769d-11eb-a81e-663f66aa018c", "yoshinorin", "This is a test one.", 1567814290),
+          Comments("cc82737d-769d-11eb-a81e-d01087af6fe4", "yoshinorin", "This is a test two.", 1567814391)
         )
       )
     )
@@ -195,13 +197,13 @@ class UserRouteSpec extends AnyWordSpec with ScalatestRouteTest {
         """
           |[
           |  {
-          |    "id" : 1,
+          |    "id" : "cc82737d-769d-11eb-a81e-663f66aa018c",
           |    "userName" : "yoshinorin",
           |    "comment" : "This is a test one.",
           |    "createdAt" : 1567814290
           |  },
           |  {
-          |    "id" : 2,
+          |    "id" : "cc82737d-769d-11eb-a81e-d01087af6fe4",
           |    "userName" : "yoshinorin",
           |    "comment" : "This is a test two.",
           |    "createdAt" : 1567814391

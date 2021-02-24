@@ -1,5 +1,7 @@
 package net.yoshinorin.cahsper.domains.models.comments
 
+import java.util.UUID
+
 import net.yoshinorin.cahsper.domains.models.users.UserName
 import net.yoshinorin.cahsper.infrastructure.quill.OrderType.OrderConverter
 import net.yoshinorin.cahsper.models.request.QueryParamater
@@ -10,17 +12,17 @@ trait CommentRepository {
    * Create comment
    *
    * @param data Comments Instance
-   * @return created comment id
+   * @return created comment uuid
    */
-  def insert(data: Comments): Int
+  def insert(data: Comments): UUID
 
   /**
    * Find comment by id
    *
-   * @param id
+   * @param uuid
    * @return Comment
    */
-  def findById(id: Int): Option[Comments]
+  def findById(uuid: UUID): Option[Comments]
 
   /**
    * Find comment by userName

@@ -22,8 +22,8 @@ class CommentRouteSpec extends AnyWordSpec with ScalatestRouteTest {
     .thenReturn(
       Future(
         Seq(
-          Comments(1, "yoshinorin", "This is a test one.", 1567814290),
-          Comments(2, "yoshinorin", "This is a test two.", 1567814391)
+          Comments("04b89f7a-6d0c-46c5-87a2-2a35307765bf", "yoshinorin", "This is a test one.", 1567814290),
+          Comments("cc82737d-769d-11eb-a81e-663f66aa018c", "yoshinorin", "This is a test two.", 1567814391)
         )
       )
     )
@@ -42,13 +42,13 @@ class CommentRouteSpec extends AnyWordSpec with ScalatestRouteTest {
         """
         |[
         |  {
-        |    "id" : 1,
+        |    "id" : "04b89f7a-6d0c-46c5-87a2-2a35307765bf",
         |    "userName" : "yoshinorin",
         |    "comment" : "This is a test one.",
         |    "createdAt" : 1567814290
         |  },
         |  {
-        |    "id" : 2,
+        |    "id" : "cc82737d-769d-11eb-a81e-663f66aa018c",
         |    "userName" : "yoshinorin",
         |    "comment" : "This is a test two.",
         |    "createdAt" : 1567814391

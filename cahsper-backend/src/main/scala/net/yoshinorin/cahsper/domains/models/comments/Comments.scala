@@ -1,14 +1,15 @@
 package net.yoshinorin.cahsper.domains.models.comments
 
 import java.time.ZonedDateTime
+import java.util.UUID
 
 import io.circe.Encoder
 import io.circe.generic.semiauto.deriveEncoder
 import net.yoshinorin.cahsper.models.db.Table
 
 final case class Comments(
-  id: Int = 0,
-  userName: String, // TODO: Should use UserName case class
+  id: String = UUID.randomUUID().toString,
+  userName: String,
   comment: String,
   override val createdAt: Long = ZonedDateTime.now.toEpochSecond
 ) extends Table
