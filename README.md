@@ -2,9 +2,9 @@
 
 *Cahsper is an alternative of twitter for a solitary person.*
 
-|Build|Quality|Coverage|
-|---|---|---|
-|[![CI](https://img.shields.io/github/workflow/status/yoshinorin/cahsper/CI/master?label=CI)](https://github.com/yoshinorin/cahsper/actions)|[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6981167737cf4e21b6a9cf74d5c36c0a)](https://www.codacy.com/app/yoshinorin/cahsper?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=yoshinorin/cahsper&amp;utm_campaign=Badge_Grade)|[![Coverage Status](https://coveralls.io/repos/github/yoshinorin/cahsper/badge.svg?branch=master)](https://coveralls.io/github/yoshinorin/cahsper?branch=master)|
+|Version|Build|Quality|Coverage|
+|---|---|---|---|
+|![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/yoshinorin/cahsper?label=stable)|[![CI](https://img.shields.io/github/workflow/status/yoshinorin/cahsper/CI/master?label=CI)](https://github.com/yoshinorin/cahsper/actions)|[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6981167737cf4e21b6a9cf74d5c36c0a)](https://www.codacy.com/app/yoshinorin/cahsper?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=yoshinorin/cahsper&amp;utm_campaign=Badge_Grade)|[![Coverage Status](https://coveralls.io/repos/github/yoshinorin/cahsper/badge.svg?branch=master)](https://coveralls.io/github/yoshinorin/cahsper?branch=master)|
 
 ## Demo
 
@@ -31,7 +31,7 @@
 
 ## Requirements
 
-* sbt 1.3.x
+* sbt 1.4.x
 * Scala 2.13.x
 * JVM 11
 * MariaDB 10.x
@@ -90,7 +90,12 @@ After done above procedure, [set system environment](#configuration) before star
 
 ## Docker integration
 
-Cahsper provide [docker image](https://cloud.docker.com/repository/docker/yoshinorin/docker-cahsper). Please see [docker-compose.yml](https://github.com/yoshinorin/cahsper/blob/master/docker/docker-compose.yml)
+Cahsper provide docker image.
+
+* on [GitHub Container Registory](https://github.com/users/yoshinorin/packages/container/package/docker-cahsper)
+* on [Docker Hub](https://cloud.docker.com/repository/docker/yoshinorin/docker-cahsper)
+
+Please see more [docker-compose.yml](https://github.com/yoshinorin/cahsper/blob/master/docker/docker-compose.yml)
 
 ## Configuration
 
@@ -195,13 +200,13 @@ Content-Length: 307
 
 [
   {
-    "id" : 1,
+    "id" : "04b89f7a-6d0c-46c5-87a2-2a35307765bf",
     "user" : "yoshinorin",
     "comment" : "test",
     "createdAt" : 1567862313
   },
   {
-    "id" : 2,
+    "id" : "cc82737d-769d-11eb-a81e-663f66aa018c",
     "user" : "TODO",
     "comment" : "Hello Cahsper!!",
     "createdAt" : 1567862760
@@ -223,7 +228,7 @@ Date: Sat, 07 Sep 2019 13:26:01 GMT
 Content-Type: application/json
 Content-Length: 94
 {
-  "id" : 1,
+  "id" : "cc82737d-769d-11eb-a81e-663f66aa018c",
   "user" : "TODO",
   "comment" : "Hello Cahsper!!",
   "createdAt" : 1567862760
@@ -245,7 +250,7 @@ Content-Length: 94
 |[MariaDB](https://mariadb.org/)|Database|
 |[ScalaTest](http://www.scalatest.org/)|Unit test|
 |[Scalafmt](https://scalameta.org/scalafmt/)|Code formatter|
-|[GitHub Action](https://github.com/yoshinorin/cahsper/actions)|CI|
+|[GitHub Action](https://github.com/yoshinorin/cahsper/actions)|CI/CD|
 |[Codacy](https://app.codacy.com/manual/yoshinorin/cahsper/dashboard)|Check Code quality|
 |[COVERALLS](https://coveralls.io/github/yoshinorin/cahsper?branch=master)|Coverage report|
 |[ReDoc](https://github.com/Rebilly/ReDoc)|Generate API documentation |
