@@ -190,9 +190,9 @@ components:
       type: object
       properties:
         id:
-          type: integer
-          format: int
-          example: 1
+          type: string
+          format: uuid
+          example: "04b89f7a-6d0c-46c5-87a2-2a35307765bf"
         user:
           type: string
           example: JohnDoe
